@@ -1,0 +1,44 @@
+[
+ {
+  "id": "camp_fire",
+  "name": "2018 Camp Fire perimeter (context)",
+  "file": "camp_fire.geojson",
+  "kind": "polygon",
+  "pip": false,
+  "zones": {
+   "fire_perimeter_2018": {
+    "label": "2018 Camp Fire perimeter (CAL FIRE FRAP)",
+    "color": "#636363"
+   }
+  },
+  "features": 1,
+  "source": "CAL FIRE FRAP, California Fire Perimeters (all)",
+  "source_url": "https://www.fire.ca.gov/what-we-do/fire-resource-assessment-program/fire-perimeters",
+  "license": "Public data from the State of California; attribution to CAL FIRE FRAP",
+  "raw_file": "camp_fire.geojson",
+  "prepared": "2026-11-09T00:35:52+00:00"
+ },
+ {
+  "id": "fire",
+  "name": "Fire Hazard Severity Zones (CAL FIRE)",
+  "file": "fire.geojson",
+  "kind": "polygon",
+  "pip": true,
+  "zones": {
+   "fire_high": {
+    "label": "High fire hazard severity (CAL FIRE FHSZ)",
+    "color": "#ef3b2c"
+   },
+   "fire_very_high": {
+    "label": "Very High fire hazard severity (CAL FIRE FHSZ)",
+    "color": "#99000d"
+   }
+  },
+  "features": 32,
+  "source": "CAL FIRE / Office of the State Fire Marshal, Fire Hazard Severity Zones (SRA 2022-23 + LRA 2024-25 combined, 6-class; CAL FIRE hosted layer fhsz24_1)",
+  "source_url": "https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones",
+  "license": "Public data from the State of California; attribution to CAL FIRE",
+  "raw_file": "fire.geojson",
+  "prepared": "2026-11-09T00:35:53+00:00"
+ }
+]

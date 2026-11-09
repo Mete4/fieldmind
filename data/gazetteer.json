@@ -1,0 +1,8843 @@
+[
+{
+"name": "Cable Bridge Drive",
+"type": "bridge",
+"lat": 39.749439,
+"lon": -121.680626,
+"segments": 2
+},
+{
+"name": "Paradise Branch Butte County Library",
+"type": "civic",
+"lat": 39.75797,
+"lon": -121.606202,
+"segments": 1
+},
+{
+"name": "Butte County Fire Station 26 Honey Run",
+"type": "fire_station",
+"lat": 39.729022,
+"lon": -121.702416,
+"segments": 1
+},
+{
+"name": "Paradise Fire Department #82",
+"type": "fire_station",
+"lat": 39.748791,
+"lon": -121.594002,
+"segments": 1
+},
+{
+"name": "Paradise Fire Station #81",
+"type": "fire_station",
+"lat": 39.753808,
+"lon": -121.62461,
+"segments": 1
+},
+{
+"name": "Paradise Station 35",
+"type": "fire_station",
+"lat": 39.785601,
+"lon": -121.59036,
+"segments": 1
+},
+{
+"name": "Upper Ridge Station 33",
+"type": "fire_station",
+"lat": 39.819504,
+"lon": -121.592127,
+"segments": 1
+},
+{
+"name": "Adventist Health",
+"type": "hospital",
+"lat": 39.746453,
+"lon": -121.640676,
+"segments": 1
+},
+{
+"name": "Adventist Health Feather River",
+"type": "hospital",
+"lat": 39.757417,
+"lon": -121.570327,
+"segments": 1
+},
+{
+"name": "Butte County Vista Point",
+"type": "landmark",
+"lat": 39.705269,
+"lon": -121.531078,
+"segments": 1
+},
+{
+"name": "Butte Creek Watershed Overlook",
+"type": "landmark",
+"lat": 39.731311,
+"lon": -121.684429,
+"segments": 1
+},
+{
+"name": "Depot Museum",
+"type": "landmark",
+"lat": 39.752928,
+"lon": -121.623698,
+"segments": 1
+},
+{
+"name": "Holiday Market",
+"type": "landmark",
+"lat": 39.815357,
+"lon": -121.590655,
+"segments": 1
+},
+{
+"name": "KCHH-FM (Paradise)",
+"type": "landmark",
+"lat": 39.806828,
+"lon": -121.627474,
+"segments": 1
+},
+{
+"name": "KHAP-FM (Chico)",
+"type": "landmark",
+"lat": 39.726829,
+"lon": -121.680252,
+"segments": 1
+},
+{
+"name": "KKXX-AM (Mulberry)",
+"type": "landmark",
+"lat": 39.726829,
+"lon": -121.680252,
+"segments": 1
+},
+{
+"name": "KKXX-AM (Paradise)",
+"type": "landmark",
+"lat": 39.726829,
+"lon": -121.680252,
+"segments": 1
+},
+{
+"name": "KNVR-FM (Paradise)",
+"type": "landmark",
+"lat": 39.783495,
+"lon": -121.678031,
+"segments": 1
+},
+{
+"name": "KZFR-FM (Chico)",
+"type": "landmark",
+"lat": 39.806828,
+"lon": -121.627474,
+"segments": 1
+},
+{
+"name": "Paradise Skypark",
+"type": "landmark",
+"lat": 39.710942,
+"lon": -121.61632,
+"segments": 1
+},
+{
+"name": "Save Mart Supermarket",
+"type": "landmark",
+"lat": 39.776624,
+"lon": -121.589482,
+"segments": 1
+},
+{
+"name": "Sawmill Peak Lookout",
+"type": "landmark",
+"lat": 39.811951,
+"lon": -121.558804,
+"segments": 1
+},
+{
+"name": "Clark Road",
+"type": "major_road",
+"lat": 39.751098,
+"lon": -121.604919,
+"segments": 6
+},
+{
+"name": "Deer Creek Highway",
+"type": "major_road",
+"lat": 39.804677,
+"lon": -121.733596,
+"segments": 1
+},
+{
+"name": "New Skyway",
+"type": "major_road",
+"lat": 39.806613,
+"lon": -121.578827,
+"segments": 1
+},
+{
+"name": "Pearson Road",
+"type": "major_road",
+"lat": 39.752512,
+"lon": -121.621,
+"segments": 5
+},
+{
+"name": "Skyway",
+"type": "major_road",
+"lat": 39.768035,
+"lon": -121.623073,
+"segments": 17
+},
+{
+"name": "Skyway Road",
+"type": "major_road",
+"lat": 39.731191,
+"lon": -121.683024,
+"segments": 5
+},
+{
+"name": "Centerville",
+"type": "neighborhood",
+"lat": 39.787661,
+"lon": -121.655252,
+"segments": 1
+},
+{
+"name": "Deadwood",
+"type": "neighborhood",
+"lat": 39.742384,
+"lon": -121.524692,
+"segments": 1
+},
+{
+"name": "Helltown",
+"type": "neighborhood",
+"lat": 39.81155,
+"lon": -121.659697,
+"segments": 1
+},
+{
+"name": "Irish Town",
+"type": "neighborhood",
+"lat": 39.812384,
+"lon": -121.625807,
+"segments": 1
+},
+{
+"name": "Magalia",
+"type": "neighborhood",
+"lat": 39.815192,
+"lon": -121.586298,
+"segments": 2
+},
+{
+"name": "Mineral Slide",
+"type": "neighborhood",
+"lat": 39.785162,
+"lon": -121.619974,
+"segments": 1
+},
+{
+"name": "Paradise",
+"type": "neighborhood",
+"lat": 39.759606,
+"lon": -121.621918,
+"segments": 1
+},
+{
+"name": "Yankee Hill",
+"type": "neighborhood",
+"lat": 39.703496,
+"lon": -121.522192,
+"segments": 1
+},
+{
+"name": "Bille Park",
+"type": "park",
+"lat": 39.773893,
+"lon": -121.633713,
+"segments": 1
+},
+{
+"name": "Moore Road Ball Park",
+"type": "park",
+"lat": 39.787395,
+"lon": -121.590654,
+"segments": 1
+},
+{
+"name": "Paradise Community Park",
+"type": "park",
+"lat": 39.753267,
+"lon": -121.623608,
+"segments": 1
+},
+{
+"name": "Paul Bryne Aquatic Park",
+"type": "park",
+"lat": 39.749147,
+"lon": -121.613693,
+"segments": 1
+},
+{
+"name": "Rotary Grove",
+"type": "park",
+"lat": 39.749511,
+"lon": -121.613887,
+"segments": 1
+},
+{
+"name": "Terry Ashe Park",
+"type": "park",
+"lat": 39.760975,
+"lon": -121.622174,
+"segments": 1
+},
+{
+"name": "Tuscan Ridge Golf Club",
+"type": "park",
+"lat": 39.715341,
+"lon": -121.705143,
+"segments": 1
+},
+{
+"name": "Upper Bidwell Park",
+"type": "park",
+"lat": 39.786147,
+"lon": -121.758787,
+"segments": 1
+},
+{
+"name": "Castle Rock",
+"type": "peak",
+"lat": 39.741828,
+"lon": -121.684141,
+"segments": 1
+},
+{
+"name": "Flatiron",
+"type": "peak",
+"lat": 39.738773,
+"lon": -121.691364,
+"segments": 1
+},
+{
+"name": "Jordan Hill",
+"type": "peak",
+"lat": 39.747662,
+"lon": -121.550804,
+"segments": 1
+},
+{
+"name": "Nimshew Ridge",
+"type": "peak",
+"lat": 39.829328,
+"lon": -121.619696,
+"segments": 1
+},
+{
+"name": "Sawmill Peak",
+"type": "peak",
+"lat": 39.812106,
+"lon": -121.55775,
+"segments": 1
+},
+{
+"name": "Serpentine Point",
+"type": "peak",
+"lat": 39.696829,
+"lon": -121.531915,
+"segments": 1
+},
+{
+"name": "Baptist Church",
+"type": "place_of_worship",
+"lat": 39.81621,
+"lon": -121.590793,
+"segments": 1
+},
+{
+"name": "Calvary Baptist Church",
+"type": "place_of_worship",
+"lat": 39.75544,
+"lon": -121.607195,
+"segments": 1
+},
+{
+"name": "Christian Center",
+"type": "place_of_worship",
+"lat": 39.767662,
+"lon": -121.633585,
+"segments": 1
+},
+{
+"name": "First Baptist Church",
+"type": "place_of_worship",
+"lat": 39.773198,
+"lon": -121.594247,
+"segments": 1
+},
+{
+"name": "First Christian Church",
+"type": "place_of_worship",
+"lat": 39.74794,
+"lon": -121.571916,
+"segments": 1
+},
+{
+"name": "Foursquare Gospel Church",
+"type": "place_of_worship",
+"lat": 39.770717,
+"lon": -121.586084,
+"segments": 1
+},
+{
+"name": "Historic Pioneer Church",
+"type": "place_of_worship",
+"lat": 39.809872,
+"lon": -121.579419,
+"segments": 1
+},
+{
+"name": "Jubilee on the Ridge Church",
+"type": "place_of_worship",
+"lat": 39.767106,
+"lon": -121.600251,
+"segments": 1
+},
+{
+"name": "Magalia Community Church",
+"type": "place_of_worship",
+"lat": 39.808031,
+"lon": -121.578715,
+"segments": 2
+},
+{
+"name": "Our Savior Lutheran Church",
+"type": "place_of_worship",
+"lat": 39.769328,
+"lon": -121.577472,
+"segments": 1
+},
+{
+"name": "Paradise Alliance Church",
+"type": "place_of_worship",
+"lat": 39.772999,
+"lon": -121.596349,
+"segments": 1
+},
+{
+"name": "Paradise Church of Religious Science",
+"type": "place_of_worship",
+"lat": 39.770717,
+"lon": -121.620529,
+"segments": 1
+},
+{
+"name": "Paradise Community Church of the Brethren",
+"type": "place_of_worship",
+"lat": 39.760439,
+"lon": -121.589417,
+"segments": 1
+},
+{
+"name": "Paradise Holiness Church",
+"type": "place_of_worship",
+"lat": 39.755717,
+"lon": -121.59775,
+"segments": 1
+},
+{
+"name": "Paradise Lutheran Church",
+"type": "place_of_worship",
+"lat": 39.761989,
+"lon": -121.621655,
+"segments": 1
+},
+{
+"name": "Paradise Ridge Southern Baptist Church",
+"type": "place_of_worship",
+"lat": 39.790162,
+"lon": -121.579972,
+"segments": 1
+},
+{
+"name": "Saint Nicholas Episcopal Church",
+"type": "place_of_worship",
+"lat": 39.76294,
+"lon": -121.622473,
+"segments": 1
+},
+{
+"name": "Saint Thomas More Catholic Church",
+"type": "place_of_worship",
+"lat": 39.759924,
+"lon": -121.62099,
+"segments": 1
+},
+{
+"name": "The Church of Jesus Christ of Latter-day Saints",
+"type": "place_of_worship",
+"lat": 39.759745,
+"lon": -121.604197,
+"segments": 2
+},
+{
+"name": "Butte County Sheriff's Office Magalia Substation",
+"type": "police",
+"lat": 39.819692,
+"lon": -121.592143,
+"segments": 1
+},
+{
+"name": "Paradise Police Station",
+"type": "police",
+"lat": 39.753773,
+"lon": -121.624047,
+"segments": 1
+},
+{
+"name": "Concow Elementary School",
+"type": "school",
+"lat": 39.73044,
+"lon": -121.527193,
+"segments": 1
+},
+{
+"name": "Junior Academy",
+"type": "school",
+"lat": 39.753648,
+"lon": -121.618454,
+"segments": 1
+},
+{
+"name": "Paradise Christian School",
+"type": "school",
+"lat": 39.755162,
+"lon": -121.606917,
+"segments": 1
+},
+{
+"name": "Paradise High School",
+"type": "school",
+"lat": 39.761787,
+"lon": -121.61524,
+"segments": 1
+},
+{
+"name": "Paradise Intermediate School",
+"type": "school",
+"lat": 39.750939,
+"lon": -121.613713,
+"segments": 1
+},
+{
+"name": "Paradise Junior High School",
+"type": "school",
+"lat": 39.750937,
+"lon": -121.613309,
+"segments": 1
+},
+{
+"name": "Pine Ridge Elementary School",
+"type": "school",
+"lat": 39.812822,
+"lon": -121.60048,
+"segments": 1
+},
+{
+"name": "Ponderosa Elementary School",
+"type": "school",
+"lat": 39.775717,
+"lon": -121.580806,
+"segments": 1
+},
+{
+"name": "Ridge View High School",
+"type": "school",
+"lat": 39.762088,
+"lon": -121.611906,
+"segments": 1
+},
+{
+"name": "Ridgeview High School",
+"type": "school",
+"lat": 39.783489,
+"lon": -121.595651,
+"segments": 2
+},
+{
+"name": "Saint Thomas More School",
+"type": "school",
+"lat": 39.760669,
+"lon": -121.62115,
+"segments": 1
+},
+{
+"name": "7974 Skyway",
+"type": "street",
+"lat": 39.774607,
+"lon": -121.608839,
+"segments": 1
+},
+{
+"name": "Academy Drive",
+"type": "street",
+"lat": 39.754016,
+"lon": -121.617186,
+"segments": 1
+},
+{
+"name": "Achilles Court",
+"type": "street",
+"lat": 39.798755,
+"lon": -121.601697,
+"segments": 1
+},
+{
+"name": "Acorn Court",
+"type": "street",
+"lat": 39.765442,
+"lon": -121.629114,
+"segments": 1
+},
+{
+"name": "Acorn Ridge Drive",
+"type": "street",
+"lat": 39.754681,
+"lon": -121.641834,
+"segments": 2
+},
+{
+"name": "Adams Road",
+"type": "street",
+"lat": 39.782105,
+"lon": -121.586632,
+"segments": 1
+},
+{
+"name": "Adrian Drive",
+"type": "street",
+"lat": 39.799057,
+"lon": -121.600273,
+"segments": 1
+},
+{
+"name": "Agate Lane",
+"type": "street",
+"lat": 39.775666,
+"lon": -121.595388,
+"segments": 1
+},
+{
+"name": "Airport Road",
+"type": "street",
+"lat": 39.714866,
+"lon": -121.614648,
+"segments": 3
+},
+{
+"name": "Alamo Lane",
+"type": "street",
+"lat": 39.769528,
+"lon": -121.590744,
+"segments": 1
+},
+{
+"name": "Albert Lane",
+"type": "street",
+"lat": 39.763158,
+"lon": -121.588391,
+"segments": 1
+},
+{
+"name": "Alexander Court",
+"type": "street",
+"lat": 39.771021,
+"lon": -121.575757,
+"segments": 1
+},
+{
+"name": "Alexis Lane",
+"type": "street",
+"lat": 39.75702,
+"lon": -121.582954,
+"segments": 1
+},
+{
+"name": "Allison Court",
+"type": "street",
+"lat": 39.740633,
+"lon": -121.583217,
+"segments": 1
+},
+{
+"name": "Allwood Lane",
+"type": "street",
+"lat": 39.758806,
+"lon": -121.594053,
+"segments": 1
+},
+{
+"name": "Almond Street",
+"type": "street",
+"lat": 39.754505,
+"lon": -121.624772,
+"segments": 5
+},
+{
+"name": "Alpine Court",
+"type": "street",
+"lat": 39.739694,
+"lon": -121.577585,
+"segments": 1
+},
+{
+"name": "Alta Cedar Lane",
+"type": "street",
+"lat": 39.757081,
+"lon": -121.602365,
+"segments": 1
+},
+{
+"name": "Altatina Drive",
+"type": "street",
+"lat": 39.816592,
+"lon": -121.705954,
+"segments": 1
+},
+{
+"name": "Altus Court",
+"type": "street",
+"lat": 39.803584,
+"lon": -121.59652,
+"segments": 1
+},
+{
+"name": "Amber Oaks Court",
+"type": "street",
+"lat": 39.714968,
+"lon": -121.646414,
+"segments": 1
+},
+{
+"name": "Amberwood Terrace",
+"type": "street",
+"lat": 39.764608,
+"lon": -121.581391,
+"segments": 1
+},
+{
+"name": "Ambrook Lane",
+"type": "street",
+"lat": 39.737485,
+"lon": -121.62243,
+"segments": 1
+},
+{
+"name": "American Way",
+"type": "street",
+"lat": 39.736664,
+"lon": -121.611565,
+"segments": 1
+},
+{
+"name": "Amy Lane",
+"type": "street",
+"lat": 39.753507,
+"lon": -121.592876,
+"segments": 1
+},
+{
+"name": "Anchor Way",
+"type": "street",
+"lat": 39.740404,
+"lon": -121.601234,
+"segments": 1
+},
+{
+"name": "Anderson Place",
+"type": "street",
+"lat": 39.775656,
+"lon": -121.601068,
+"segments": 1
+},
+{
+"name": "Andover Drive",
+"type": "street",
+"lat": 39.809064,
+"lon": -121.59638,
+"segments": 1
+},
+{
+"name": "Andrea Lane",
+"type": "street",
+"lat": 39.781162,
+"lon": -121.593192,
+"segments": 2
+},
+{
+"name": "Andrew Place",
+"type": "street",
+"lat": 39.776529,
+"lon": -121.571159,
+"segments": 1
+},
+{
+"name": "Angel Drive",
+"type": "street",
+"lat": 39.750442,
+"lon": -121.598405,
+"segments": 1
+},
+{
+"name": "Another Lane",
+"type": "street",
+"lat": 39.759348,
+"lon": -121.643641,
+"segments": 1
+},
+{
+"name": "Apache Lane",
+"type": "street",
+"lat": 39.738917,
+"lon": -121.618866,
+"segments": 1
+},
+{
+"name": "Apollo Lane",
+"type": "street",
+"lat": 39.778208,
+"lon": -121.59487,
+"segments": 1
+},
+{
+"name": "Apple Creek Drive",
+"type": "street",
+"lat": 39.770961,
+"lon": -121.574122,
+"segments": 1
+},
+{
+"name": "Apple Lane",
+"type": "street",
+"lat": 39.732467,
+"lon": -121.635596,
+"segments": 1
+},
+{
+"name": "Apple View Way",
+"type": "street",
+"lat": 39.78852,
+"lon": -121.578126,
+"segments": 1
+},
+{
+"name": "Arany Court",
+"type": "street",
+"lat": 39.794479,
+"lon": -121.578467,
+"segments": 1
+},
+{
+"name": "Arden Way",
+"type": "street",
+"lat": 39.730037,
+"lon": -121.573305,
+"segments": 1
+},
+{
+"name": "Argus Drive",
+"type": "street",
+"lat": 39.798792,
+"lon": -121.603617,
+"segments": 1
+},
+{
+"name": "Arlene Way",
+"type": "street",
+"lat": 39.780761,
+"lon": -121.602846,
+"segments": 1
+},
+{
+"name": "Armstrong Place",
+"type": "street",
+"lat": 39.773829,
+"lon": -121.595611,
+"segments": 1
+},
+{
+"name": "Arrowhead Drive",
+"type": "street",
+"lat": 39.743061,
+"lon": -121.574528,
+"segments": 1
+},
+{
+"name": "Arroyo Canyon Lane",
+"type": "street",
+"lat": 39.734765,
+"lon": -121.698925,
+"segments": 1
+},
+{
+"name": "Arthur Court",
+"type": "street",
+"lat": 39.806804,
+"lon": -121.604062,
+"segments": 1
+},
+{
+"name": "Ashland Lane",
+"type": "street",
+"lat": 39.774859,
+"lon": -121.622457,
+"segments": 1
+},
+{
+"name": "Aspen Lane",
+"type": "street",
+"lat": 39.794973,
+"lon": -121.580281,
+"segments": 1
+},
+{
+"name": "Aster Lane",
+"type": "street",
+"lat": 39.764949,
+"lon": -121.623179,
+"segments": 1
+},
+{
+"name": "Astoria Way",
+"type": "street",
+"lat": 39.784936,
+"lon": -121.529871,
+"segments": 1
+},
+{
+"name": "Athens Way",
+"type": "street",
+"lat": 39.799302,
+"lon": -121.603184,
+"segments": 1
+},
+{
+"name": "August Lane",
+"type": "street",
+"lat": 39.776265,
+"lon": -121.628703,
+"segments": 1
+},
+{
+"name": "Auroa Court",
+"type": "street",
+"lat": 39.800214,
+"lon": -121.606711,
+"segments": 1
+},
+{
+"name": "Autumn Lane",
+"type": "street",
+"lat": 39.801051,
+"lon": -121.716404,
+"segments": 1
+},
+{
+"name": "Azalea Lane",
+"type": "street",
+"lat": 39.772749,
+"lon": -121.602031,
+"segments": 1
+},
+{
+"name": "Babbling Brook Lane",
+"type": "street",
+"lat": 39.750978,
+"lon": -121.594316,
+"segments": 1
+},
+{
+"name": "Babson Court",
+"type": "street",
+"lat": 39.803541,
+"lon": -121.60446,
+"segments": 1
+},
+{
+"name": "Bader Mine Road",
+"type": "street",
+"lat": 39.799545,
+"lon": -121.586476,
+"segments": 1
+},
+{
+"name": "Bailey Lane",
+"type": "street",
+"lat": 39.751357,
+"lon": -121.589604,
+"segments": 1
+},
+{
+"name": "Baker Drive",
+"type": "street",
+"lat": 39.767752,
+"lon": -121.626135,
+"segments": 1
+},
+{
+"name": "Bambi Lane",
+"type": "street",
+"lat": 39.757328,
+"lon": -121.580951,
+"segments": 1
+},
+{
+"name": "Bandtail Lane",
+"type": "street",
+"lat": 39.759476,
+"lon": -121.581028,
+"segments": 1
+},
+{
+"name": "Barat Court",
+"type": "street",
+"lat": 39.803945,
+"lon": -121.595617,
+"segments": 1
+},
+{
+"name": "Barbara Way",
+"type": "street",
+"lat": 39.754194,
+"lon": -121.63029,
+"segments": 2
+},
+{
+"name": "Barnaby Court",
+"type": "street",
+"lat": 39.787143,
+"lon": -121.578293,
+"segments": 1
+},
+{
+"name": "Bartles Place",
+"type": "street",
+"lat": 39.754427,
+"lon": -121.64706,
+"segments": 1
+},
+{
+"name": "Bartok Court",
+"type": "street",
+"lat": 39.7826,
+"lon": -121.597921,
+"segments": 1
+},
+{
+"name": "Baston Lane",
+"type": "street",
+"lat": 39.775433,
+"lon": -121.62869,
+"segments": 1
+},
+{
+"name": "Batt Road",
+"type": "street",
+"lat": 39.779958,
+"lon": -121.695305,
+"segments": 1
+},
+{
+"name": "Bay Tree Drive",
+"type": "street",
+"lat": 39.739006,
+"lon": -121.659585,
+"segments": 1
+},
+{
+"name": "Bayleaf Lane",
+"type": "street",
+"lat": 39.729419,
+"lon": -121.655233,
+"segments": 1
+},
+{
+"name": "Bayleaf Road",
+"type": "street",
+"lat": 39.728163,
+"lon": -121.655216,
+"segments": 1
+},
+{
+"name": "Beacon Court",
+"type": "street",
+"lat": 39.768963,
+"lon": -121.629613,
+"segments": 1
+},
+{
+"name": "Bean Flat Road",
+"type": "street",
+"lat": 39.787366,
+"lon": -121.661254,
+"segments": 1
+},
+{
+"name": "Becker Way",
+"type": "street",
+"lat": 39.772241,
+"lon": -121.619844,
+"segments": 1
+},
+{
+"name": "Beechwood Drive",
+"type": "street",
+"lat": 39.758867,
+"lon": -121.629341,
+"segments": 1
+},
+{
+"name": "Bel Air Drive",
+"type": "street",
+"lat": 39.791567,
+"lon": -121.591012,
+"segments": 1
+},
+{
+"name": "Bella Vista Avenue",
+"type": "street",
+"lat": 39.748098,
+"lon": -121.612187,
+"segments": 1
+},
+{
+"name": "Belle Creek Lane",
+"type": "street",
+"lat": 39.727347,
+"lon": -121.63499,
+"segments": 1
+},
+{
+"name": "Belle View Drive",
+"type": "street",
+"lat": 39.781854,
+"lon": -121.581832,
+"segments": 1
+},
+{
+"name": "Belleview Drive",
+"type": "street",
+"lat": 39.779121,
+"lon": -121.581942,
+"segments": 1
+},
+{
+"name": "Belviso Terrace",
+"type": "street",
+"lat": 39.748159,
+"lon": -121.58595,
+"segments": 1
+},
+{
+"name": "Bend Lane",
+"type": "street",
+"lat": 39.74566,
+"lon": -121.580537,
+"segments": 1
+},
+{
+"name": "Bennett Road",
+"type": "street",
+"lat": 39.740966,
+"lon": -121.595534,
+"segments": 1
+},
+{
+"name": "Bentley Court",
+"type": "street",
+"lat": 39.819113,
+"lon": -121.601361,
+"segments": 1
+},
+{
+"name": "Berkshire Avenue",
+"type": "street",
+"lat": 39.772107,
+"lon": -121.60787,
+"segments": 3
+},
+{
+"name": "Berkshire Way",
+"type": "street",
+"lat": 39.769554,
+"lon": -121.609657,
+"segments": 1
+},
+{
+"name": "Berry Creek Drive",
+"type": "street",
+"lat": 39.746196,
+"lon": -121.618616,
+"segments": 1
+},
+{
+"name": "Bethany Circle",
+"type": "street",
+"lat": 39.830012,
+"lon": -121.602597,
+"segments": 1
+},
+{
+"name": "Bettencourt Lane",
+"type": "street",
+"lat": 39.759832,
+"lon": -121.600629,
+"segments": 1
+},
+{
+"name": "Betty Lane",
+"type": "street",
+"lat": 39.780282,
+"lon": -121.599178,
+"segments": 1
+},
+{
+"name": "Bever Lane",
+"type": "street",
+"lat": 39.755934,
+"lon": -121.575551,
+"segments": 1
+},
+{
+"name": "Beverly Glen Avenue",
+"type": "street",
+"lat": 39.740415,
+"lon": -121.588299,
+"segments": 1
+},
+{
+"name": "Beverly Lane",
+"type": "street",
+"lat": 39.794394,
+"lon": -121.576074,
+"segments": 1
+},
+{
+"name": "Bieberdorf Lane",
+"type": "street",
+"lat": 39.750747,
+"lon": -121.586372,
+"segments": 1
+},
+{
+"name": "Big Pine Lane",
+"type": "street",
+"lat": 39.741937,
+"lon": -121.588082,
+"segments": 1
+},
+{
+"name": "Big Sky Drive",
+"type": "street",
+"lat": 39.730479,
+"lon": -121.615422,
+"segments": 1
+},
+{
+"name": "Big Tree Lane",
+"type": "street",
+"lat": 39.754484,
+"lon": -121.588396,
+"segments": 1
+},
+{
+"name": "Bille Road",
+"type": "street",
+"lat": 39.770341,
+"lon": -121.595672,
+"segments": 5
+},
+{
+"name": "Birch Street",
+"type": "street",
+"lat": 39.753875,
+"lon": -121.625531,
+"segments": 2
+},
+{
+"name": "Black Olive Drive",
+"type": "street",
+"lat": 39.753581,
+"lon": -121.624768,
+"segments": 3
+},
+{
+"name": "Blackberry Lane",
+"type": "street",
+"lat": 39.764942,
+"lon": -121.569037,
+"segments": 1
+},
+{
+"name": "Blair Lane",
+"type": "street",
+"lat": 39.810001,
+"lon": -121.582433,
+"segments": 1
+},
+{
+"name": "Blue Balaton Lane",
+"type": "street",
+"lat": 39.728128,
+"lon": -121.57562,
+"segments": 1
+},
+{
+"name": "Blue Danube Drive",
+"type": "street",
+"lat": 39.73821,
+"lon": -121.568442,
+"segments": 1
+},
+{
+"name": "Blue Feather Road",
+"type": "street",
+"lat": 39.728583,
+"lon": -121.659713,
+"segments": 2
+},
+{
+"name": "Blue Jay Lane",
+"type": "street",
+"lat": 39.734091,
+"lon": -121.651343,
+"segments": 1
+},
+{
+"name": "Boardman Lane",
+"type": "street",
+"lat": 39.786301,
+"lon": -121.52662,
+"segments": 1
+},
+{
+"name": "Boaz Lane",
+"type": "street",
+"lat": 39.748981,
+"lon": -121.637291,
+"segments": 1
+},
+{
+"name": "Bob Road",
+"type": "street",
+"lat": 39.715103,
+"lon": -121.531263,
+"segments": 1
+},
+{
+"name": "Boeta Court",
+"type": "street",
+"lat": 39.7611,
+"lon": -121.57956,
+"segments": 2
+},
+{
+"name": "Bombo Way",
+"type": "street",
+"lat": 39.756208,
+"lon": -121.587302,
+"segments": 1
+},
+{
+"name": "Bonnie Lane",
+"type": "street",
+"lat": 39.756089,
+"lon": -121.594813,
+"segments": 1
+},
+{
+"name": "Boone Court",
+"type": "street",
+"lat": 39.801178,
+"lon": -121.59599,
+"segments": 1
+},
+{
+"name": "Boquest Boulevard",
+"type": "street",
+"lat": 39.757738,
+"lon": -121.627928,
+"segments": 1
+},
+{
+"name": "Bow Hunter Lane",
+"type": "street",
+"lat": 39.743678,
+"lon": -121.640163,
+"segments": 1
+},
+{
+"name": "Bowles Boulevard",
+"type": "street",
+"lat": 39.768369,
+"lon": -121.615427,
+"segments": 1
+},
+{
+"name": "Bowman Drive",
+"type": "street",
+"lat": 39.769295,
+"lon": -121.60778,
+"segments": 1
+},
+{
+"name": "Bowman Lane",
+"type": "street",
+"lat": 39.768192,
+"lon": -121.608755,
+"segments": 1
+},
+{
+"name": "Boyden Lane",
+"type": "street",
+"lat": 39.768135,
+"lon": -121.588282,
+"segments": 1
+},
+{
+"name": "Breezewood Drive",
+"type": "street",
+"lat": 39.744135,
+"lon": -121.580372,
+"segments": 1
+},
+{
+"name": "Brevard Circle",
+"type": "street",
+"lat": 39.816381,
+"lon": -121.608036,
+"segments": 1
+},
+{
+"name": "Brill Road",
+"type": "street",
+"lat": 39.764083,
+"lon": -121.595496,
+"segments": 1
+},
+{
+"name": "Bronx Court",
+"type": "street",
+"lat": 39.809781,
+"lon": -121.604544,
+"segments": 1
+},
+{
+"name": "Brook Way",
+"type": "street",
+"lat": 39.779912,
+"lon": -121.585725,
+"segments": 1
+},
+{
+"name": "Brookhaven Drive",
+"type": "street",
+"lat": 39.765953,
+"lon": -121.624377,
+"segments": 1
+},
+{
+"name": "Brookhaven Road",
+"type": "street",
+"lat": 39.766163,
+"lon": -121.622121,
+"segments": 1
+},
+{
+"name": "Brookside Avenue",
+"type": "street",
+"lat": 39.749761,
+"lon": -121.626144,
+"segments": 1
+},
+{
+"name": "Brookview Way",
+"type": "street",
+"lat": 39.753135,
+"lon": -121.604602,
+"segments": 1
+},
+{
+"name": "Brookwood Circle",
+"type": "street",
+"lat": 39.76439,
+"lon": -121.603757,
+"segments": 1
+},
+{
+"name": "Buckboard Lane",
+"type": "street",
+"lat": 39.740716,
+"lon": -121.62042,
+"segments": 1
+},
+{
+"name": "Buena Vista Drive",
+"type": "street",
+"lat": 39.82955,
+"lon": -121.589484,
+"segments": 1
+},
+{
+"name": "Burdaparadise Lane",
+"type": "street",
+"lat": 39.785778,
+"lon": -121.595737,
+"segments": 2
+},
+{
+"name": "Burden Terrace",
+"type": "street",
+"lat": 39.739766,
+"lon": -121.64299,
+"segments": 1
+},
+{
+"name": "Burke Lane",
+"type": "street",
+"lat": 39.770014,
+"lon": -121.600971,
+"segments": 1
+},
+{
+"name": "Buschmann Road",
+"type": "street",
+"lat": 39.748551,
+"lon": -121.617158,
+"segments": 1
+},
+{
+"name": "Butte Creek Island Road",
+"type": "street",
+"lat": 39.734401,
+"lon": -121.696703,
+"segments": 4
+},
+{
+"name": "Butte View Terrace",
+"type": "street",
+"lat": 39.751149,
+"lon": -121.583179,
+"segments": 2
+},
+{
+"name": "Cabernet Lane",
+"type": "street",
+"lat": 39.796241,
+"lon": -121.584193,
+"segments": 1
+},
+{
+"name": "Cable Bridge Drive",
+"type": "street",
+"lat": 39.749604,
+"lon": -121.680947,
+"segments": 4
+},
+{
+"name": "Caldwell Court",
+"type": "street",
+"lat": 39.826735,
+"lon": -121.598015,
+"segments": 1
+},
+{
+"name": "Calernbar Road",
+"type": "street",
+"lat": 39.716911,
+"lon": -121.648278,
+"segments": 1
+},
+{
+"name": "Calico Lane",
+"type": "street",
+"lat": 39.742327,
+"lon": -121.583589,
+"segments": 1
+},
+{
+"name": "California Way",
+"type": "street",
+"lat": 39.738648,
+"lon": -121.595467,
+"segments": 1
+},
+{
+"name": "Calvary Court",
+"type": "street",
+"lat": 39.817979,
+"lon": -121.606374,
+"segments": 1
+},
+{
+"name": "Calvin Drive",
+"type": "street",
+"lat": 39.807014,
+"lon": -121.598332,
+"segments": 1
+},
+{
+"name": "Camellia Drive",
+"type": "street",
+"lat": 39.764065,
+"lon": -121.624156,
+"segments": 1
+},
+{
+"name": "Cameo Lane",
+"type": "street",
+"lat": 39.761105,
+"lon": -121.580758,
+"segments": 1
+},
+{
+"name": "Camino Lane",
+"type": "street",
+"lat": 39.758865,
+"lon": -121.616387,
+"segments": 1
+},
+{
+"name": "Campus Drive",
+"type": "street",
+"lat": 39.750648,
+"lon": -121.619743,
+"segments": 1
+},
+{
+"name": "Candlewood Court",
+"type": "street",
+"lat": 39.797069,
+"lon": -121.581005,
+"segments": 1
+},
+{
+"name": "Canton Court",
+"type": "street",
+"lat": 39.827427,
+"lon": -121.599181,
+"segments": 1
+},
+{
+"name": "Canyon Drive",
+"type": "street",
+"lat": 39.809844,
+"lon": -121.583172,
+"segments": 1
+},
+{
+"name": "Canyon View Drive",
+"type": "street",
+"lat": 39.758187,
+"lon": -121.569945,
+"segments": 2
+},
+{
+"name": "Carli Court",
+"type": "street",
+"lat": 39.74892,
+"lon": -121.618983,
+"segments": 1
+},
+{
+"name": "Carmel Court",
+"type": "street",
+"lat": 39.742367,
+"lon": -121.64349,
+"segments": 1
+},
+{
+"name": "Carnegie Road",
+"type": "street",
+"lat": 39.837443,
+"lon": -121.613218,
+"segments": 1
+},
+{
+"name": "Carousel Way",
+"type": "street",
+"lat": 39.715772,
+"lon": -121.613105,
+"segments": 1
+},
+{
+"name": "Carroll Lane",
+"type": "street",
+"lat": 39.74043,
+"lon": -121.591864,
+"segments": 2
+},
+{
+"name": "Carson Lane",
+"type": "street",
+"lat": 39.774812,
+"lon": -121.585719,
+"segments": 1
+},
+{
+"name": "Carver Drive",
+"type": "street",
+"lat": 39.814833,
+"lon": -121.597131,
+"segments": 1
+},
+{
+"name": "Casa Drive",
+"type": "street",
+"lat": 39.735573,
+"lon": -121.632552,
+"segments": 1
+},
+{
+"name": "Casa Grande Road",
+"type": "street",
+"lat": 39.741347,
+"lon": -121.617991,
+"segments": 1
+},
+{
+"name": "Casa Sierra",
+"type": "street",
+"lat": 39.709445,
+"lon": -121.577701,
+"segments": 1
+},
+{
+"name": "Cascade Drive",
+"type": "street",
+"lat": 39.815855,
+"lon": -121.595472,
+"segments": 1
+},
+{
+"name": "Castle Drive",
+"type": "street",
+"lat": 39.766731,
+"lon": -121.634798,
+"segments": 2
+},
+{
+"name": "Castle Rock Court",
+"type": "street",
+"lat": 39.742143,
+"lon": -121.692547,
+"segments": 1
+},
+{
+"name": "Cathy Lane",
+"type": "street",
+"lat": 39.752896,
+"lon": -121.60226,
+"segments": 1
+},
+{
+"name": "Cedar Park Drive",
+"type": "street",
+"lat": 39.828733,
+"lon": -121.593983,
+"segments": 1
+},
+{
+"name": "Cedar Park Lane",
+"type": "street",
+"lat": 39.827829,
+"lon": -121.593507,
+"segments": 1
+},
+{
+"name": "Cedar Street",
+"type": "street",
+"lat": 39.754537,
+"lon": -121.624025,
+"segments": 1
+},
+{
+"name": "Cemetery Road",
+"type": "street",
+"lat": 39.810263,
+"lon": -121.581337,
+"segments": 1
+},
+{
+"name": "Center Gap Road",
+"type": "street",
+"lat": 39.774623,
+"lon": -121.671309,
+"segments": 1
+},
+{
+"name": "Center Street",
+"type": "street",
+"lat": 39.764302,
+"lon": -121.62073,
+"segments": 1
+},
+{
+"name": "Centerville Road",
+"type": "street",
+"lat": 39.781691,
+"lon": -121.662027,
+"segments": 10
+},
+{
+"name": "Central Park Drive",
+"type": "street",
+"lat": 39.765415,
+"lon": -121.607664,
+"segments": 1
+},
+{
+"name": "Chandler Drive",
+"type": "street",
+"lat": 39.75583,
+"lon": -121.642773,
+"segments": 1
+},
+{
+"name": "Chaney Lane",
+"type": "street",
+"lat": 39.752978,
+"lon": -121.573507,
+"segments": 1
+},
+{
+"name": "Chaparral Drive",
+"type": "street",
+"lat": 39.732392,
+"lon": -121.647578,
+"segments": 1
+},
+{
+"name": "Chapel Drive",
+"type": "street",
+"lat": 39.753022,
+"lon": -121.615206,
+"segments": 1
+},
+{
+"name": "Chapman Lane",
+"type": "street",
+"lat": 39.788088,
+"lon": -121.57262,
+"segments": 1
+},
+{
+"name": "Chatham Court",
+"type": "street",
+"lat": 39.818512,
+"lon": -121.602185,
+"segments": 1
+},
+{
+"name": "Cherokee Drive",
+"type": "street",
+"lat": 39.755323,
+"lon": -121.591956,
+"segments": 1
+},
+{
+"name": "Cherry Lane",
+"type": "street",
+"lat": 39.751274,
+"lon": -121.581193,
+"segments": 1
+},
+{
+"name": "Chestnut Circle",
+"type": "street",
+"lat": 39.816009,
+"lon": -121.600527,
+"segments": 1
+},
+{
+"name": "China Camp Road",
+"type": "street",
+"lat": 39.760394,
+"lon": -121.676652,
+"segments": 1
+},
+{
+"name": "Chris Court",
+"type": "street",
+"lat": 39.780492,
+"lon": -121.575748,
+"segments": 1
+},
+{
+"name": "Churchill Road",
+"type": "street",
+"lat": 39.753011,
+"lon": -121.612672,
+"segments": 1
+},
+{
+"name": "Cindy Lane",
+"type": "street",
+"lat": 39.774834,
+"lon": -121.60074,
+"segments": 1
+},
+{
+"name": "Circle J Lane",
+"type": "street",
+"lat": 39.689079,
+"lon": -121.628257,
+"segments": 1
+},
+{
+"name": "Circle J Road",
+"type": "street",
+"lat": 39.690097,
+"lon": -121.626422,
+"segments": 1
+},
+{
+"name": "Circle Lane",
+"type": "street",
+"lat": 39.735714,
+"lon": -121.597886,
+"segments": 1
+},
+{
+"name": "Circlewood Drive",
+"type": "street",
+"lat": 39.743905,
+"lon": -121.632715,
+"segments": 2
+},
+{
+"name": "Citadel Way",
+"type": "street",
+"lat": 39.823482,
+"lon": -121.597054,
+"segments": 1
+},
+{
+"name": "Clara Lane",
+"type": "street",
+"lat": 39.753151,
+"lon": -121.595774,
+"segments": 1
+},
+{
+"name": "Clarion Way",
+"type": "street",
+"lat": 39.831713,
+"lon": -121.598612,
+"segments": 1
+},
+{
+"name": "Clark Road",
+"type": "street",
+"lat": 39.698017,
+"lon": -121.608915,
+"segments": 1
+},
+{
+"name": "Clear Brook Lane",
+"type": "street",
+"lat": 39.766985,
+"lon": -121.573969,
+"segments": 1
+},
+{
+"name": "Clearview Drive",
+"type": "street",
+"lat": 39.740521,
+"lon": -121.568979,
+"segments": 1
+},
+{
+"name": "Clements Ridge Road",
+"type": "street",
+"lat": 39.691703,
+"lon": -121.623814,
+"segments": 1
+},
+{
+"name": "Cliff Drive",
+"type": "street",
+"lat": 39.768649,
+"lon": -121.635792,
+"segments": 1
+},
+{
+"name": "Cliffhanger Road",
+"type": "street",
+"lat": 39.738379,
+"lon": -121.668618,
+"segments": 1
+},
+{
+"name": "Cluster Court",
+"type": "street",
+"lat": 39.815283,
+"lon": -121.609379,
+"segments": 1
+},
+{
+"name": "Coast Range Lane",
+"type": "street",
+"lat": 39.738559,
+"lon": -121.648784,
+"segments": 1
+},
+{
+"name": "Colby Court",
+"type": "street",
+"lat": 39.803934,
+"lon": -121.600263,
+"segments": 1
+},
+{
+"name": "Coldren Road",
+"type": "street",
+"lat": 39.790269,
+"lon": -121.593091,
+"segments": 1
+},
+{
+"name": "Cole Miller Road",
+"type": "street",
+"lat": 39.722321,
+"lon": -121.623161,
+"segments": 1
+},
+{
+"name": "College Hill Road",
+"type": "street",
+"lat": 39.751494,
+"lon": -121.618906,
+"segments": 1
+},
+{
+"name": "Colman Ranch Road",
+"type": "street",
+"lat": 39.789511,
+"lon": -121.656377,
+"segments": 3
+},
+{
+"name": "Comer Court",
+"type": "street",
+"lat": 39.740063,
+"lon": -121.643806,
+"segments": 1
+},
+{
+"name": "Comforter Place",
+"type": "street",
+"lat": 39.792673,
+"lon": -121.587634,
+"segments": 1
+},
+{
+"name": "Community Way",
+"type": "street",
+"lat": 39.746472,
+"lon": -121.612644,
+"segments": 1
+},
+{
+"name": "Compton Drive",
+"type": "street",
+"lat": 39.812311,
+"lon": -121.604548,
+"segments": 2
+},
+{
+"name": "Concord Court",
+"type": "street",
+"lat": 39.800351,
+"lon": -121.596778,
+"segments": 1
+},
+{
+"name": "Concow Road",
+"type": "street",
+"lat": 39.751628,
+"lon": -121.516896,
+"segments": 1
+},
+{
+"name": "Conejo Lane",
+"type": "street",
+"lat": 39.757414,
+"lon": -121.680324,
+"segments": 1
+},
+{
+"name": "Conifer Drive",
+"type": "street",
+"lat": 39.762858,
+"lon": -121.572363,
+"segments": 1
+},
+{
+"name": "Conklin Lane",
+"type": "street",
+"lat": 39.733622,
+"lon": -121.63412,
+"segments": 1
+},
+{
+"name": "Connell Lane",
+"type": "street",
+"lat": 39.758511,
+"lon": -121.581063,
+"segments": 1
+},
+{
+"name": "Conners Court",
+"type": "street",
+"lat": 39.796072,
+"lon": -121.580213,
+"segments": 1
+},
+{
+"name": "Connie Circle",
+"type": "street",
+"lat": 39.747685,
+"lon": -121.639279,
+"segments": 2
+},
+{
+"name": "Consoler Place",
+"type": "street",
+"lat": 39.791624,
+"lon": -121.588162,
+"segments": 1
+},
+{
+"name": "Copeland Road",
+"type": "street",
+"lat": 39.760211,
+"lon": -121.60204,
+"segments": 2
+},
+{
+"name": "Coppel Court",
+"type": "street",
+"lat": 39.807577,
+"lon": -121.603475,
+"segments": 1
+},
+{
+"name": "Coral Avenue",
+"type": "street",
+"lat": 39.769647,
+"lon": -121.604236,
+"segments": 1
+},
+{
+"name": "Coral Circle",
+"type": "street",
+"lat": 39.769458,
+"lon": -121.603781,
+"segments": 1
+},
+{
+"name": "Corning Court",
+"type": "street",
+"lat": 39.827723,
+"lon": -121.597195,
+"segments": 1
+},
+{
+"name": "Cottage Lane",
+"type": "street",
+"lat": 39.746846,
+"lon": -121.594564,
+"segments": 1
+},
+{
+"name": "Cottontail Lane",
+"type": "street",
+"lat": 39.758199,
+"lon": -121.582763,
+"segments": 1
+},
+{
+"name": "Country Club Drive",
+"type": "street",
+"lat": 39.737281,
+"lon": -121.570306,
+"segments": 1
+},
+{
+"name": "Country Oak Drive",
+"type": "street",
+"lat": 39.773681,
+"lon": -121.590469,
+"segments": 1
+},
+{
+"name": "Coutolenc Road",
+"type": "street",
+"lat": 39.826027,
+"lon": -121.576241,
+"segments": 3
+},
+{
+"name": "Covelo Court",
+"type": "street",
+"lat": 39.7849,
+"lon": -121.527251,
+"segments": 1
+},
+{
+"name": "Covert Lane",
+"type": "street",
+"lat": 39.757666,
+"lon": -121.603932,
+"segments": 1
+},
+{
+"name": "Covey Run Court",
+"type": "street",
+"lat": 39.764101,
+"lon": -121.581401,
+"segments": 1
+},
+{
+"name": "Cowell Lane",
+"type": "street",
+"lat": 39.746028,
+"lon": -121.612103,
+"segments": 1
+},
+{
+"name": "Craft Lane",
+"type": "street",
+"lat": 39.740839,
+"lon": -121.645695,
+"segments": 1
+},
+{
+"name": "Crandall Way",
+"type": "street",
+"lat": 39.743975,
+"lon": -121.57171,
+"segments": 1
+},
+{
+"name": "Crawford Lane",
+"type": "street",
+"lat": 39.74973,
+"lon": -121.623204,
+"segments": 1
+},
+{
+"name": "Creekside Drive",
+"type": "street",
+"lat": 39.775343,
+"lon": -121.582877,
+"segments": 1
+},
+{
+"name": "Crestmoor Drive",
+"type": "street",
+"lat": 39.761035,
+"lon": -121.638051,
+"segments": 1
+},
+{
+"name": "Creston Road",
+"type": "street",
+"lat": 39.820128,
+"lon": -121.601776,
+"segments": 1
+},
+{
+"name": "Crestview Circle",
+"type": "street",
+"lat": 39.762689,
+"lon": -121.634976,
+"segments": 1
+},
+{
+"name": "Crestview Drive",
+"type": "street",
+"lat": 39.762466,
+"lon": -121.630538,
+"segments": 2
+},
+{
+"name": "Crestwood Drive",
+"type": "street",
+"lat": 39.761866,
+"lon": -121.63293,
+"segments": 1
+},
+{
+"name": "Critters Lane",
+"type": "street",
+"lat": 39.782066,
+"lon": -121.571505,
+"segments": 1
+},
+{
+"name": "Crown Point Road",
+"type": "street",
+"lat": 39.832763,
+"lon": -121.685216,
+"segments": 1
+},
+{
+"name": "Crystal Lane",
+"type": "street",
+"lat": 39.769901,
+"lon": -121.588473,
+"segments": 1
+},
+{
+"name": "Culver Court",
+"type": "street",
+"lat": 39.827187,
+"lon": -121.602215,
+"segments": 1
+},
+{
+"name": "Cumberland Road",
+"type": "street",
+"lat": 39.828919,
+"lon": -121.599768,
+"segments": 1
+},
+{
+"name": "Cumorah Lane",
+"type": "street",
+"lat": 39.748424,
+"lon": -121.600612,
+"segments": 1
+},
+{
+"name": "Curtis Court",
+"type": "street",
+"lat": 39.809973,
+"lon": -121.603708,
+"segments": 1
+},
+{
+"name": "Cynthia Lane",
+"type": "street",
+"lat": 39.778078,
+"lon": -121.625883,
+"segments": 1
+},
+{
+"name": "Cypress Lane",
+"type": "street",
+"lat": 39.783959,
+"lon": -121.583648,
+"segments": 2
+},
+{
+"name": "Dade Court",
+"type": "street",
+"lat": 39.818694,
+"lon": -121.593529,
+"segments": 1
+},
+{
+"name": "Damrow Lane",
+"type": "street",
+"lat": 39.744704,
+"lon": -121.624286,
+"segments": 1
+},
+{
+"name": "Danika Court",
+"type": "street",
+"lat": 39.770976,
+"lon": -121.577241,
+"segments": 1
+},
+{
+"name": "Daphne Lane",
+"type": "street",
+"lat": 39.781925,
+"lon": -121.595862,
+"segments": 1
+},
+{
+"name": "Darren Lane",
+"type": "street",
+"lat": 39.784262,
+"lon": -121.592383,
+"segments": 1
+},
+{
+"name": "David Court",
+"type": "street",
+"lat": 39.803001,
+"lon": -121.605215,
+"segments": 1
+},
+{
+"name": "Davis Lane",
+"type": "street",
+"lat": 39.771398,
+"lon": -121.602776,
+"segments": 1
+},
+{
+"name": "Dawn Terrace",
+"type": "street",
+"lat": 39.713532,
+"lon": -121.52489,
+"segments": 2
+},
+{
+"name": "Dawnridge Court",
+"type": "street",
+"lat": 39.774099,
+"lon": -121.589642,
+"segments": 1
+},
+{
+"name": "Dawson Court",
+"type": "street",
+"lat": 39.820819,
+"lon": -121.606134,
+"segments": 1
+},
+{
+"name": "De Mille Road",
+"type": "street",
+"lat": 39.737948,
+"lon": -121.575627,
+"segments": 1
+},
+{
+"name": "De Sante Lane",
+"type": "street",
+"lat": 39.742354,
+"lon": -121.576304,
+"segments": 1
+},
+{
+"name": "Deadwood Road",
+"type": "street",
+"lat": 39.741034,
+"lon": -121.510635,
+"segments": 1
+},
+{
+"name": "Dean Place",
+"type": "street",
+"lat": 39.786059,
+"lon": -121.570432,
+"segments": 1
+},
+{
+"name": "Dean Road",
+"type": "street",
+"lat": 39.787011,
+"lon": -121.571476,
+"segments": 1
+},
+{
+"name": "Deanna Way",
+"type": "street",
+"lat": 39.756343,
+"lon": -121.592206,
+"segments": 1
+},
+{
+"name": "Debbie Lane",
+"type": "street",
+"lat": 39.761197,
+"lon": -121.596577,
+"segments": 1
+},
+{
+"name": "Decatur Drive",
+"type": "street",
+"lat": 39.823082,
+"lon": -121.596992,
+"segments": 1
+},
+{
+"name": "Deer Creek Lane",
+"type": "street",
+"lat": 39.772738,
+"lon": -121.615037,
+"segments": 1
+},
+{
+"name": "Deer Haven Court",
+"type": "street",
+"lat": 39.732995,
+"lon": -121.615244,
+"segments": 1
+},
+{
+"name": "Deer Lane",
+"type": "street",
+"lat": 39.780699,
+"lon": -121.599689,
+"segments": 1
+},
+{
+"name": "Deerpark Lane",
+"type": "street",
+"lat": 39.756899,
+"lon": -121.593396,
+"segments": 1
+},
+{
+"name": "Deerwood Lane",
+"type": "street",
+"lat": 39.746308,
+"lon": -121.573465,
+"segments": 1
+},
+{
+"name": "Del Mar Avenue",
+"type": "street",
+"lat": 39.761319,
+"lon": -121.597742,
+"segments": 1
+},
+{
+"name": "Del Monte Avenue",
+"type": "street",
+"lat": 39.748351,
+"lon": -121.61091,
+"segments": 1
+},
+{
+"name": "Del Rio Way",
+"type": "street",
+"lat": 39.759951,
+"lon": -121.571772,
+"segments": 1
+},
+{
+"name": "Delia Way",
+"type": "street",
+"lat": 39.767429,
+"lon": -121.59518,
+"segments": 1
+},
+{
+"name": "Della Lane",
+"type": "street",
+"lat": 39.780114,
+"lon": -121.588685,
+"segments": 1
+},
+{
+"name": "Delta Court",
+"type": "street",
+"lat": 39.802853,
+"lon": -121.601963,
+"segments": 1
+},
+{
+"name": "Denmar Lane",
+"type": "street",
+"lat": 39.780527,
+"lon": -121.592546,
+"segments": 1
+},
+{
+"name": "Deodara Way",
+"type": "street",
+"lat": 39.757725,
+"lon": -121.597272,
+"segments": 1
+},
+{
+"name": "Depot Lane",
+"type": "street",
+"lat": 39.812098,
+"lon": -121.578158,
+"segments": 2
+},
+{
+"name": "Derrough Lane",
+"type": "street",
+"lat": 39.757348,
+"lon": -121.587829,
+"segments": 1
+},
+{
+"name": "Descanso Lane",
+"type": "street",
+"lat": 39.771135,
+"lon": -121.604286,
+"segments": 1
+},
+{
+"name": "Dez Court",
+"type": "street",
+"lat": 39.712246,
+"lon": -121.525188,
+"segments": 1
+},
+{
+"name": "Diamond Avenue",
+"type": "street",
+"lat": 39.77562,
+"lon": -121.605122,
+"segments": 2
+},
+{
+"name": "Diamond K Lane",
+"type": "street",
+"lat": 39.794359,
+"lon": -121.655866,
+"segments": 1
+},
+{
+"name": "Diduca Court",
+"type": "street",
+"lat": 39.726847,
+"lon": -121.639683,
+"segments": 1
+},
+{
+"name": "Digger Pine Lane",
+"type": "street",
+"lat": 39.729661,
+"lon": -121.635314,
+"segments": 1
+},
+{
+"name": "Dimitri Court",
+"type": "street",
+"lat": 39.801462,
+"lon": -121.603186,
+"segments": 1
+},
+{
+"name": "Dira's Way",
+"type": "street",
+"lat": 39.724087,
+"lon": -121.670007,
+"segments": 1
+},
+{
+"name": "Dobbs Court",
+"type": "street",
+"lat": 39.817008,
+"lon": -121.607599,
+"segments": 1
+},
+{
+"name": "Doe Mill Road",
+"type": "street",
+"lat": 39.801946,
+"lon": -121.67599,
+"segments": 2
+},
+{
+"name": "Dogtown Road",
+"type": "street",
+"lat": 39.822577,
+"lon": -121.590357,
+"segments": 1
+},
+{
+"name": "Dogwood Lane",
+"type": "street",
+"lat": 39.763895,
+"lon": -121.625512,
+"segments": 1
+},
+{
+"name": "Dolores Drive",
+"type": "street",
+"lat": 39.776516,
+"lon": -121.583073,
+"segments": 1
+},
+{
+"name": "Dora Lee Lane",
+"type": "street",
+"lat": 39.778416,
+"lon": -121.594024,
+"segments": 1
+},
+{
+"name": "Dottie Lane",
+"type": "street",
+"lat": 39.744962,
+"lon": -121.59154,
+"segments": 2
+},
+{
+"name": "Dove Song Court",
+"type": "street",
+"lat": 39.739095,
+"lon": -121.64498,
+"segments": 1
+},
+{
+"name": "Drake Court",
+"type": "street",
+"lat": 39.80892,
+"lon": -121.592431,
+"segments": 1
+},
+{
+"name": "Drayer Drive",
+"type": "street",
+"lat": 39.793586,
+"lon": -121.577269,
+"segments": 1
+},
+{
+"name": "Drendel Circle",
+"type": "street",
+"lat": 39.74274,
+"lon": -121.568451,
+"segments": 1
+},
+{
+"name": "Drexel Drive",
+"type": "street",
+"lat": 39.819357,
+"lon": -121.594378,
+"segments": 1
+},
+{
+"name": "Drury Court",
+"type": "street",
+"lat": 39.80937,
+"lon": -121.606665,
+"segments": 1
+},
+{
+"name": "Dry Creek Road",
+"type": "street",
+"lat": 39.698152,
+"lon": -121.592384,
+"segments": 4
+},
+{
+"name": "Dubarry Lane",
+"type": "street",
+"lat": 39.76504,
+"lon": -121.574039,
+"segments": 1
+},
+{
+"name": "Dudley Lane",
+"type": "street",
+"lat": 39.747557,
+"lon": -121.614846,
+"segments": 1
+},
+{
+"name": "Duncombe Drive",
+"type": "street",
+"lat": 39.769586,
+"lon": -121.62227,
+"segments": 1
+},
+{
+"name": "Eaglet Way",
+"type": "street",
+"lat": 39.789079,
+"lon": -121.583993,
+"segments": 1
+},
+{
+"name": "East Oak Street",
+"type": "street",
+"lat": 39.753833,
+"lon": -121.620733,
+"segments": 1
+},
+{
+"name": "Easy Street",
+"type": "street",
+"lat": 39.734806,
+"lon": -121.611571,
+"segments": 1
+},
+{
+"name": "Ed Court",
+"type": "street",
+"lat": 39.804946,
+"lon": -121.603274,
+"segments": 1
+},
+{
+"name": "Eden Road",
+"type": "street",
+"lat": 39.733345,
+"lon": -121.625477,
+"segments": 1
+},
+{
+"name": "Eden Roc Drive",
+"type": "street",
+"lat": 39.768496,
+"lon": -121.579103,
+"segments": 2
+},
+{
+"name": "Edgewood Lane",
+"type": "street",
+"lat": 39.738617,
+"lon": -121.584384,
+"segments": 1
+},
+{
+"name": "Edwards Lane",
+"type": "street",
+"lat": 39.767435,
+"lon": -121.623702,
+"segments": 1
+},
+{
+"name": "Ehrlich Court",
+"type": "street",
+"lat": 39.82874,
+"lon": -121.597143,
+"segments": 1
+},
+{
+"name": "Einstoss Court",
+"type": "street",
+"lat": 39.805022,
+"lon": -121.601844,
+"segments": 1
+},
+{
+"name": "El Toro Court",
+"type": "street",
+"lat": 39.785564,
+"lon": -121.576199,
+"segments": 1
+},
+{
+"name": "Eldridge Drive",
+"type": "street",
+"lat": 39.732806,
+"lon": -121.634171,
+"segments": 1
+},
+{
+"name": "Eley Drive",
+"type": "street",
+"lat": 39.806477,
+"lon": -121.580176,
+"segments": 1
+},
+{
+"name": "Elk Lane",
+"type": "street",
+"lat": 39.768318,
+"lon": -121.602409,
+"segments": 1
+},
+{
+"name": "Elliott Road",
+"type": "street",
+"lat": 39.759523,
+"lon": -121.604803,
+"segments": 4
+},
+{
+"name": "Ellis Drive",
+"type": "street",
+"lat": 39.752621,
+"lon": -121.5809,
+"segments": 2
+},
+{
+"name": "Elmira Circle",
+"type": "street",
+"lat": 39.824264,
+"lon": -121.601337,
+"segments": 1
+},
+{
+"name": "Ely Lane",
+"type": "street",
+"lat": 39.777024,
+"lon": -121.58026,
+"segments": 1
+},
+{
+"name": "Elysee Drive",
+"type": "street",
+"lat": 39.796227,
+"lon": -121.578734,
+"segments": 1
+},
+{
+"name": "Emerald",
+"type": "street",
+"lat": 39.775652,
+"lon": -121.594352,
+"segments": 1
+},
+{
+"name": "Emerald Lane",
+"type": "street",
+"lat": 39.775222,
+"lon": -121.595614,
+"segments": 1
+},
+{
+"name": "Endicot Circle",
+"type": "street",
+"lat": 39.806698,
+"lon": -121.598191,
+"segments": 1
+},
+{
+"name": "Erika Drive",
+"type": "street",
+"lat": 39.768849,
+"lon": -121.581726,
+"segments": 1
+},
+{
+"name": "Erin Way",
+"type": "street",
+"lat": 39.741602,
+"lon": -121.570816,
+"segments": 1
+},
+{
+"name": "Eskin Maidu Trail",
+"type": "street",
+"lat": 39.739039,
+"lon": -121.676983,
+"segments": 2
+},
+{
+"name": "Esping Way",
+"type": "street",
+"lat": 39.750562,
+"lon": -121.615936,
+"segments": 1
+},
+{
+"name": "Eureka Drive",
+"type": "street",
+"lat": 39.808296,
+"lon": -121.596688,
+"segments": 1
+},
+{
+"name": "Evergreen Lane",
+"type": "street",
+"lat": 39.778364,
+"lon": -121.618014,
+"segments": 1
+},
+{
+"name": "Eves Lane",
+"type": "street",
+"lat": 39.736922,
+"lon": -121.687074,
+"segments": 1
+},
+{
+"name": "Ewald Court",
+"type": "street",
+"lat": 39.744226,
+"lon": -121.608522,
+"segments": 1
+},
+{
+"name": "Fairview Drive",
+"type": "street",
+"lat": 39.764037,
+"lon": -121.611378,
+"segments": 1
+},
+{
+"name": "Faith Road",
+"type": "street",
+"lat": 39.709542,
+"lon": -121.52098,
+"segments": 1
+},
+{
+"name": "Falcons View Court",
+"type": "street",
+"lat": 39.733075,
+"lon": -121.569746,
+"segments": 1
+},
+{
+"name": "Farber Lane",
+"type": "street",
+"lat": 39.786245,
+"lon": -121.578298,
+"segments": 1
+},
+{
+"name": "Farview Court",
+"type": "street",
+"lat": 39.740367,
+"lon": -121.634501,
+"segments": 1
+},
+{
+"name": "Fawnbrook Place",
+"type": "street",
+"lat": 39.772638,
+"lon": -121.599611,
+"segments": 1
+},
+{
+"name": "Fawndale Lane",
+"type": "street",
+"lat": 39.775707,
+"lon": -121.618316,
+"segments": 1
+},
+{
+"name": "Fawnridge Court",
+"type": "street",
+"lat": 39.71457,
+"lon": -121.661052,
+"segments": 1
+},
+{
+"name": "Feather River Place",
+"type": "street",
+"lat": 39.749017,
+"lon": -121.570768,
+"segments": 3
+},
+{
+"name": "Feather Rock Court",
+"type": "street",
+"lat": 39.732725,
+"lon": -121.569102,
+"segments": 1
+},
+{
+"name": "Ferguson Drive",
+"type": "street",
+"lat": 39.808821,
+"lon": -121.603196,
+"segments": 1
+},
+{
+"name": "Fern Glenn Way",
+"type": "street",
+"lat": 39.829887,
+"lon": -121.620087,
+"segments": 1
+},
+{
+"name": "Fern Lane",
+"type": "street",
+"lat": 39.772038,
+"lon": -121.619489,
+"segments": 2
+},
+{
+"name": "Fickett Lane",
+"type": "street",
+"lat": 39.757256,
+"lon": -121.575087,
+"segments": 1
+},
+{
+"name": "Fieldstone Court",
+"type": "street",
+"lat": 39.755363,
+"lon": -121.609408,
+"segments": 3
+},
+{
+"name": "Filbert Court",
+"type": "street",
+"lat": 39.740789,
+"lon": -121.633002,
+"segments": 1
+},
+{
+"name": "Filbert Street",
+"type": "street",
+"lat": 39.743926,
+"lon": -121.633735,
+"segments": 1
+},
+{
+"name": "Finch Court",
+"type": "street",
+"lat": 39.809022,
+"lon": -121.601184,
+"segments": 1
+},
+{
+"name": "Finnicum Road",
+"type": "street",
+"lat": 39.7947,
+"lon": -121.65625,
+"segments": 1
+},
+{
+"name": "Fir Street",
+"type": "street",
+"lat": 39.756143,
+"lon": -121.625629,
+"segments": 4
+},
+{
+"name": "Firland Drive",
+"type": "street",
+"lat": 39.783293,
+"lon": -121.602482,
+"segments": 1
+},
+{
+"name": "Flatiron Road",
+"type": "street",
+"lat": 39.736641,
+"lon": -121.696293,
+"segments": 1
+},
+{
+"name": "Flicker Lane",
+"type": "street",
+"lat": 39.760925,
+"lon": -121.581019,
+"segments": 1
+},
+{
+"name": "Flint Court",
+"type": "street",
+"lat": 39.810555,
+"lon": -121.591639,
+"segments": 1
+},
+{
+"name": "Floral Lane",
+"type": "street",
+"lat": 39.747806,
+"lon": -121.615266,
+"segments": 1
+},
+{
+"name": "Fluffy Foot Lane",
+"type": "street",
+"lat": 39.764566,
+"lon": -121.631106,
+"segments": 1
+},
+{
+"name": "Foland Road",
+"type": "street",
+"lat": 39.750999,
+"lon": -121.591446,
+"segments": 1
+},
+{
+"name": "Foothill Road",
+"type": "street",
+"lat": 39.744107,
+"lon": -121.645938,
+"segments": 1
+},
+{
+"name": "Forest Circle",
+"type": "street",
+"lat": 39.774461,
+"lon": -121.587717,
+"segments": 1
+},
+{
+"name": "Forest Glen Road",
+"type": "street",
+"lat": 39.76572,
+"lon": -121.576699,
+"segments": 1
+},
+{
+"name": "Forest Lane",
+"type": "street",
+"lat": 39.774231,
+"lon": -121.586963,
+"segments": 2
+},
+{
+"name": "Forest Service Road",
+"type": "street",
+"lat": 39.785004,
+"lon": -121.589934,
+"segments": 1
+},
+{
+"name": "Forgotten Way",
+"type": "street",
+"lat": 39.771121,
+"lon": -121.606054,
+"segments": 1
+},
+{
+"name": "Fort Humbug Road",
+"type": "street",
+"lat": 39.786603,
+"lon": -121.654552,
+"segments": 1
+},
+{
+"name": "Forty Oaks Lane",
+"type": "street",
+"lat": 39.771437,
+"lon": -121.634308,
+"segments": 1
+},
+{
+"name": "Foster Road",
+"type": "street",
+"lat": 39.743603,
+"lon": -121.633343,
+"segments": 5
+},
+{
+"name": "Fountain Avenue",
+"type": "street",
+"lat": 39.733862,
+"lon": -121.649657,
+"segments": 1
+},
+{
+"name": "Fox Road",
+"type": "street",
+"lat": 39.761378,
+"lon": -121.589742,
+"segments": 1
+},
+{
+"name": "Frank Turner Way",
+"type": "street",
+"lat": 39.775534,
+"lon": -121.595746,
+"segments": 2
+},
+{
+"name": "Franke Lane",
+"type": "street",
+"lat": 39.790453,
+"lon": -121.583614,
+"segments": 2
+},
+{
+"name": "Freedom Court",
+"type": "street",
+"lat": 39.740474,
+"lon": -121.623296,
+"segments": 1
+},
+{
+"name": "Freestone Court",
+"type": "street",
+"lat": 39.766328,
+"lon": -121.589839,
+"segments": 1
+},
+{
+"name": "Friendly Way",
+"type": "street",
+"lat": 39.754174,
+"lon": -121.632222,
+"segments": 1
+},
+{
+"name": "Fritz Court",
+"type": "street",
+"lat": 39.805515,
+"lon": -121.602489,
+"segments": 1
+},
+{
+"name": "Frontier Road",
+"type": "street",
+"lat": 39.743514,
+"lon": -121.587457,
+"segments": 1
+},
+{
+"name": "Fruitland Lane",
+"type": "street",
+"lat": 39.765726,
+"lon": -121.574565,
+"segments": 1
+},
+{
+"name": "Fuhrmann Drive",
+"type": "street",
+"lat": 39.778176,
+"lon": -121.584548,
+"segments": 1
+},
+{
+"name": "Garden View Lane",
+"type": "street",
+"lat": 39.747994,
+"lon": -121.600028,
+"segments": 1
+},
+{
+"name": "Gardner Lane",
+"type": "street",
+"lat": 39.770892,
+"lon": -121.615458,
+"segments": 1
+},
+{
+"name": "Garnet Lane",
+"type": "street",
+"lat": 39.774804,
+"lon": -121.595806,
+"segments": 1
+},
+{
+"name": "Gate Lane",
+"type": "street",
+"lat": 39.797458,
+"lon": -121.58166,
+"segments": 1
+},
+{
+"name": "Genele Lane",
+"type": "street",
+"lat": 39.76855,
+"lon": -121.592601,
+"segments": 1
+},
+{
+"name": "Genevieve Lane",
+"type": "street",
+"lat": 39.763912,
+"lon": -121.567604,
+"segments": 1
+},
+{
+"name": "Georgia Lane",
+"type": "street",
+"lat": 39.767116,
+"lon": -121.589657,
+"segments": 1
+},
+{
+"name": "Geppetto Lane",
+"type": "street",
+"lat": 39.764004,
+"lon": -121.600599,
+"segments": 1
+},
+{
+"name": "Gilfillan Drive",
+"type": "street",
+"lat": 39.810974,
+"lon": -121.581037,
+"segments": 1
+},
+{
+"name": "Ginny Lane",
+"type": "street",
+"lat": 39.793064,
+"lon": -121.580502,
+"segments": 2
+},
+{
+"name": "Glen Circle",
+"type": "street",
+"lat": 39.751908,
+"lon": -121.603715,
+"segments": 1
+},
+{
+"name": "Glen Drive",
+"type": "street",
+"lat": 39.750569,
+"lon": -121.602798,
+"segments": 2
+},
+{
+"name": "Glen Park Lane",
+"type": "street",
+"lat": 39.751519,
+"lon": -121.603898,
+"segments": 1
+},
+{
+"name": "Glen Way",
+"type": "street",
+"lat": 39.750945,
+"lon": -121.602472,
+"segments": 1
+},
+{
+"name": "Glendale Court",
+"type": "street",
+"lat": 39.8044,
+"lon": -121.598874,
+"segments": 1
+},
+{
+"name": "Glendale Drive",
+"type": "street",
+"lat": 39.806562,
+"lon": -121.600729,
+"segments": 1
+},
+{
+"name": "Glory Road",
+"type": "street",
+"lat": 39.773938,
+"lon": -121.586595,
+"segments": 1
+},
+{
+"name": "Glover Lane",
+"type": "street",
+"lat": 39.811008,
+"lon": -121.578804,
+"segments": 1
+},
+{
+"name": "Goa Way",
+"type": "street",
+"lat": 39.719069,
+"lon": -121.662612,
+"segments": 1
+},
+{
+"name": "Gold Rush Road",
+"type": "street",
+"lat": 39.81989,
+"lon": -121.627446,
+"segments": 2
+},
+{
+"name": "Golden Oaks Road",
+"type": "street",
+"lat": 39.755533,
+"lon": -121.605383,
+"segments": 1
+},
+{
+"name": "Golf Road",
+"type": "street",
+"lat": 39.738919,
+"lon": -121.571389,
+"segments": 1
+},
+{
+"name": "Good View Drive",
+"type": "street",
+"lat": 39.708791,
+"lon": -121.610538,
+"segments": 1
+},
+{
+"name": "Gordon Way",
+"type": "street",
+"lat": 39.761343,
+"lon": -121.592831,
+"segments": 1
+},
+{
+"name": "Gracephil Lane",
+"type": "street",
+"lat": 39.747674,
+"lon": -121.592978,
+"segments": 1
+},
+{
+"name": "Gradley Lane",
+"type": "street",
+"lat": 39.76113,
+"lon": -121.6313,
+"segments": 1
+},
+{
+"name": "Graham Road",
+"type": "street",
+"lat": 39.77488,
+"lon": -121.622033,
+"segments": 1
+},
+{
+"name": "Gramercy Place",
+"type": "street",
+"lat": 39.751151,
+"lon": -121.605454,
+"segments": 1
+},
+{
+"name": "Granada Drive",
+"type": "street",
+"lat": 39.811464,
+"lon": -121.580113,
+"segments": 2
+},
+{
+"name": "Grand Court",
+"type": "street",
+"lat": 39.799041,
+"lon": -121.579412,
+"segments": 1
+},
+{
+"name": "Granda Vista Drive",
+"type": "street",
+"lat": 39.742775,
+"lon": -121.654475,
+"segments": 1
+},
+{
+"name": "Granite Ridge Road",
+"type": "street",
+"lat": 39.744001,
+"lon": -121.552435,
+"segments": 1
+},
+{
+"name": "Grape Lane",
+"type": "street",
+"lat": 39.758663,
+"lon": -121.591718,
+"segments": 1
+},
+{
+"name": "Graystone Court",
+"type": "street",
+"lat": 39.772185,
+"lon": -121.580242,
+"segments": 1
+},
+{
+"name": "Green Oaks Drive",
+"type": "street",
+"lat": 39.742156,
+"lon": -121.63534,
+"segments": 1
+},
+{
+"name": "Green Tree Court",
+"type": "street",
+"lat": 39.774593,
+"lon": -121.609795,
+"segments": 1
+},
+{
+"name": "Greenway Lane",
+"type": "street",
+"lat": 39.764828,
+"lon": -121.575706,
+"segments": 1
+},
+{
+"name": "Greenwood Drive",
+"type": "street",
+"lat": 39.766642,
+"lon": -121.611084,
+"segments": 1
+},
+{
+"name": "Greg's Way",
+"type": "street",
+"lat": 39.742891,
+"lon": -121.627653,
+"segments": 1
+},
+{
+"name": "Gregory Lane",
+"type": "street",
+"lat": 39.778666,
+"lon": -121.613225,
+"segments": 1
+},
+{
+"name": "Grey Squirrell Trail",
+"type": "street",
+"lat": 39.746508,
+"lon": -121.58497,
+"segments": 1
+},
+{
+"name": "Grinding Rock Road",
+"type": "street",
+"lat": 39.732238,
+"lon": -121.652826,
+"segments": 2
+},
+{
+"name": "Gypsy Lane",
+"type": "street",
+"lat": 39.751581,
+"lon": -121.58609,
+"segments": 1
+},
+{
+"name": "Hamlin Court",
+"type": "street",
+"lat": 39.722073,
+"lon": -121.65236,
+"segments": 1
+},
+{
+"name": "Hamma Drive",
+"type": "street",
+"lat": 39.756091,
+"lon": -121.623483,
+"segments": 1
+},
+{
+"name": "Happy Woods Lane",
+"type": "street",
+"lat": 39.768112,
+"lon": -121.589822,
+"segments": 1
+},
+{
+"name": "Hardie Lane",
+"type": "street",
+"lat": 39.74215,
+"lon": -121.593091,
+"segments": 1
+},
+{
+"name": "Harmony Lane",
+"type": "street",
+"lat": 39.736425,
+"lon": -121.646524,
+"segments": 1
+},
+{
+"name": "Harold Lane",
+"type": "street",
+"lat": 39.767859,
+"lon": -121.577684,
+"segments": 1
+},
+{
+"name": "Harris Lane",
+"type": "street",
+"lat": 39.735536,
+"lon": -121.642875,
+"segments": 1
+},
+{
+"name": "Harrison Road",
+"type": "street",
+"lat": 39.737007,
+"lon": -121.575683,
+"segments": 1
+},
+{
+"name": "Hartnell Court",
+"type": "street",
+"lat": 39.819553,
+"lon": -121.603481,
+"segments": 1
+},
+{
+"name": "Harvard Court",
+"type": "street",
+"lat": 39.826301,
+"lon": -121.59833,
+"segments": 1
+},
+{
+"name": "Harvey Johnson Run",
+"type": "street",
+"lat": 39.787873,
+"lon": -121.655904,
+"segments": 1
+},
+{
+"name": "Harvey Road",
+"type": "street",
+"lat": 39.774031,
+"lon": -121.600679,
+"segments": 1
+},
+{
+"name": "Hayes Lane",
+"type": "street",
+"lat": 39.762589,
+"lon": -121.625785,
+"segments": 1
+},
+{
+"name": "Hazel Way",
+"type": "street",
+"lat": 39.762861,
+"lon": -121.590523,
+"segments": 1
+},
+{
+"name": "Hazelwood Drive",
+"type": "street",
+"lat": 39.76504,
+"lon": -121.594675,
+"segments": 1
+},
+{
+"name": "Heathrow Road",
+"type": "street",
+"lat": 39.736479,
+"lon": -121.597223,
+"segments": 1
+},
+{
+"name": "Heaven's Gate",
+"type": "street",
+"lat": 39.779347,
+"lon": -121.623824,
+"segments": 1
+},
+{
+"name": "Heavenly Place",
+"type": "street",
+"lat": 39.750307,
+"lon": -121.59851,
+"segments": 1
+},
+{
+"name": "Heller Court",
+"type": "street",
+"lat": 39.808708,
+"lon": -121.602431,
+"segments": 1
+},
+{
+"name": "Helltown Road",
+"type": "street",
+"lat": 39.798164,
+"lon": -121.65465,
+"segments": 1
+},
+{
+"name": "Hemlock Lane",
+"type": "street",
+"lat": 39.752996,
+"lon": -121.585572,
+"segments": 1
+},
+{
+"name": "Henderson Lane",
+"type": "street",
+"lat": 39.739986,
+"lon": -121.583626,
+"segments": 1
+},
+{
+"name": "Henson Road",
+"type": "street",
+"lat": 39.751231,
+"lon": -121.587115,
+"segments": 3
+},
+{
+"name": "Herb Lane",
+"type": "street",
+"lat": 39.792144,
+"lon": -121.588937,
+"segments": 1
+},
+{
+"name": "Herman Lane",
+"type": "street",
+"lat": 39.781385,
+"lon": -121.596056,
+"segments": 1
+},
+{
+"name": "Heynen Road",
+"type": "street",
+"lat": 39.763773,
+"lon": -121.575515,
+"segments": 1
+},
+{
+"name": "Hickory Way",
+"type": "street",
+"lat": 39.744994,
+"lon": -121.636446,
+"segments": 1
+},
+{
+"name": "Hidden Haven",
+"type": "street",
+"lat": 39.74772,
+"lon": -121.585126,
+"segments": 1
+},
+{
+"name": "High Winds Road",
+"type": "street",
+"lat": 39.803232,
+"lon": -121.525859,
+"segments": 1
+},
+{
+"name": "Highland Lane",
+"type": "street",
+"lat": 39.750414,
+"lon": -121.622299,
+"segments": 1
+},
+{
+"name": "Highridge Drive",
+"type": "street",
+"lat": 39.757467,
+"lon": -121.643936,
+"segments": 1
+},
+{
+"name": "Hilbe Drive",
+"type": "street",
+"lat": 39.752403,
+"lon": -121.576962,
+"segments": 1
+},
+{
+"name": "Hillcrest Drive",
+"type": "street",
+"lat": 39.746088,
+"lon": -121.628669,
+"segments": 2
+},
+{
+"name": "Hillpark Lane",
+"type": "street",
+"lat": 39.736579,
+"lon": -121.572136,
+"segments": 1
+},
+{
+"name": "Hillside Drive",
+"type": "street",
+"lat": 39.77212,
+"lon": -121.607294,
+"segments": 1
+},
+{
+"name": "Hilltop Drive",
+"type": "street",
+"lat": 39.749264,
+"lon": -121.579695,
+"segments": 1
+},
+{
+"name": "Himmel Street",
+"type": "street",
+"lat": 39.772073,
+"lon": -121.592512,
+"segments": 1
+},
+{
+"name": "Hobart Court",
+"type": "street",
+"lat": 39.814954,
+"lon": -121.603142,
+"segments": 1
+},
+{
+"name": "Hoffman Road",
+"type": "street",
+"lat": 39.785854,
+"lon": -121.529571,
+"segments": 1
+},
+{
+"name": "Hog Ranch Road",
+"type": "street",
+"lat": 39.790092,
+"lon": -121.530177,
+"segments": 2
+},
+{
+"name": "Hollis Hill Road",
+"type": "street",
+"lat": 39.755055,
+"lon": -121.640066,
+"segments": 1
+},
+{
+"name": "Holly Lane",
+"type": "street",
+"lat": 39.754673,
+"lon": -121.620718,
+"segments": 1
+},
+{
+"name": "Hollybrook Drive",
+"type": "street",
+"lat": 39.793655,
+"lon": -121.580724,
+"segments": 1
+},
+{
+"name": "Holmwood Drive",
+"type": "street",
+"lat": 39.835732,
+"lon": -121.590608,
+"segments": 1
+},
+{
+"name": "Homestead Place",
+"type": "street",
+"lat": 39.756315,
+"lon": -121.580339,
+"segments": 1
+},
+{
+"name": "Honey Run Road",
+"type": "street",
+"lat": 39.732218,
+"lon": -121.698429,
+"segments": 7
+},
+{
+"name": "Honey View Terrace",
+"type": "street",
+"lat": 39.751871,
+"lon": -121.635799,
+"segments": 1
+},
+{
+"name": "Honeysuckle Lane",
+"type": "street",
+"lat": 39.798558,
+"lon": -121.578373,
+"segments": 2
+},
+{
+"name": "Hood Court",
+"type": "street",
+"lat": 39.815143,
+"lon": -121.59921,
+"segments": 1
+},
+{
+"name": "Hoot Owl Lane",
+"type": "street",
+"lat": 39.706196,
+"lon": -121.520104,
+"segments": 1
+},
+{
+"name": "Horseshoe Hill Drive",
+"type": "street",
+"lat": 39.753501,
+"lon": -121.632689,
+"segments": 1
+},
+{
+"name": "Howard Lane",
+"type": "street",
+"lat": 39.765119,
+"lon": -121.603636,
+"segments": 1
+},
+{
+"name": "Howe Lane",
+"type": "street",
+"lat": 39.768729,
+"lon": -121.617603,
+"segments": 1
+},
+{
+"name": "Hucka Lane",
+"type": "street",
+"lat": 39.79096,
+"lon": -121.584732,
+"segments": 1
+},
+{
+"name": "Huron Court",
+"type": "street",
+"lat": 39.811341,
+"lon": -121.591084,
+"segments": 1
+},
+{
+"name": "Ida Linn Way",
+"type": "street",
+"lat": 39.756849,
+"lon": -121.60338,
+"segments": 1
+},
+{
+"name": "Idlewild Lane",
+"type": "street",
+"lat": 39.73932,
+"lon": -121.592516,
+"segments": 1
+},
+{
+"name": "Indian Drive",
+"type": "street",
+"lat": 39.804403,
+"lon": -121.581711,
+"segments": 1
+},
+{
+"name": "Indian Rock Lane",
+"type": "street",
+"lat": 39.749342,
+"lon": -121.627557,
+"segments": 1
+},
+{
+"name": "Indian Springs Road",
+"type": "street",
+"lat": 39.726265,
+"lon": -121.663072,
+"segments": 1
+},
+{
+"name": "Inez Way",
+"type": "street",
+"lat": 39.756801,
+"lon": -121.627008,
+"segments": 1
+},
+{
+"name": "Ingalls Road",
+"type": "street",
+"lat": 39.757734,
+"lon": -121.598397,
+"segments": 1
+},
+{
+"name": "Intercessor Place",
+"type": "street",
+"lat": 39.792355,
+"lon": -121.588554,
+"segments": 1
+},
+{
+"name": "Iona Court",
+"type": "street",
+"lat": 39.814999,
+"lon": -121.593504,
+"segments": 1
+},
+{
+"name": "Iris Lane",
+"type": "street",
+"lat": 39.753647,
+"lon": -121.633505,
+"segments": 1
+},
+{
+"name": "Ishi Drive",
+"type": "street",
+"lat": 39.804034,
+"lon": -121.583542,
+"segments": 1
+},
+{
+"name": "Jade Lane",
+"type": "street",
+"lat": 39.739686,
+"lon": -121.647582,
+"segments": 1
+},
+{
+"name": "Jaguar Court",
+"type": "street",
+"lat": 39.759778,
+"lon": -121.611653,
+"segments": 1
+},
+{
+"name": "James Drive",
+"type": "street",
+"lat": 39.758647,
+"lon": -121.618176,
+"segments": 1
+},
+{
+"name": "Jamie Lane",
+"type": "street",
+"lat": 39.755315,
+"lon": -121.582861,
+"segments": 1
+},
+{
+"name": "Janine Court",
+"type": "street",
+"lat": 39.802169,
+"lon": -121.602542,
+"segments": 1
+},
+{
+"name": "Jaramillo Lane",
+"type": "street",
+"lat": 39.741827,
+"lon": -121.583408,
+"segments": 1
+},
+{
+"name": "Jarman Lane",
+"type": "street",
+"lat": 39.746935,
+"lon": -121.637648,
+"segments": 1
+},
+{
+"name": "Jarvis Circle",
+"type": "street",
+"lat": 39.817062,
+"lon": -121.598709,
+"segments": 1
+},
+{
+"name": "Jarvis Lane",
+"type": "street",
+"lat": 39.738324,
+"lon": -121.639842,
+"segments": 1
+},
+{
+"name": "Jay Bird Lane",
+"type": "street",
+"lat": 39.73888,
+"lon": -121.648039,
+"segments": 1
+},
+{
+"name": "Jay Lane",
+"type": "street",
+"lat": 39.7472,
+"lon": -121.627848,
+"segments": 1
+},
+{
+"name": "Jeannie Lane",
+"type": "street",
+"lat": 39.744148,
+"lon": -121.596145,
+"segments": 1
+},
+{
+"name": "Jennifer Court",
+"type": "street",
+"lat": 39.804527,
+"lon": -121.602785,
+"segments": 1
+},
+{
+"name": "Jensen Court",
+"type": "street",
+"lat": 39.744717,
+"lon": -121.568604,
+"segments": 1
+},
+{
+"name": "Jessie Lane",
+"type": "street",
+"lat": 39.751957,
+"lon": -121.593408,
+"segments": 1
+},
+{
+"name": "Jewell Court",
+"type": "street",
+"lat": 39.752348,
+"lon": -121.633945,
+"segments": 1
+},
+{
+"name": "Jewell Road",
+"type": "street",
+"lat": 39.75109,
+"lon": -121.633567,
+"segments": 1
+},
+{
+"name": "Johnson Drive",
+"type": "street",
+"lat": 39.764672,
+"lon": -121.570379,
+"segments": 1
+},
+{
+"name": "Jon Lane",
+"type": "street",
+"lat": 39.783196,
+"lon": -121.591623,
+"segments": 1
+},
+{
+"name": "Jones Lane",
+"type": "street",
+"lat": 39.780408,
+"lon": -121.590266,
+"segments": 1
+},
+{
+"name": "Joplin Court",
+"type": "street",
+"lat": 39.815663,
+"lon": -121.605934,
+"segments": 1
+},
+{
+"name": "Jordan Hill Road",
+"type": "street",
+"lat": 39.797295,
+"lon": -121.554316,
+"segments": 9
+},
+{
+"name": "Josephs Court",
+"type": "street",
+"lat": 39.736531,
+"lon": -121.568419,
+"segments": 1
+},
+{
+"name": "Jubilee Lane",
+"type": "street",
+"lat": 39.756264,
+"lon": -121.601636,
+"segments": 1
+},
+{
+"name": "Judy Lane",
+"type": "street",
+"lat": 39.767412,
+"lon": -121.588026,
+"segments": 1
+},
+{
+"name": "June Way",
+"type": "street",
+"lat": 39.776947,
+"lon": -121.572013,
+"segments": 1
+},
+{
+"name": "Juneau Court",
+"type": "street",
+"lat": 39.829215,
+"lon": -121.599525,
+"segments": 1
+},
+{
+"name": "Juniper Lane",
+"type": "street",
+"lat": 39.774403,
+"lon": -121.593231,
+"segments": 1
+},
+{
+"name": "Justa Road",
+"type": "street",
+"lat": 39.789491,
+"lon": -121.589877,
+"segments": 1
+},
+{
+"name": "Kathleen Lane",
+"type": "street",
+"lat": 39.782032,
+"lon": -121.594723,
+"segments": 1
+},
+{
+"name": "Kay Court",
+"type": "street",
+"lat": 39.764626,
+"lon": -121.588473,
+"segments": 1
+},
+{
+"name": "Keffer Lane",
+"type": "street",
+"lat": 39.747332,
+"lon": -121.642438,
+"segments": 1
+},
+{
+"name": "Keith Road",
+"type": "street",
+"lat": 39.749387,
+"lon": -121.623601,
+"segments": 1
+},
+{
+"name": "Keller Lane",
+"type": "street",
+"lat": 39.741213,
+"lon": -121.594132,
+"segments": 1
+},
+{
+"name": "Kemen Lane",
+"type": "street",
+"lat": 39.779152,
+"lon": -121.605683,
+"segments": 1
+},
+{
+"name": "Kemlyn Lane",
+"type": "street",
+"lat": 39.748071,
+"lon": -121.624962,
+"segments": 1
+},
+{
+"name": "Kenford Way",
+"type": "street",
+"lat": 39.757752,
+"lon": -121.582611,
+"segments": 1
+},
+{
+"name": "Kenglo Drive",
+"type": "street",
+"lat": 39.756341,
+"lon": -121.596841,
+"segments": 1
+},
+{
+"name": "Kerr Lane",
+"type": "street",
+"lat": 39.743624,
+"lon": -121.594634,
+"segments": 1
+},
+{
+"name": "Kibler Road",
+"type": "street",
+"lat": 39.760219,
+"lon": -121.581964,
+"segments": 1
+},
+{
+"name": "Kilcrease Circle",
+"type": "street",
+"lat": 39.784108,
+"lon": -121.591604,
+"segments": 4
+},
+{
+"name": "Kimberly Lane",
+"type": "street",
+"lat": 39.786898,
+"lon": -121.585375,
+"segments": 1
+},
+{
+"name": "Kimble Lane",
+"type": "street",
+"lat": 39.754673,
+"lon": -121.581557,
+"segments": 1
+},
+{
+"name": "Kindig Drive",
+"type": "street",
+"lat": 39.780079,
+"lon": -121.608813,
+"segments": 1
+},
+{
+"name": "Kingdom Court",
+"type": "street",
+"lat": 39.788089,
+"lon": -121.580728,
+"segments": 1
+},
+{
+"name": "Kings Row",
+"type": "street",
+"lat": 39.7727,
+"lon": -121.580367,
+"segments": 1
+},
+{
+"name": "Kingsdale Court",
+"type": "street",
+"lat": 39.816946,
+"lon": -121.594982,
+"segments": 1
+},
+{
+"name": "Kinsey Way",
+"type": "street",
+"lat": 39.735986,
+"lon": -121.623384,
+"segments": 1
+},
+{
+"name": "Kitty Lane",
+"type": "street",
+"lat": 39.786183,
+"lon": -121.572657,
+"segments": 1
+},
+{
+"name": "Kling Court",
+"type": "street",
+"lat": 39.764499,
+"lon": -121.599793,
+"segments": 1
+},
+{
+"name": "Koenig Road",
+"type": "street",
+"lat": 39.769788,
+"lon": -121.604748,
+"segments": 1
+},
+{
+"name": "Kristin Court",
+"type": "street",
+"lat": 39.783761,
+"lon": -121.59056,
+"segments": 1
+},
+{
+"name": "Kunkle Rsvr Road",
+"type": "street",
+"lat": 39.71256,
+"lon": -121.572691,
+"segments": 3
+},
+{
+"name": "La Castana Drive",
+"type": "street",
+"lat": 39.811578,
+"lon": -121.712354,
+"segments": 2
+},
+{
+"name": "La Grand View Road",
+"type": "street",
+"lat": 39.738645,
+"lon": -121.585108,
+"segments": 1
+},
+{
+"name": "La Playa Court",
+"type": "street",
+"lat": 39.800781,
+"lon": -121.657371,
+"segments": 1
+},
+{
+"name": "Lago Vista Way",
+"type": "street",
+"lat": 39.723427,
+"lon": -121.573836,
+"segments": 1
+},
+{
+"name": "Laguna Court",
+"type": "street",
+"lat": 39.731983,
+"lon": -121.575521,
+"segments": 1
+},
+{
+"name": "Lakeridge Circle",
+"type": "street",
+"lat": 39.816473,
+"lon": -121.591125,
+"segments": 1
+},
+{
+"name": "Lakeridge Court",
+"type": "street",
+"lat": 39.819021,
+"lon": -121.591429,
+"segments": 1
+},
+{
+"name": "Lamar Court",
+"type": "street",
+"lat": 39.812159,
+"lon": -121.590902,
+"segments": 1
+},
+{
+"name": "Lancaster Drive",
+"type": "street",
+"lat": 39.771497,
+"lon": -121.590441,
+"segments": 2
+},
+{
+"name": "Lander Court",
+"type": "street",
+"lat": 39.804108,
+"lon": -121.604998,
+"segments": 1
+},
+{
+"name": "Lands End",
+"type": "street",
+"lat": 39.749947,
+"lon": -121.59418,
+"segments": 2
+},
+{
+"name": "Lanser Drive",
+"type": "street",
+"lat": 39.740954,
+"lon": -121.607087,
+"segments": 1
+},
+{
+"name": "Larissa Lane",
+"type": "street",
+"lat": 39.764176,
+"lon": -121.633257,
+"segments": 1
+},
+{
+"name": "Larsen Lane",
+"type": "street",
+"lat": 39.781899,
+"lon": -121.574395,
+"segments": 1
+},
+{
+"name": "Lassen Road",
+"type": "street",
+"lat": 39.736191,
+"lon": -121.651731,
+"segments": 1
+},
+{
+"name": "Laurel Drive",
+"type": "street",
+"lat": 39.767605,
+"lon": -121.633713,
+"segments": 2
+},
+{
+"name": "Laurel Oak Road",
+"type": "street",
+"lat": 39.73653,
+"lon": -121.591904,
+"segments": 1
+},
+{
+"name": "Laurelwood Lane",
+"type": "street",
+"lat": 39.790342,
+"lon": -121.587884,
+"segments": 2
+},
+{
+"name": "Lavender Lane",
+"type": "street",
+"lat": 39.73727,
+"lon": -121.629443,
+"segments": 1
+},
+{
+"name": "Layton Court",
+"type": "street",
+"lat": 39.804575,
+"lon": -121.604168,
+"segments": 1
+},
+{
+"name": "Lazy Oaks Circle",
+"type": "street",
+"lat": 39.768743,
+"lon": -121.580327,
+"segments": 1
+},
+{
+"name": "Lazy Oaks Drive",
+"type": "street",
+"lat": 39.768314,
+"lon": -121.580731,
+"segments": 1
+},
+{
+"name": "Leafy Lane",
+"type": "street",
+"lat": 39.742809,
+"lon": -121.590092,
+"segments": 1
+},
+{
+"name": "Leisure Lane",
+"type": "street",
+"lat": 39.73707,
+"lon": -121.633319,
+"segments": 1
+},
+{
+"name": "Leone Way",
+"type": "street",
+"lat": 39.782327,
+"lon": -121.57603,
+"segments": 1
+},
+{
+"name": "Lesley Court",
+"type": "street",
+"lat": 39.807786,
+"lon": -121.592856,
+"segments": 1
+},
+{
+"name": "Liberty Park Lane",
+"type": "street",
+"lat": 39.766753,
+"lon": -121.593158,
+"segments": 1
+},
+{
+"name": "Lightfoot Way",
+"type": "street",
+"lat": 39.748103,
+"lon": -121.594515,
+"segments": 1
+},
+{
+"name": "Lighty Lane",
+"type": "street",
+"lat": 39.758301,
+"lon": -121.582937,
+"segments": 1
+},
+{
+"name": "Likens Lane",
+"type": "street",
+"lat": 39.731511,
+"lon": -121.634294,
+"segments": 1
+},
+{
+"name": "Lilac Way",
+"type": "street",
+"lat": 39.754188,
+"lon": -121.585273,
+"segments": 1
+},
+{
+"name": "Lillian Avenue",
+"type": "street",
+"lat": 39.745415,
+"lon": -121.57354,
+"segments": 1
+},
+{
+"name": "Lilliput Lane",
+"type": "street",
+"lat": 39.767826,
+"lon": -121.572058,
+"segments": 1
+},
+{
+"name": "Lincoln Drive",
+"type": "street",
+"lat": 39.786507,
+"lon": -121.599833,
+"segments": 1
+},
+{
+"name": "Lind Lane",
+"type": "street",
+"lat": 39.771113,
+"lon": -121.604928,
+"segments": 1
+},
+{
+"name": "Linda Lee Court",
+"type": "street",
+"lat": 39.810038,
+"lon": -121.60648,
+"segments": 1
+},
+{
+"name": "Lindholm Lane",
+"type": "street",
+"lat": 39.761655,
+"lon": -121.58116,
+"segments": 1
+},
+{
+"name": "Linrich Lane",
+"type": "street",
+"lat": 39.749393,
+"lon": -121.612176,
+"segments": 1
+},
+{
+"name": "Linry Lane",
+"type": "street",
+"lat": 39.786408,
+"lon": -121.577631,
+"segments": 1
+},
+{
+"name": "Lisa Lane",
+"type": "street",
+"lat": 39.773409,
+"lon": -121.609498,
+"segments": 1
+},
+{
+"name": "Little Grand Canyon Drive",
+"type": "street",
+"lat": 39.751893,
+"lon": -121.635047,
+"segments": 1
+},
+{
+"name": "Locksley Court",
+"type": "street",
+"lat": 39.760955,
+"lon": -121.636765,
+"segments": 1
+},
+{
+"name": "Locust Vale Road",
+"type": "street",
+"lat": 39.756022,
+"lon": -121.586651,
+"segments": 2
+},
+{
+"name": "Lofty Lane",
+"type": "street",
+"lat": 39.793099,
+"lon": -121.590124,
+"segments": 1
+},
+{
+"name": "Log Cabin Lane",
+"type": "street",
+"lat": 39.762778,
+"lon": -121.582399,
+"segments": 1
+},
+{
+"name": "Logan Drive",
+"type": "street",
+"lat": 39.749016,
+"lon": -121.624643,
+"segments": 1
+},
+{
+"name": "Lois Drive",
+"type": "street",
+"lat": 39.768403,
+"lon": -121.628275,
+"segments": 1
+},
+{
+"name": "Lone Cedar Lane",
+"type": "street",
+"lat": 39.780446,
+"lon": -121.594274,
+"segments": 1
+},
+{
+"name": "Lonesome Pine Trail",
+"type": "street",
+"lat": 39.813027,
+"lon": -121.580585,
+"segments": 1
+},
+{
+"name": "Longview Drive",
+"type": "street",
+"lat": 39.746963,
+"lon": -121.641922,
+"segments": 1
+},
+{
+"name": "Lorrie Lane",
+"type": "street",
+"lat": 39.777375,
+"lon": -121.624298,
+"segments": 1
+},
+{
+"name": "Los Amigos Lane",
+"type": "street",
+"lat": 39.743232,
+"lon": -121.552663,
+"segments": 1
+},
+{
+"name": "Lost Ridge Way",
+"type": "street",
+"lat": 39.74831,
+"lon": -121.554333,
+"segments": 1
+},
+{
+"name": "Louie Lane",
+"type": "street",
+"lat": 39.744118,
+"lon": -121.583409,
+"segments": 2
+},
+{
+"name": "Lovely Lane",
+"type": "street",
+"lat": 39.763242,
+"lon": -121.602315,
+"segments": 1
+},
+{
+"name": "Lovett Lane",
+"type": "street",
+"lat": 39.763446,
+"lon": -121.568254,
+"segments": 1
+},
+{
+"name": "Lowry Lane",
+"type": "street",
+"lat": 39.753684,
+"lon": -121.571969,
+"segments": 1
+},
+{
+"name": "Loyola Court",
+"type": "street",
+"lat": 39.821694,
+"lon": -121.594469,
+"segments": 1
+},
+{
+"name": "Lucas Court",
+"type": "street",
+"lat": 39.803512,
+"lon": -121.606055,
+"segments": 1
+},
+{
+"name": "Lucky John Road",
+"type": "street",
+"lat": 39.771775,
+"lon": -121.617115,
+"segments": 1
+},
+{
+"name": "Lucky Lady Lane",
+"type": "street",
+"lat": 39.774028,
+"lon": -121.599757,
+"segments": 1
+},
+{
+"name": "Lunar Lane",
+"type": "street",
+"lat": 39.785713,
+"lon": -121.573547,
+"segments": 1
+},
+{
+"name": "Lunt Road",
+"type": "street",
+"lat": 39.706516,
+"lon": -121.531612,
+"segments": 2
+},
+{
+"name": "Lurena Lane",
+"type": "street",
+"lat": 39.746594,
+"lon": -121.588047,
+"segments": 1
+},
+{
+"name": "Luther Drive",
+"type": "street",
+"lat": 39.761786,
+"lon": -121.62145,
+"segments": 1
+},
+{
+"name": "Lynterlee Way",
+"type": "street",
+"lat": 39.724994,
+"lon": -121.669695,
+"segments": 1
+},
+{
+"name": "Mabelle Way",
+"type": "street",
+"lat": 39.76493,
+"lon": -121.590092,
+"segments": 1
+},
+{
+"name": "Machuga Lane",
+"type": "street",
+"lat": 39.780423,
+"lon": -121.608373,
+"segments": 1
+},
+{
+"name": "Madre de Oro Place",
+"type": "street",
+"lat": 39.746675,
+"lon": -121.553793,
+"segments": 1
+},
+{
+"name": "Madrone Way",
+"type": "street",
+"lat": 39.77231,
+"lon": -121.62424,
+"segments": 1
+},
+{
+"name": "Magadon Road",
+"type": "street",
+"lat": 39.741929,
+"lon": -121.589499,
+"segments": 1
+},
+{
+"name": "Magalia Cemetery Road",
+"type": "street",
+"lat": 39.80917,
+"lon": -121.580523,
+"segments": 1
+},
+{
+"name": "Maggies Lane",
+"type": "street",
+"lat": 39.75867,
+"lon": -121.589474,
+"segments": 1
+},
+{
+"name": "Magnolia Drive",
+"type": "street",
+"lat": 39.745309,
+"lon": -121.620012,
+"segments": 1
+},
+{
+"name": "Mags Place",
+"type": "street",
+"lat": 39.726515,
+"lon": -121.658574,
+"segments": 1
+},
+{
+"name": "Maida Lane",
+"type": "street",
+"lat": 39.771443,
+"lon": -121.614241,
+"segments": 1
+},
+{
+"name": "Mainord Lane",
+"type": "street",
+"lat": 39.770156,
+"lon": -121.594801,
+"segments": 1
+},
+{
+"name": "Malibu Drive",
+"type": "street",
+"lat": 39.732368,
+"lon": -121.572164,
+"segments": 1
+},
+{
+"name": "Mallan Lane",
+"type": "street",
+"lat": 39.751382,
+"lon": -121.615409,
+"segments": 1
+},
+{
+"name": "Manatee Circle",
+"type": "street",
+"lat": 39.82696,
+"lon": -121.604584,
+"segments": 1
+},
+{
+"name": "Maple Leaf Lane",
+"type": "street",
+"lat": 39.787355,
+"lon": -121.584436,
+"segments": 1
+},
+{
+"name": "Maple Park Drive",
+"type": "street",
+"lat": 39.761785,
+"lon": -121.607476,
+"segments": 1
+},
+{
+"name": "Mariah Mesa Court",
+"type": "street",
+"lat": 39.725652,
+"lon": -121.615476,
+"segments": 1
+},
+{
+"name": "Marin Court",
+"type": "street",
+"lat": 39.80274,
+"lon": -121.596901,
+"segments": 1
+},
+{
+"name": "Mark Lane",
+"type": "street",
+"lat": 39.749092,
+"lon": -121.595206,
+"segments": 1
+},
+{
+"name": "Marlee Lane",
+"type": "street",
+"lat": 39.736698,
+"lon": -121.649777,
+"segments": 1
+},
+{
+"name": "Marlow Lane",
+"type": "street",
+"lat": 39.76739,
+"lon": -121.622243,
+"segments": 1
+},
+{
+"name": "Marston Way",
+"type": "street",
+"lat": 39.734531,
+"lon": -121.585026,
+"segments": 1
+},
+{
+"name": "Marty Court",
+"type": "street",
+"lat": 39.766739,
+"lon": -121.622233,
+"segments": 1
+},
+{
+"name": "Marvin Drive",
+"type": "street",
+"lat": 39.746835,
+"lon": -121.626353,
+"segments": 1
+},
+{
+"name": "Mary Lane",
+"type": "street",
+"lat": 39.765505,
+"lon": -121.608939,
+"segments": 1
+},
+{
+"name": "Marywood Drive",
+"type": "street",
+"lat": 39.739995,
+"lon": -121.573185,
+"segments": 1
+},
+{
+"name": "Matell Road",
+"type": "street",
+"lat": 39.782305,
+"lon": -121.570231,
+"segments": 1
+},
+{
+"name": "Matsu Lane",
+"type": "street",
+"lat": 39.780935,
+"lon": -121.59688,
+"segments": 1
+},
+{
+"name": "Maxwell Drive",
+"type": "street",
+"lat": 39.763225,
+"lon": -121.613152,
+"segments": 1
+},
+{
+"name": "Maxwood Drive",
+"type": "street",
+"lat": 39.767167,
+"lon": -121.585444,
+"segments": 1
+},
+{
+"name": "Mayhew Court",
+"type": "street",
+"lat": 39.782587,
+"lon": -121.589417,
+"segments": 1
+},
+{
+"name": "Mayhew Lane",
+"type": "street",
+"lat": 39.782232,
+"lon": -121.590133,
+"segments": 1
+},
+{
+"name": "Mays Lane",
+"type": "street",
+"lat": 39.745137,
+"lon": -121.623138,
+"segments": 1
+},
+{
+"name": "Mc Kale Road",
+"type": "street",
+"lat": 39.735765,
+"lon": -121.611466,
+"segments": 1
+},
+{
+"name": "McCann Way",
+"type": "street",
+"lat": 39.715467,
+"lon": -121.66494,
+"segments": 1
+},
+{
+"name": "McClain Lane",
+"type": "street",
+"lat": 39.760657,
+"lon": -121.619231,
+"segments": 1
+},
+{
+"name": "McClure Lane",
+"type": "street",
+"lat": 39.761186,
+"lon": -121.676248,
+"segments": 1
+},
+{
+"name": "McCullough Drive",
+"type": "street",
+"lat": 39.76407,
+"lon": -121.594667,
+"segments": 1
+},
+{
+"name": "McKinney Lane",
+"type": "street",
+"lat": 39.766455,
+"lon": -121.634993,
+"segments": 1
+},
+{
+"name": "Meadow Creek Place",
+"type": "street",
+"lat": 39.742148,
+"lon": -121.621001,
+"segments": 1
+},
+{
+"name": "Meadow Song Drive",
+"type": "street",
+"lat": 39.721034,
+"lon": -121.613823,
+"segments": 1
+},
+{
+"name": "Meadowbrook Lane",
+"type": "street",
+"lat": 39.773296,
+"lon": -121.580795,
+"segments": 1
+},
+{
+"name": "Meadowlark Lane",
+"type": "street",
+"lat": 39.792049,
+"lon": -121.587289,
+"segments": 1
+},
+{
+"name": "Media",
+"type": "street",
+"lat": 39.729242,
+"lon": -121.680447,
+"segments": 1
+},
+{
+"name": "Melene Court",
+"type": "street",
+"lat": 39.774111,
+"lon": -121.592078,
+"segments": 1
+},
+{
+"name": "Mellowood Way",
+"type": "street",
+"lat": 39.734978,
+"lon": -121.644123,
+"segments": 1
+},
+{
+"name": "Melody Lane",
+"type": "street",
+"lat": 39.770899,
+"lon": -121.594579,
+"segments": 1
+},
+{
+"name": "Memorial Way",
+"type": "street",
+"lat": 39.760903,
+"lon": -121.624327,
+"segments": 1
+},
+{
+"name": "Memphis Drive",
+"type": "street",
+"lat": 39.744154,
+"lon": -121.618686,
+"segments": 1
+},
+{
+"name": "Menlo Court",
+"type": "street",
+"lat": 39.821592,
+"lon": -121.596502,
+"segments": 1
+},
+{
+"name": "Meriam Road",
+"type": "street",
+"lat": 39.761365,
+"lon": -121.595131,
+"segments": 1
+},
+{
+"name": "Merlin Lane",
+"type": "street",
+"lat": 39.746294,
+"lon": -121.673604,
+"segments": 1
+},
+{
+"name": "Merrill Road",
+"type": "street",
+"lat": 39.781739,
+"lon": -121.575624,
+"segments": 1
+},
+{
+"name": "Merritt Horning Road",
+"type": "street",
+"lat": 39.767742,
+"lon": -121.672663,
+"segments": 3
+},
+{
+"name": "Meyers Lane",
+"type": "street",
+"lat": 39.774009,
+"lon": -121.624362,
+"segments": 1
+},
+{
+"name": "Michael Lane",
+"type": "street",
+"lat": 39.761653,
+"lon": -121.623635,
+"segments": 1
+},
+{
+"name": "Middle Butte Drive",
+"type": "street",
+"lat": 39.81689,
+"lon": -121.622066,
+"segments": 1
+},
+{
+"name": "Middle Libby Road",
+"type": "street",
+"lat": 39.751233,
+"lon": -121.593825,
+"segments": 3
+},
+{
+"name": "Middle Tree Lane",
+"type": "street",
+"lat": 39.791837,
+"lon": -121.580635,
+"segments": 1
+},
+{
+"name": "Miller Peak Road",
+"type": "street",
+"lat": 39.73031,
+"lon": -121.518169,
+"segments": 1
+},
+{
+"name": "Millwood Lane",
+"type": "street",
+"lat": 39.745968,
+"lon": -121.587619,
+"segments": 1
+},
+{
+"name": "Milton Court",
+"type": "street",
+"lat": 39.809666,
+"lon": -121.591829,
+"segments": 1
+},
+{
+"name": "Mirada Lane",
+"type": "street",
+"lat": 39.738451,
+"lon": -121.628112,
+"segments": 1
+},
+{
+"name": "Miwok Court",
+"type": "street",
+"lat": 39.803399,
+"lon": -121.5823,
+"segments": 1
+},
+{
+"name": "Molinari Court",
+"type": "street",
+"lat": 39.803652,
+"lon": -121.599631,
+"segments": 1
+},
+{
+"name": "Moll Road",
+"type": "street",
+"lat": 39.783278,
+"lon": -121.570857,
+"segments": 2
+},
+{
+"name": "Molokai Drive",
+"type": "street",
+"lat": 39.783127,
+"lon": -121.603834,
+"segments": 1
+},
+{
+"name": "Monte Calle Lane",
+"type": "street",
+"lat": 39.824376,
+"lon": -121.581389,
+"segments": 1
+},
+{
+"name": "Monterey Circle",
+"type": "street",
+"lat": 39.758887,
+"lon": -121.601546,
+"segments": 1
+},
+{
+"name": "Montgomery Place",
+"type": "street",
+"lat": 39.744804,
+"lon": -121.619205,
+"segments": 1
+},
+{
+"name": "Montna Drive",
+"type": "street",
+"lat": 39.781522,
+"lon": -121.604919,
+"segments": 1
+},
+{
+"name": "Moon Valley Lane",
+"type": "street",
+"lat": 39.731117,
+"lon": -121.637222,
+"segments": 1
+},
+{
+"name": "Moon Way",
+"type": "street",
+"lat": 39.765555,
+"lon": -121.590571,
+"segments": 1
+},
+{
+"name": "Moore Road",
+"type": "street",
+"lat": 39.788241,
+"lon": -121.588972,
+"segments": 1
+},
+{
+"name": "Mooz Court",
+"type": "street",
+"lat": 39.806141,
+"lon": -121.605264,
+"segments": 1
+},
+{
+"name": "Mor-Dell Road",
+"type": "street",
+"lat": 39.753059,
+"lon": -121.588452,
+"segments": 2
+},
+{
+"name": "Morning Lane",
+"type": "street",
+"lat": 39.763728,
+"lon": -121.575988,
+"segments": 1
+},
+{
+"name": "Moss Lane",
+"type": "street",
+"lat": 39.779147,
+"lon": -121.59599,
+"segments": 1
+},
+{
+"name": "Mosure Lane",
+"type": "street",
+"lat": 39.74243,
+"lon": -121.574025,
+"segments": 1
+},
+{
+"name": "Mountain Meadow Court",
+"type": "street",
+"lat": 39.774082,
+"lon": -121.591071,
+"segments": 1
+},
+{
+"name": "Mountain View Drive",
+"type": "street",
+"lat": 39.772425,
+"lon": -121.572119,
+"segments": 1
+},
+{
+"name": "Mulberry Lane",
+"type": "street",
+"lat": 39.789159,
+"lon": -121.580641,
+"segments": 1
+},
+{
+"name": "Murray Lane",
+"type": "street",
+"lat": 39.777058,
+"lon": -121.621088,
+"segments": 1
+},
+{
+"name": "My Way",
+"type": "street",
+"lat": 39.771755,
+"lon": -121.630486,
+"segments": 1
+},
+{
+"name": "Myrtle Way",
+"type": "street",
+"lat": 39.785982,
+"lon": -121.600482,
+"segments": 1
+},
+{
+"name": "Mystic Lane",
+"type": "street",
+"lat": 39.75996,
+"lon": -121.581087,
+"segments": 1
+},
+{
+"name": "N-B Lane",
+"type": "street",
+"lat": 39.745036,
+"lon": -121.594931,
+"segments": 1
+},
+{
+"name": "Nadena Way",
+"type": "street",
+"lat": 39.761871,
+"lon": -121.63519,
+"segments": 1
+},
+{
+"name": "Nancy Way",
+"type": "street",
+"lat": 39.772427,
+"lon": -121.621342,
+"segments": 1
+},
+{
+"name": "Napa Court",
+"type": "street",
+"lat": 39.80865,
+"lon": -121.595985,
+"segments": 1
+},
+{
+"name": "Nathan Lane",
+"type": "street",
+"lat": 39.730388,
+"lon": -121.634633,
+"segments": 1
+},
+{
+"name": "Natures Way",
+"type": "street",
+"lat": 39.735076,
+"lon": -121.615515,
+"segments": 1
+},
+{
+"name": "Nb Lane",
+"type": "street",
+"lat": 39.746132,
+"lon": -121.595751,
+"segments": 1
+},
+{
+"name": "Neal Road",
+"type": "street",
+"lat": 39.716109,
+"lon": -121.673532,
+"segments": 2
+},
+{
+"name": "Nedry Drive",
+"type": "street",
+"lat": 39.780767,
+"lon": -121.575179,
+"segments": 1
+},
+{
+"name": "Nelsen Lane",
+"type": "street",
+"lat": 39.76377,
+"lon": -121.583119,
+"segments": 1
+},
+{
+"name": "Nelson Bar Boat Ramp Road",
+"type": "street",
+"lat": 39.691642,
+"lon": -121.568692,
+"segments": 1
+},
+{
+"name": "Nelson Bar Road",
+"type": "street",
+"lat": 39.7138,
+"lon": -121.540735,
+"segments": 1
+},
+{
+"name": "Never Never Lane",
+"type": "street",
+"lat": 39.739009,
+"lon": -121.631074,
+"segments": 1
+},
+{
+"name": "Newland",
+"type": "street",
+"lat": 39.754338,
+"lon": -121.60038,
+"segments": 1
+},
+{
+"name": "Newland Road",
+"type": "street",
+"lat": 39.751128,
+"lon": -121.597409,
+"segments": 3
+},
+{
+"name": "Newman Avenue",
+"type": "street",
+"lat": 39.752975,
+"lon": -121.597802,
+"segments": 1
+},
+{
+"name": "Nielsen Court",
+"type": "street",
+"lat": 39.758462,
+"lon": -121.58631,
+"segments": 1
+},
+{
+"name": "Nielsen Drive",
+"type": "street",
+"lat": 39.7589,
+"lon": -121.586641,
+"segments": 1
+},
+{
+"name": "Nimshew Road",
+"type": "street",
+"lat": 39.817238,
+"lon": -121.625684,
+"segments": 2
+},
+{
+"name": "Nimshew Run Lane",
+"type": "street",
+"lat": 39.803196,
+"lon": -121.646265,
+"segments": 2
+},
+{
+"name": "Noffsinger Lane",
+"type": "street",
+"lat": 39.746578,
+"lon": -121.606184,
+"segments": 1
+},
+{
+"name": "North Cloud Drive",
+"type": "street",
+"lat": 39.74765,
+"lon": -121.622639,
+"segments": 1
+},
+{
+"name": "North Libby Road",
+"type": "street",
+"lat": 39.765006,
+"lon": -121.593739,
+"segments": 1
+},
+{
+"name": "North Point Drive",
+"type": "street",
+"lat": 39.77868,
+"lon": -121.625467,
+"segments": 1
+},
+{
+"name": "North Wood Road",
+"type": "street",
+"lat": 39.829568,
+"lon": -121.592934,
+"segments": 1
+},
+{
+"name": "Norwich Circle",
+"type": "street",
+"lat": 39.822047,
+"lon": -121.599103,
+"segments": 1
+},
+{
+"name": "Norwood Drive",
+"type": "street",
+"lat": 39.763616,
+"lon": -121.572419,
+"segments": 1
+},
+{
+"name": "Nottingham Drive",
+"type": "street",
+"lat": 39.759968,
+"lon": -121.635787,
+"segments": 1
+},
+{
+"name": "Nottingham Park",
+"type": "street",
+"lat": 39.759953,
+"lon": -121.633185,
+"segments": 1
+},
+{
+"name": "Nugget Lane",
+"type": "street",
+"lat": 39.786137,
+"lon": -121.59755,
+"segments": 1
+},
+{
+"name": "Nunneley Road",
+"type": "street",
+"lat": 39.755882,
+"lon": -121.59876,
+"segments": 5
+},
+{
+"name": "Nut Tree Court",
+"type": "street",
+"lat": 39.760151,
+"lon": -121.59596,
+"segments": 1
+},
+{
+"name": "Nutmeg Way",
+"type": "street",
+"lat": 39.787619,
+"lon": -121.600474,
+"segments": 1
+},
+{
+"name": "Oak Creek Drive",
+"type": "street",
+"lat": 39.756772,
+"lon": -121.579616,
+"segments": 1
+},
+{
+"name": "Oak Haven Lane",
+"type": "street",
+"lat": 39.736592,
+"lon": -121.683337,
+"segments": 1
+},
+{
+"name": "Oak Knoll Road",
+"type": "street",
+"lat": 39.749314,
+"lon": -121.610736,
+"segments": 1
+},
+{
+"name": "Oak Ravine Lane",
+"type": "street",
+"lat": 39.705233,
+"lon": -121.522527,
+"segments": 1
+},
+{
+"name": "Oak Spring Road",
+"type": "street",
+"lat": 39.741439,
+"lon": -121.64152,
+"segments": 1
+},
+{
+"name": "Oak Valley Drive",
+"type": "street",
+"lat": 39.791475,
+"lon": -121.586924,
+"segments": 1
+},
+{
+"name": "Oak Way",
+"type": "street",
+"lat": 39.774613,
+"lon": -121.603051,
+"segments": 1
+},
+{
+"name": "Oakmore Drive",
+"type": "street",
+"lat": 39.761119,
+"lon": -121.62875,
+"segments": 1
+},
+{
+"name": "Oakway",
+"type": "street",
+"lat": 39.813683,
+"lon": -121.547099,
+"segments": 1
+},
+{
+"name": "Oakwood Lane",
+"type": "street",
+"lat": 39.752528,
+"lon": -121.628058,
+"segments": 1
+},
+{
+"name": "Oberlin Court",
+"type": "street",
+"lat": 39.828291,
+"lon": -121.599592,
+"segments": 1
+},
+{
+"name": "Odessa Court",
+"type": "street",
+"lat": 39.816643,
+"lon": -121.605188,
+"segments": 1
+},
+{
+"name": "Old Clark Road",
+"type": "street",
+"lat": 39.737384,
+"lon": -121.611947,
+"segments": 2
+},
+{
+"name": "Old Mill Stream",
+"type": "street",
+"lat": 39.745836,
+"lon": -121.619553,
+"segments": 1
+},
+{
+"name": "Old Nimshew Stage Road",
+"type": "street",
+"lat": 39.79239,
+"lon": -121.655098,
+"segments": 1
+},
+{
+"name": "Olive Branch Lane",
+"type": "street",
+"lat": 39.791386,
+"lon": -121.587556,
+"segments": 1
+},
+{
+"name": "Oliver Road",
+"type": "street",
+"lat": 39.769731,
+"lon": -121.624597,
+"segments": 1
+},
+{
+"name": "Olivet Drive",
+"type": "street",
+"lat": 39.814714,
+"lon": -121.600227,
+"segments": 1
+},
+{
+"name": "Olympia Way",
+"type": "street",
+"lat": 39.770727,
+"lon": -121.617706,
+"segments": 1
+},
+{
+"name": "Opal Lane",
+"type": "street",
+"lat": 39.769613,
+"lon": -121.591904,
+"segments": 1
+},
+{
+"name": "Orchard Drive",
+"type": "street",
+"lat": 39.744318,
+"lon": -121.643355,
+"segments": 1
+},
+{
+"name": "Orput Lane",
+"type": "street",
+"lat": 39.766221,
+"lon": -121.595319,
+"segments": 1
+},
+{
+"name": "Orrin Drive",
+"type": "street",
+"lat": 39.76001,
+"lon": -121.594665,
+"segments": 1
+},
+{
+"name": "Otis Court",
+"type": "street",
+"lat": 39.810074,
+"lon": -121.594099,
+"segments": 1
+},
+{
+"name": "Pacheco Lane",
+"type": "street",
+"lat": 39.755105,
+"lon": -121.598088,
+"segments": 1
+},
+{
+"name": "Pacific Drive",
+"type": "street",
+"lat": 39.745374,
+"lon": -121.644853,
+"segments": 1
+},
+{
+"name": "Paige Lane",
+"type": "street",
+"lat": 39.768258,
+"lon": -121.576159,
+"segments": 1
+},
+{
+"name": "Palmer Hill Road",
+"type": "street",
+"lat": 39.736881,
+"lon": -121.613499,
+"segments": 1
+},
+{
+"name": "Paloma Avenue",
+"type": "street",
+"lat": 39.747897,
+"lon": -121.612645,
+"segments": 1
+},
+{
+"name": "Palos Verde Lane",
+"type": "street",
+"lat": 39.740186,
+"lon": -121.62409,
+"segments": 1
+},
+{
+"name": "Pamela Drive",
+"type": "street",
+"lat": 39.779785,
+"lon": -121.582817,
+"segments": 1
+},
+{
+"name": "Panarama Point",
+"type": "street",
+"lat": 39.780025,
+"lon": -121.616045,
+"segments": 1
+},
+{
+"name": "Paradise Avenue",
+"type": "street",
+"lat": 39.753325,
+"lon": -121.597128,
+"segments": 1
+},
+{
+"name": "Paradisewood Drive",
+"type": "street",
+"lat": 39.783743,
+"lon": -121.580885,
+"segments": 1
+},
+{
+"name": "Paragalia Way",
+"type": "street",
+"lat": 39.779005,
+"lon": -121.609173,
+"segments": 1
+},
+{
+"name": "Pardes Way",
+"type": "street",
+"lat": 39.695956,
+"lon": -121.574476,
+"segments": 1
+},
+{
+"name": "Parker Way",
+"type": "street",
+"lat": 39.770927,
+"lon": -121.592928,
+"segments": 1
+},
+{
+"name": "Parkway Drive",
+"type": "street",
+"lat": 39.737112,
+"lon": -121.595269,
+"segments": 1
+},
+{
+"name": "Parkwood Way",
+"type": "street",
+"lat": 39.778308,
+"lon": -121.592996,
+"segments": 1
+},
+{
+"name": "Pasa Way",
+"type": "street",
+"lat": 39.79962,
+"lon": -121.644548,
+"segments": 1
+},
+{
+"name": "Patrick Drive",
+"type": "street",
+"lat": 39.782875,
+"lon": -121.590707,
+"segments": 1
+},
+{
+"name": "Patsy Court",
+"type": "street",
+"lat": 39.766264,
+"lon": -121.635756,
+"segments": 1
+},
+{
+"name": "Pawn Court",
+"type": "street",
+"lat": 39.804074,
+"lon": -121.60363,
+"segments": 1
+},
+{
+"name": "Paynes Way",
+"type": "street",
+"lat": 39.753835,
+"lon": -121.574967,
+"segments": 1
+},
+{
+"name": "Peaceful Oaks Lane",
+"type": "street",
+"lat": 39.742324,
+"lon": -121.594757,
+"segments": 1
+},
+{
+"name": "Peach Lane",
+"type": "street",
+"lat": 39.758757,
+"lon": -121.570955,
+"segments": 1
+},
+{
+"name": "Pearl Drive",
+"type": "street",
+"lat": 39.755144,
+"lon": -121.599206,
+"segments": 1
+},
+{
+"name": "Pearson Road",
+"type": "street",
+"lat": 39.750054,
+"lon": -121.592376,
+"segments": 3
+},
+{
+"name": "Pebble Lane",
+"type": "street",
+"lat": 39.771237,
+"lon": -121.583731,
+"segments": 1
+},
+{
+"name": "Peck Lane",
+"type": "street",
+"lat": 39.764472,
+"lon": -121.586627,
+"segments": 1
+},
+{
+"name": "Penn Court",
+"type": "street",
+"lat": 39.806218,
+"lon": -121.597431,
+"segments": 1
+},
+{
+"name": "Penny Lane",
+"type": "street",
+"lat": 39.779439,
+"lon": -121.597683,
+"segments": 1
+},
+{
+"name": "Pentz Road",
+"type": "street",
+"lat": 39.726941,
+"lon": -121.572823,
+"segments": 2
+},
+{
+"name": "Pepe Circle",
+"type": "street",
+"lat": 39.768706,
+"lon": -121.583205,
+"segments": 1
+},
+{
+"name": "Perry Mason Lane",
+"type": "street",
+"lat": 39.761193,
+"lon": -121.635084,
+"segments": 1
+},
+{
+"name": "Petra Court",
+"type": "street",
+"lat": 39.777363,
+"lon": -121.597767,
+"segments": 1
+},
+{
+"name": "Pheasant Ridge Court",
+"type": "street",
+"lat": 39.790976,
+"lon": -121.58877,
+"segments": 1
+},
+{
+"name": "Pheasant Ridge Drive",
+"type": "street",
+"lat": 39.790633,
+"lon": -121.587167,
+"segments": 1
+},
+{
+"name": "Picnic Lane",
+"type": "street",
+"lat": 39.785416,
+"lon": -121.570565,
+"segments": 1
+},
+{
+"name": "Pine Brae Road",
+"type": "street",
+"lat": 39.70765,
+"lon": -121.520803,
+"segments": 1
+},
+{
+"name": "Pine Canyon Drive",
+"type": "street",
+"lat": 39.811768,
+"lon": -121.624724,
+"segments": 1
+},
+{
+"name": "Pine Circle",
+"type": "street",
+"lat": 39.759806,
+"lon": -121.626239,
+"segments": 1
+},
+{
+"name": "Pine Creek Way",
+"type": "street",
+"lat": 39.765864,
+"lon": -121.592749,
+"segments": 1
+},
+{
+"name": "Pine Haven Drive",
+"type": "street",
+"lat": 39.746966,
+"lon": -121.643844,
+"segments": 1
+},
+{
+"name": "Pine Needle Drive",
+"type": "street",
+"lat": 39.813007,
+"lon": -121.579408,
+"segments": 2
+},
+{
+"name": "Pine Point Lane",
+"type": "street",
+"lat": 39.780214,
+"lon": -121.521228,
+"segments": 2
+},
+{
+"name": "Pine Ridge Elementary Parking Lot",
+"type": "street",
+"lat": 39.813497,
+"lon": -121.601982,
+"segments": 1
+},
+{
+"name": "Pine Ridge Middle School Parking",
+"type": "street",
+"lat": 39.811884,
+"lon": -121.599068,
+"segments": 1
+},
+{
+"name": "Pine View Drive",
+"type": "street",
+"lat": 39.761105,
+"lon": -121.627234,
+"segments": 1
+},
+{
+"name": "Pinecrest Drive",
+"type": "street",
+"lat": 39.770963,
+"lon": -121.593432,
+"segments": 1
+},
+{
+"name": "Pineland Circle",
+"type": "street",
+"lat": 39.818349,
+"lon": -121.596964,
+"segments": 1
+},
+{
+"name": "Pinewood Court",
+"type": "street",
+"lat": 39.756843,
+"lon": -121.6397,
+"segments": 1
+},
+{
+"name": "Pinewood Drive",
+"type": "street",
+"lat": 39.756858,
+"lon": -121.640355,
+"segments": 1
+},
+{
+"name": "Piney Ridge Drive",
+"type": "street",
+"lat": 39.795175,
+"lon": -121.578563,
+"segments": 1
+},
+{
+"name": "Pinkston Canyon Road",
+"type": "street",
+"lat": 39.726022,
+"lon": -121.513862,
+"segments": 1
+},
+{
+"name": "Pintail Court",
+"type": "street",
+"lat": 39.728012,
+"lon": -121.636899,
+"segments": 1
+},
+{
+"name": "Pioneer Trail",
+"type": "street",
+"lat": 39.701592,
+"lon": -121.569746,
+"segments": 2
+},
+{
+"name": "Plantation Drive",
+"type": "street",
+"lat": 39.743439,
+"lon": -121.619484,
+"segments": 1
+},
+{
+"name": "Pleasant Lane",
+"type": "street",
+"lat": 39.761814,
+"lon": -121.610852,
+"segments": 1
+},
+{
+"name": "Point West Drive",
+"type": "street",
+"lat": 39.757669,
+"lon": -121.651587,
+"segments": 1
+},
+{
+"name": "Pole Cat Way",
+"type": "street",
+"lat": 39.707055,
+"lon": -121.521755,
+"segments": 1
+},
+{
+"name": "Ponderosa Way",
+"type": "street",
+"lat": 39.81611,
+"lon": -121.611586,
+"segments": 2
+},
+{
+"name": "Poppy Lane",
+"type": "street",
+"lat": 39.763996,
+"lon": -121.623527,
+"segments": 1
+},
+{
+"name": "Porter Court",
+"type": "street",
+"lat": 39.774318,
+"lon": -121.630982,
+"segments": 1
+},
+{
+"name": "Posey Lane",
+"type": "street",
+"lat": 39.772044,
+"lon": -121.613496,
+"segments": 1
+},
+{
+"name": "Potomac Drive",
+"type": "street",
+"lat": 39.817246,
+"lon": -121.592917,
+"segments": 1
+},
+{
+"name": "Powell Lane",
+"type": "street",
+"lat": 39.763455,
+"lon": -121.592794,
+"segments": 1
+},
+{
+"name": "Prentis Court",
+"type": "street",
+"lat": 39.817521,
+"lon": -121.604198,
+"segments": 1
+},
+{
+"name": "Primrose Lane",
+"type": "street",
+"lat": 39.763357,
+"lon": -121.631007,
+"segments": 1
+},
+{
+"name": "Princeton Circle",
+"type": "street",
+"lat": 39.744788,
+"lon": -121.645029,
+"segments": 1
+},
+{
+"name": "Princeton Way",
+"type": "street",
+"lat": 39.745359,
+"lon": -121.644435,
+"segments": 1
+},
+{
+"name": "Prospect Court",
+"type": "street",
+"lat": 39.724136,
+"lon": -121.651216,
+"segments": 1
+},
+{
+"name": "Providence Court",
+"type": "street",
+"lat": 39.819125,
+"lon": -121.59501,
+"segments": 1
+},
+{
+"name": "Pueblo Drive",
+"type": "street",
+"lat": 39.806619,
+"lon": -121.604388,
+"segments": 1
+},
+{
+"name": "Purdue Court",
+"type": "street",
+"lat": 39.821074,
+"lon": -121.593696,
+"segments": 1
+},
+{
+"name": "Quail Run Drive",
+"type": "street",
+"lat": 39.767049,
+"lon": -121.674116,
+"segments": 1
+},
+{
+"name": "Quail Way",
+"type": "street",
+"lat": 39.786964,
+"lon": -121.597837,
+"segments": 2
+},
+{
+"name": "Queen Drive",
+"type": "street",
+"lat": 39.758609,
+"lon": -121.620286,
+"segments": 1
+},
+{
+"name": "Quiet Lane",
+"type": "street",
+"lat": 39.761777,
+"lon": -121.573183,
+"segments": 1
+},
+{
+"name": "Racine Circle",
+"type": "street",
+"lat": 39.821632,
+"lon": -121.606153,
+"segments": 1
+},
+{
+"name": "Ragan Lane",
+"type": "street",
+"lat": 39.758949,
+"lon": -121.596165,
+"segments": 1
+},
+{
+"name": "Rainbow Lane",
+"type": "street",
+"lat": 39.764033,
+"lon": -121.609865,
+"segments": 1
+},
+{
+"name": "Rainbow Ranch Lane",
+"type": "street",
+"lat": 39.719912,
+"lon": -121.62303,
+"segments": 1
+},
+{
+"name": "Ramada Lane",
+"type": "street",
+"lat": 39.753902,
+"lon": -121.59285,
+"segments": 1
+},
+{
+"name": "Ranch Drive",
+"type": "street",
+"lat": 39.717905,
+"lon": -121.577788,
+"segments": 1
+},
+{
+"name": "Rancho Oaks Road",
+"type": "street",
+"lat": 39.823394,
+"lon": -121.581206,
+"segments": 1
+},
+{
+"name": "Ranger Court",
+"type": "street",
+"lat": 39.801882,
+"lon": -121.596892,
+"segments": 1
+},
+{
+"name": "Rankin Way",
+"type": "street",
+"lat": 39.762329,
+"lon": -121.637629,
+"segments": 1
+},
+{
+"name": "Raulson Lane",
+"type": "street",
+"lat": 39.695837,
+"lon": -121.526908,
+"segments": 1
+},
+{
+"name": "Ravelle Court",
+"type": "street",
+"lat": 39.726436,
+"lon": -121.575339,
+"segments": 1
+},
+{
+"name": "Raylinn Lane",
+"type": "street",
+"lat": 39.791519,
+"lon": -121.583713,
+"segments": 2
+},
+{
+"name": "Recreation Drive",
+"type": "street",
+"lat": 39.750045,
+"lon": -121.613123,
+"segments": 2
+},
+{
+"name": "Red Eye Road",
+"type": "street",
+"lat": 39.69286,
+"lon": -121.516832,
+"segments": 1
+},
+{
+"name": "Red Hill Way",
+"type": "street",
+"lat": 39.774502,
+"lon": -121.620638,
+"segments": 1
+},
+{
+"name": "Red Sky Lane",
+"type": "street",
+"lat": 39.728908,
+"lon": -121.657584,
+"segments": 1
+},
+{
+"name": "Redbud Drive",
+"type": "street",
+"lat": 39.757007,
+"lon": -121.643638,
+"segments": 1
+},
+{
+"name": "Redoak Road",
+"type": "street",
+"lat": 39.747296,
+"lon": -121.588063,
+"segments": 1
+},
+{
+"name": "Redwood Lane",
+"type": "street",
+"lat": 39.767441,
+"lon": -121.585463,
+"segments": 1
+},
+{
+"name": "Reed Lane",
+"type": "street",
+"lat": 39.765122,
+"lon": -121.634034,
+"segments": 1
+},
+{
+"name": "Regis Road",
+"type": "street",
+"lat": 39.771737,
+"lon": -121.628474,
+"segments": 1
+},
+{
+"name": "Regnier Lane",
+"type": "street",
+"lat": 39.774842,
+"lon": -121.61807,
+"segments": 1
+},
+{
+"name": "Renato Way",
+"type": "street",
+"lat": 39.774324,
+"lon": -121.627654,
+"segments": 1
+},
+{
+"name": "Restorer Place",
+"type": "street",
+"lat": 39.792058,
+"lon": -121.588138,
+"segments": 1
+},
+{
+"name": "Revere Court",
+"type": "street",
+"lat": 39.799962,
+"lon": -121.581079,
+"segments": 1
+},
+{
+"name": "Rexdale Lane",
+"type": "street",
+"lat": 39.782407,
+"lon": -121.578308,
+"segments": 2
+},
+{
+"name": "Rich Bar Road",
+"type": "street",
+"lat": 39.766716,
+"lon": -121.671712,
+"segments": 1
+},
+{
+"name": "Rich Gulch Road",
+"type": "street",
+"lat": 39.683238,
+"lon": -121.532038,
+"segments": 1
+},
+{
+"name": "Richmond Road",
+"type": "street",
+"lat": 39.736787,
+"lon": -121.576522,
+"segments": 1
+},
+{
+"name": "Ridge Rim Road",
+"type": "street",
+"lat": 39.735504,
+"lon": -121.700118,
+"segments": 1
+},
+{
+"name": "Ridgecrest Drive",
+"type": "street",
+"lat": 39.782674,
+"lon": -121.603622,
+"segments": 1
+},
+{
+"name": "Ridgeside Court",
+"type": "street",
+"lat": 39.802817,
+"lon": -121.595772,
+"segments": 1
+},
+{
+"name": "Rim View Drive",
+"type": "street",
+"lat": 39.759247,
+"lon": -121.679714,
+"segments": 1
+},
+{
+"name": "Ripley Lane",
+"type": "street",
+"lat": 39.769158,
+"lon": -121.620815,
+"segments": 1
+},
+{
+"name": "Rising Star Court",
+"type": "street",
+"lat": 39.760154,
+"lon": -121.583692,
+"segments": 1
+},
+{
+"name": "Rita Lane",
+"type": "street",
+"lat": 39.753737,
+"lon": -121.616849,
+"segments": 1
+},
+{
+"name": "Rivendell Lane",
+"type": "street",
+"lat": 39.730308,
+"lon": -121.649895,
+"segments": 2
+},
+{
+"name": "Riverview Drive",
+"type": "street",
+"lat": 39.755087,
+"lon": -121.571642,
+"segments": 1
+},
+{
+"name": "Rix Lane",
+"type": "street",
+"lat": 39.778419,
+"lon": -121.59245,
+"segments": 1
+},
+{
+"name": "Ro-Ann Way",
+"type": "street",
+"lat": 39.744928,
+"lon": -121.552993,
+"segments": 1
+},
+{
+"name": "Roberts Road",
+"type": "street",
+"lat": 39.775832,
+"lon": -121.625975,
+"segments": 1
+},
+{
+"name": "Robin Place",
+"type": "street",
+"lat": 39.780225,
+"lon": -121.582248,
+"segments": 1
+},
+{
+"name": "Rochelle Lane",
+"type": "street",
+"lat": 39.771242,
+"lon": -121.610812,
+"segments": 1
+},
+{
+"name": "Rock House Lane",
+"type": "street",
+"lat": 39.783402,
+"lon": -121.57845,
+"segments": 1
+},
+{
+"name": "Rockford Lane",
+"type": "street",
+"lat": 39.747414,
+"lon": -121.574764,
+"segments": 1
+},
+{
+"name": "Rocky Lane",
+"type": "street",
+"lat": 39.780434,
+"lon": -121.598362,
+"segments": 1
+},
+{
+"name": "Rocky Ridge Court",
+"type": "street",
+"lat": 39.754616,
+"lon": -121.609286,
+"segments": 1
+},
+{
+"name": "Roe Road",
+"type": "street",
+"lat": 39.740094,
+"lon": -121.633416,
+"segments": 1
+},
+{
+"name": "Rollins Court",
+"type": "street",
+"lat": 39.822087,
+"lon": -121.605403,
+"segments": 1
+},
+{
+"name": "Ronsue Road",
+"type": "street",
+"lat": 39.763889,
+"lon": -121.63598,
+"segments": 1
+},
+{
+"name": "Rorabough Lane",
+"type": "street",
+"lat": 39.807094,
+"lon": -121.580035,
+"segments": 1
+},
+{
+"name": "Rose Lane",
+"type": "street",
+"lat": 39.759481,
+"lon": -121.639752,
+"segments": 1
+},
+{
+"name": "Rosehill Road",
+"type": "street",
+"lat": 39.738458,
+"lon": -121.621063,
+"segments": 2
+},
+{
+"name": "Rosemary Court",
+"type": "street",
+"lat": 39.76582,
+"lon": -121.588057,
+"segments": 1
+},
+{
+"name": "Rossi Lane",
+"type": "street",
+"lat": 39.767497,
+"lon": -121.59906,
+"segments": 1
+},
+{
+"name": "Rossi Way",
+"type": "street",
+"lat": 39.765793,
+"lon": -121.600465,
+"segments": 1
+},
+{
+"name": "Round Tree Drive",
+"type": "street",
+"lat": 39.755257,
+"lon": -121.596029,
+"segments": 1
+},
+{
+"name": "Round Valley Ranch Road",
+"type": "street",
+"lat": 39.721097,
+"lon": -121.620603,
+"segments": 1
+},
+{
+"name": "Rowyn Circle",
+"type": "street",
+"lat": 39.765514,
+"lon": -121.585356,
+"segments": 1
+},
+{
+"name": "Roy Lane",
+"type": "street",
+"lat": 39.743899,
+"lon": -121.59264,
+"segments": 1
+},
+{
+"name": "Royal Canyon Lane",
+"type": "street",
+"lat": 39.732265,
+"lon": -121.567448,
+"segments": 1
+},
+{
+"name": "Royal Court",
+"type": "street",
+"lat": 39.756823,
+"lon": -121.641852,
+"segments": 1
+},
+{
+"name": "Royal Meadow Way",
+"type": "street",
+"lat": 39.713615,
+"lon": -121.666168,
+"segments": 1
+},
+{
+"name": "Royal Mountain Road",
+"type": "street",
+"lat": 39.689894,
+"lon": -121.630408,
+"segments": 1
+},
+{
+"name": "Royal Point Drive",
+"type": "street",
+"lat": 39.757533,
+"lon": -121.651454,
+"segments": 1
+},
+{
+"name": "Ruby Lane",
+"type": "street",
+"lat": 39.773136,
+"lon": -121.615449,
+"segments": 1
+},
+{
+"name": "Rue Rosso",
+"type": "street",
+"lat": 39.81226,
+"lon": -121.581317,
+"segments": 1
+},
+{
+"name": "Running Deer Lane",
+"type": "street",
+"lat": 39.744559,
+"lon": -121.585221,
+"segments": 1
+},
+{
+"name": "Russell Drive",
+"type": "street",
+"lat": 39.74478,
+"lon": -121.653273,
+"segments": 1
+},
+{
+"name": "Rustic Lane",
+"type": "street",
+"lat": 39.736815,
+"lon": -121.630356,
+"segments": 1
+},
+{
+"name": "Rutgers Court",
+"type": "street",
+"lat": 39.815368,
+"lon": -121.602226,
+"segments": 1
+},
+{
+"name": "Ryan Road",
+"type": "street",
+"lat": 39.763213,
+"lon": -121.58071,
+"segments": 1
+},
+{
+"name": "Safari Lane",
+"type": "street",
+"lat": 39.72854,
+"lon": -121.575117,
+"segments": 1
+},
+{
+"name": "Saint Peter's Court",
+"type": "street",
+"lat": 39.757805,
+"lon": -121.589722,
+"segments": 1
+},
+{
+"name": "Salida Circle",
+"type": "street",
+"lat": 39.744121,
+"lon": -121.574126,
+"segments": 1
+},
+{
+"name": "Salida Way",
+"type": "street",
+"lat": 39.744262,
+"lon": -121.574303,
+"segments": 1
+},
+{
+"name": "Salisbury Lane",
+"type": "street",
+"lat": 39.782729,
+"lon": -121.594767,
+"segments": 1
+},
+{
+"name": "Salk Court",
+"type": "street",
+"lat": 39.802424,
+"lon": -121.606476,
+"segments": 1
+},
+{
+"name": "Salmon Drive",
+"type": "street",
+"lat": 39.727077,
+"lon": -121.569718,
+"segments": 2
+},
+{
+"name": "San Jose Lane",
+"type": "street",
+"lat": 39.793489,
+"lon": -121.584162,
+"segments": 1
+},
+{
+"name": "Sanbar Court",
+"type": "street",
+"lat": 39.738811,
+"lon": -121.636838,
+"segments": 1
+},
+{
+"name": "Sandpipper Lane",
+"type": "street",
+"lat": 39.718656,
+"lon": -121.620696,
+"segments": 1
+},
+{
+"name": "Santos Ranch Road",
+"type": "street",
+"lat": 39.795134,
+"lon": -121.71091,
+"segments": 1
+},
+{
+"name": "Sapphire Lane",
+"type": "street",
+"lat": 39.77284,
+"lon": -121.604934,
+"segments": 1
+},
+{
+"name": "Saticoy Lane",
+"type": "street",
+"lat": 39.738268,
+"lon": -121.63152,
+"segments": 1
+},
+{
+"name": "Savannah Way",
+"type": "street",
+"lat": 39.746288,
+"lon": -121.619419,
+"segments": 1
+},
+{
+"name": "Savoir Loop",
+"type": "street",
+"lat": 39.791859,
+"lon": -121.588456,
+"segments": 1
+},
+{
+"name": "Sawmill Road",
+"type": "street",
+"lat": 39.763698,
+"lon": -121.588855,
+"segments": 2
+},
+{
+"name": "Sawpeck Way",
+"type": "street",
+"lat": 39.764091,
+"lon": -121.58708,
+"segments": 1
+},
+{
+"name": "Saxberg Drive",
+"type": "street",
+"lat": 39.763915,
+"lon": -121.604921,
+"segments": 1
+},
+{
+"name": "Scandia Way",
+"type": "street",
+"lat": 39.746423,
+"lon": -121.592822,
+"segments": 1
+},
+{
+"name": "Schmale Lane",
+"type": "street",
+"lat": 39.748002,
+"lon": -121.637711,
+"segments": 1
+},
+{
+"name": "Scott Drive",
+"type": "street",
+"lat": 39.748132,
+"lon": -121.627866,
+"segments": 2
+},
+{
+"name": "Scottwood Road",
+"type": "street",
+"lat": 39.745502,
+"lon": -121.621854,
+"segments": 1
+},
+{
+"name": "Scotty Lake Drive",
+"type": "street",
+"lat": 39.752727,
+"lon": -121.600081,
+"segments": 1
+},
+{
+"name": "Scripps Court",
+"type": "street",
+"lat": 39.802656,
+"lon": -121.599792,
+"segments": 1
+},
+{
+"name": "Seabury Court",
+"type": "street",
+"lat": 39.818995,
+"lon": -121.604459,
+"segments": 1
+},
+{
+"name": "Seaman Lane",
+"type": "street",
+"lat": 39.733562,
+"lon": -121.651601,
+"segments": 1
+},
+{
+"name": "Sean Court",
+"type": "street",
+"lat": 39.783357,
+"lon": -121.590715,
+"segments": 1
+},
+{
+"name": "Secluded Lane",
+"type": "street",
+"lat": 39.77542,
+"lon": -121.620805,
+"segments": 1
+},
+{
+"name": "Selby Lane",
+"type": "street",
+"lat": 39.762583,
+"lon": -121.624577,
+"segments": 1
+},
+{
+"name": "Seneca Drive",
+"type": "street",
+"lat": 39.739526,
+"lon": -121.619045,
+"segments": 2
+},
+{
+"name": "Sentry Lane",
+"type": "street",
+"lat": 39.75223,
+"lon": -121.589741,
+"segments": 1
+},
+{
+"name": "Sequoia Court",
+"type": "street",
+"lat": 39.779964,
+"lon": -121.597463,
+"segments": 1
+},
+{
+"name": "Sesame Street",
+"type": "street",
+"lat": 39.786472,
+"lon": -121.572477,
+"segments": 1
+},
+{
+"name": "Severns Lane",
+"type": "street",
+"lat": 39.779417,
+"lon": -121.600152,
+"segments": 1
+},
+{
+"name": "Shade Tree Lane",
+"type": "street",
+"lat": 39.777193,
+"lon": -121.618545,
+"segments": 1
+},
+{
+"name": "Shadow Mountain Lane",
+"type": "street",
+"lat": 39.764283,
+"lon": -121.639007,
+"segments": 1
+},
+{
+"name": "Shadowbrook Way",
+"type": "street",
+"lat": 39.758023,
+"lon": -121.607727,
+"segments": 1
+},
+{
+"name": "Shady Lane",
+"type": "street",
+"lat": 39.755135,
+"lon": -121.619435,
+"segments": 1
+},
+{
+"name": "Sharon Lane",
+"type": "street",
+"lat": 39.762774,
+"lon": -121.637712,
+"segments": 1
+},
+{
+"name": "Shaw Circle",
+"type": "street",
+"lat": 39.811179,
+"lon": -121.595349,
+"segments": 1
+},
+{
+"name": "Shay Lane",
+"type": "street",
+"lat": 39.77905,
+"lon": -121.570667,
+"segments": 1
+},
+{
+"name": "Sherwood Circle",
+"type": "street",
+"lat": 39.825384,
+"lon": -121.599627,
+"segments": 1
+},
+{
+"name": "Shock Way",
+"type": "street",
+"lat": 39.746529,
+"lon": -121.629971,
+"segments": 1
+},
+{
+"name": "Shoup Court",
+"type": "street",
+"lat": 39.80156,
+"lon": -121.606628,
+"segments": 1
+},
+{
+"name": "Shuman Lane",
+"type": "street",
+"lat": 39.721539,
+"lon": -121.524642,
+"segments": 1
+},
+{
+"name": "Siena Court",
+"type": "street",
+"lat": 39.822497,
+"lon": -121.59908,
+"segments": 1
+},
+{
+"name": "Sierra Park Drive",
+"type": "street",
+"lat": 39.750304,
+"lon": -121.624338,
+"segments": 1
+},
+{
+"name": "Sierra del Sol",
+"type": "street",
+"lat": 39.711512,
+"lon": -121.577279,
+"segments": 2
+},
+{
+"name": "Siler Way",
+"type": "street",
+"lat": 39.747119,
+"lon": -121.572094,
+"segments": 1
+},
+{
+"name": "Silver Cloud Road",
+"type": "street",
+"lat": 39.742445,
+"lon": -121.571814,
+"segments": 1
+},
+{
+"name": "Silvera Court",
+"type": "street",
+"lat": 39.688898,
+"lon": -121.571816,
+"segments": 1
+},
+{
+"name": "Silverthorne Lane",
+"type": "street",
+"lat": 39.773288,
+"lon": -121.578689,
+"segments": 1
+},
+{
+"name": "Silverwood Lane",
+"type": "street",
+"lat": 39.790992,
+"lon": -121.588453,
+"segments": 1
+},
+{
+"name": "Simon Way",
+"type": "street",
+"lat": 39.779762,
+"lon": -121.595355,
+"segments": 2
+},
+{
+"name": "Simonson Court",
+"type": "street",
+"lat": 39.801831,
+"lon": -121.600124,
+"segments": 1
+},
+{
+"name": "Sinclair Circle",
+"type": "street",
+"lat": 39.828351,
+"lon": -121.603166,
+"segments": 1
+},
+{
+"name": "Singing Pines Way",
+"type": "street",
+"lat": 39.767373,
+"lon": -121.580105,
+"segments": 1
+},
+{
+"name": "Sioux Court",
+"type": "street",
+"lat": 39.806154,
+"lon": -121.582646,
+"segments": 1
+},
+{
+"name": "Sky Oaks",
+"type": "street",
+"lat": 39.75717,
+"lon": -121.644923,
+"segments": 1
+},
+{
+"name": "Skycrest Drive",
+"type": "street",
+"lat": 39.718013,
+"lon": -121.526328,
+"segments": 1
+},
+{
+"name": "Skymeadow Way",
+"type": "street",
+"lat": 39.763878,
+"lon": -121.618953,
+"segments": 1
+},
+{
+"name": "Skyview Drive",
+"type": "street",
+"lat": 39.743866,
+"lon": -121.64106,
+"segments": 1
+},
+{
+"name": "Skyway Crossroad",
+"type": "street",
+"lat": 39.742579,
+"lon": -121.655175,
+"segments": 1
+},
+{
+"name": "Skyway Road",
+"type": "street",
+"lat": 39.806613,
+"lon": -121.579626,
+"segments": 1
+},
+{
+"name": "Sleepy Hollow Lane",
+"type": "street",
+"lat": 39.762354,
+"lon": -121.592496,
+"segments": 1
+},
+{
+"name": "Slope Oaks Court",
+"type": "street",
+"lat": 39.723408,
+"lon": -121.652802,
+"segments": 1
+},
+{
+"name": "Soft Breeze Lane",
+"type": "street",
+"lat": 39.775181,
+"lon": -121.603463,
+"segments": 1
+},
+{
+"name": "South Libby Road",
+"type": "street",
+"lat": 39.745069,
+"lon": -121.593779,
+"segments": 3
+},
+{
+"name": "South Park Drive",
+"type": "street",
+"lat": 39.807223,
+"lon": -121.599356,
+"segments": 1
+},
+{
+"name": "South Stoneridge Circle",
+"type": "street",
+"lat": 39.755207,
+"lon": -121.610267,
+"segments": 2
+},
+{
+"name": "Sparks Drive",
+"type": "street",
+"lat": 39.797252,
+"lon": -121.578908,
+"segments": 1
+},
+{
+"name": "Spring Lane",
+"type": "street",
+"lat": 39.751198,
+"lon": -121.62264,
+"segments": 1
+},
+{
+"name": "Squire Lane",
+"type": "street",
+"lat": 39.738414,
+"lon": -121.596633,
+"segments": 1
+},
+{
+"name": "Stacy Lane",
+"type": "street",
+"lat": 39.736629,
+"lon": -121.633692,
+"segments": 1
+},
+{
+"name": "Stapleton Lane",
+"type": "street",
+"lat": 39.751639,
+"lon": -121.585125,
+"segments": 1
+},
+{
+"name": "Stardust Lane",
+"type": "street",
+"lat": 39.79806,
+"lon": -121.579114,
+"segments": 1
+},
+{
+"name": "Stargate Lane",
+"type": "street",
+"lat": 39.735815,
+"lon": -121.629709,
+"segments": 1
+},
+{
+"name": "Stark Lane",
+"type": "street",
+"lat": 39.77419,
+"lon": -121.574876,
+"segments": 1
+},
+{
+"name": "Starlight Court",
+"type": "street",
+"lat": 39.742292,
+"lon": -121.640746,
+"segments": 1
+},
+{
+"name": "Staten Court",
+"type": "street",
+"lat": 39.801868,
+"lon": -121.595382,
+"segments": 1
+},
+{
+"name": "Stearns Road",
+"type": "street",
+"lat": 39.7431,
+"lon": -121.575277,
+"segments": 2
+},
+{
+"name": "Stetson Court",
+"type": "street",
+"lat": 39.817565,
+"lon": -121.608426,
+"segments": 1
+},
+{
+"name": "Stinson Lane",
+"type": "street",
+"lat": 39.770844,
+"lon": -121.607161,
+"segments": 1
+},
+{
+"name": "Stiras Way",
+"type": "street",
+"lat": 39.783625,
+"lon": -121.601456,
+"segments": 1
+},
+{
+"name": "Stone Canyon Court",
+"type": "street",
+"lat": 39.755552,
+"lon": -121.609314,
+"segments": 1
+},
+{
+"name": "Stone Mountain Road",
+"type": "street",
+"lat": 39.746378,
+"lon": -121.527342,
+"segments": 1
+},
+{
+"name": "Stonecreek Court",
+"type": "street",
+"lat": 39.755393,
+"lon": -121.610457,
+"segments": 2
+},
+{
+"name": "Stonecrest Court",
+"type": "street",
+"lat": 39.755334,
+"lon": -121.610092,
+"segments": 1
+},
+{
+"name": "Stonehill Court",
+"type": "street",
+"lat": 39.825543,
+"lon": -121.605285,
+"segments": 1
+},
+{
+"name": "Stonehurst Drive",
+"type": "street",
+"lat": 39.751273,
+"lon": -121.593026,
+"segments": 1
+},
+{
+"name": "Stoney Brook Lane",
+"type": "street",
+"lat": 39.722955,
+"lon": -121.623216,
+"segments": 1
+},
+{
+"name": "Storybook Lane",
+"type": "street",
+"lat": 39.745262,
+"lon": -121.60017,
+"segments": 1
+},
+{
+"name": "Stratton Lane",
+"type": "street",
+"lat": 39.756179,
+"lon": -121.590473,
+"segments": 1
+},
+{
+"name": "Styles Lane",
+"type": "street",
+"lat": 39.765295,
+"lon": -121.573666,
+"segments": 1
+},
+{
+"name": "Subke Lane",
+"type": "street",
+"lat": 39.786141,
+"lon": -121.574847,
+"segments": 1
+},
+{
+"name": "Suffolk Lane",
+"type": "street",
+"lat": 39.742442,
+"lon": -121.585216,
+"segments": 1
+},
+{
+"name": "Sugar Pine Drive",
+"type": "street",
+"lat": 39.810511,
+"lon": -121.580745,
+"segments": 1
+},
+{
+"name": "Summer Lane",
+"type": "street",
+"lat": 39.753103,
+"lon": -121.589732,
+"segments": 1
+},
+{
+"name": "Summerwood Court",
+"type": "street",
+"lat": 39.78089,
+"lon": -121.572008,
+"segments": 1
+},
+{
+"name": "Sun Manor",
+"type": "street",
+"lat": 39.746904,
+"lon": -121.589818,
+"segments": 1
+},
+{
+"name": "Sun River Court",
+"type": "street",
+"lat": 39.737985,
+"lon": -121.620233,
+"segments": 1
+},
+{
+"name": "Sunburst Drive",
+"type": "street",
+"lat": 39.745457,
+"lon": -121.634036,
+"segments": 1
+},
+{
+"name": "Sunny Acres Road",
+"type": "street",
+"lat": 39.737792,
+"lon": -121.585243,
+"segments": 1
+},
+{
+"name": "Sunny Lane",
+"type": "street",
+"lat": 39.762487,
+"lon": -121.601784,
+"segments": 1
+},
+{
+"name": "Sunnyside Lane",
+"type": "street",
+"lat": 39.716449,
+"lon": -121.667147,
+"segments": 1
+},
+{
+"name": "Sunrise Lane",
+"type": "street",
+"lat": 39.792279,
+"lon": -121.577545,
+"segments": 1
+},
+{
+"name": "Sunset Canyon Road",
+"type": "street",
+"lat": 39.715817,
+"lon": -121.528389,
+"segments": 2
+},
+{
+"name": "Sunset Drive",
+"type": "street",
+"lat": 39.768654,
+"lon": -121.628239,
+"segments": 2
+},
+{
+"name": "Sunset Oaks Drive",
+"type": "street",
+"lat": 39.717883,
+"lon": -121.57886,
+"segments": 1
+},
+{
+"name": "Supreme Court",
+"type": "street",
+"lat": 39.765551,
+"lon": -121.585903,
+"segments": 2
+},
+{
+"name": "Susie Lane",
+"type": "street",
+"lat": 39.75305,
+"lon": -121.610781,
+"segments": 1
+},
+{
+"name": "Sutter Road",
+"type": "street",
+"lat": 39.735219,
+"lon": -121.650486,
+"segments": 1
+},
+{
+"name": "Swanee River Place",
+"type": "street",
+"lat": 39.7453,
+"lon": -121.619564,
+"segments": 1
+},
+{
+"name": "Sweetbriar Lane",
+"type": "street",
+"lat": 39.790027,
+"lon": -121.580418,
+"segments": 1
+},
+{
+"name": "Sydney Lane",
+"type": "street",
+"lat": 39.75284,
+"lon": -121.611555,
+"segments": 1
+},
+{
+"name": "Sylmar Lane",
+"type": "street",
+"lat": 39.781817,
+"lon": -121.577134,
+"segments": 1
+},
+{
+"name": "Sylvan Way",
+"type": "street",
+"lat": 39.762327,
+"lon": -121.58644,
+"segments": 1
+},
+{
+"name": "T J Way",
+"type": "street",
+"lat": 39.74458,
+"lon": -121.595612,
+"segments": 1
+},
+{
+"name": "Tabernacle Lane",
+"type": "street",
+"lat": 39.776131,
+"lon": -121.599598,
+"segments": 1
+},
+{
+"name": "Tahoe Court",
+"type": "street",
+"lat": 39.769219,
+"lon": -121.600425,
+"segments": 1
+},
+{
+"name": "Tahoe Way",
+"type": "street",
+"lat": 39.768873,
+"lon": -121.600404,
+"segments": 1
+},
+{
+"name": "Takara Road",
+"type": "street",
+"lat": 39.800806,
+"lon": -121.714041,
+"segments": 1
+},
+{
+"name": "Talley Lane",
+"type": "street",
+"lat": 39.770758,
+"lon": -121.593857,
+"segments": 1
+},
+{
+"name": "Tamarack Way",
+"type": "street",
+"lat": 39.752887,
+"lon": -121.599348,
+"segments": 1
+},
+{
+"name": "Tami Lane",
+"type": "street",
+"lat": 39.731981,
+"lon": -121.617285,
+"segments": 1
+},
+{
+"name": "Tangeman Trail",
+"type": "street",
+"lat": 39.71284,
+"lon": -121.662538,
+"segments": 1
+},
+{
+"name": "Tanglewood Drive",
+"type": "street",
+"lat": 39.759188,
+"lon": -121.627151,
+"segments": 1
+},
+{
+"name": "Tara Lane",
+"type": "street",
+"lat": 39.772163,
+"lon": -121.577979,
+"segments": 1
+},
+{
+"name": "Taynton Drive",
+"type": "street",
+"lat": 39.828582,
+"lon": -121.589765,
+"segments": 1
+},
+{
+"name": "Teaberry Lane",
+"type": "street",
+"lat": 39.741332,
+"lon": -121.589358,
+"segments": 1
+},
+{
+"name": "Temple Circle",
+"type": "street",
+"lat": 39.820316,
+"lon": -121.600431,
+"segments": 1
+},
+{
+"name": "Ten Mile House Road",
+"type": "street",
+"lat": 39.804678,
+"lon": -121.706096,
+"segments": 1
+},
+{
+"name": "Terra Vista",
+"type": "street",
+"lat": 39.766005,
+"lon": -121.637544,
+"segments": 1
+},
+{
+"name": "Terry Lane",
+"type": "street",
+"lat": 39.75407,
+"lon": -121.589655,
+"segments": 1
+},
+{
+"name": "Theis Lane",
+"type": "street",
+"lat": 39.778073,
+"lon": -121.597659,
+"segments": 1
+},
+{
+"name": "Thelma Court",
+"type": "street",
+"lat": 39.769032,
+"lon": -121.613386,
+"segments": 1
+},
+{
+"name": "Thomasson Lane",
+"type": "street",
+"lat": 39.775166,
+"lon": -121.615593,
+"segments": 2
+},
+{
+"name": "Thoreau Lane",
+"type": "street",
+"lat": 39.756701,
+"lon": -121.585167,
+"segments": 1
+},
+{
+"name": "Thornburg Road",
+"type": "street",
+"lat": 39.735901,
+"lon": -121.576933,
+"segments": 1
+},
+{
+"name": "Tigertail Lane",
+"type": "street",
+"lat": 39.737859,
+"lon": -121.632955,
+"segments": 1
+},
+{
+"name": "Tika Lane",
+"type": "street",
+"lat": 39.826855,
+"lon": -121.619951,
+"segments": 1
+},
+{
+"name": "Timber Lane",
+"type": "street",
+"lat": 39.786135,
+"lon": -121.581033,
+"segments": 1
+},
+{
+"name": "Timber Walk Way",
+"type": "street",
+"lat": 39.785432,
+"lon": -121.581013,
+"segments": 1
+},
+{
+"name": "Tipton Lane",
+"type": "street",
+"lat": 39.756228,
+"lon": -121.628934,
+"segments": 1
+},
+{
+"name": "Tobie Lane",
+"type": "street",
+"lat": 39.767761,
+"lon": -121.589562,
+"segments": 1
+},
+{
+"name": "Tokay Court",
+"type": "street",
+"lat": 39.735022,
+"lon": -121.568757,
+"segments": 1
+},
+{
+"name": "Tomin Road",
+"type": "street",
+"lat": 39.736885,
+"lon": -121.678145,
+"segments": 1
+},
+{
+"name": "Toni Drive",
+"type": "street",
+"lat": 39.745813,
+"lon": -121.592631,
+"segments": 1
+},
+{
+"name": "Topaz Circle",
+"type": "street",
+"lat": 39.743566,
+"lon": -121.636801,
+"segments": 1
+},
+{
+"name": "Toquima Road",
+"type": "street",
+"lat": 39.738048,
+"lon": -121.622002,
+"segments": 1
+},
+{
+"name": "Torie Lane",
+"type": "street",
+"lat": 39.767443,
+"lon": -121.590126,
+"segments": 1
+},
+{
+"name": "Town Lane",
+"type": "street",
+"lat": 39.750034,
+"lon": -121.631591,
+"segments": 1
+},
+{
+"name": "Toyon Lane",
+"type": "street",
+"lat": 39.737049,
+"lon": -121.636192,
+"segments": 1
+},
+{
+"name": "Trafalgar Square",
+"type": "street",
+"lat": 39.73306,
+"lon": -121.572228,
+"segments": 1
+},
+{
+"name": "Tranquil Drive",
+"type": "street",
+"lat": 39.758573,
+"lon": -121.64001,
+"segments": 1
+},
+{
+"name": "Travis Road",
+"type": "street",
+"lat": 39.74991,
+"lon": -121.587217,
+"segments": 1
+},
+{
+"name": "Troy Way",
+"type": "street",
+"lat": 39.83096,
+"lon": -121.611722,
+"segments": 1
+},
+{
+"name": "Tufts Court",
+"type": "street",
+"lat": 39.800321,
+"lon": -121.605673,
+"segments": 1
+},
+{
+"name": "Tulip Lane",
+"type": "street",
+"lat": 39.758586,
+"lon": -121.619377,
+"segments": 1
+},
+{
+"name": "Tulsa Court",
+"type": "street",
+"lat": 39.811714,
+"lon": -121.593565,
+"segments": 1
+},
+{
+"name": "Turtle Cove Way",
+"type": "street",
+"lat": 39.754404,
+"lon": -121.677652,
+"segments": 1
+},
+{
+"name": "Tuscan Drive",
+"type": "street",
+"lat": 39.737516,
+"lon": -121.657912,
+"segments": 1
+},
+{
+"name": "Twilight Court",
+"type": "street",
+"lat": 39.778755,
+"lon": -121.624153,
+"segments": 1
+},
+{
+"name": "Twin Lane",
+"type": "street",
+"lat": 39.769321,
+"lon": -121.605875,
+"segments": 1
+},
+{
+"name": "Twin Oaks Drive",
+"type": "street",
+"lat": 39.778951,
+"lon": -121.585699,
+"segments": 1
+},
+{
+"name": "Tyden Way",
+"type": "street",
+"lat": 39.76868,
+"lon": -121.58293,
+"segments": 1
+},
+{
+"name": "Udovich Lane",
+"type": "street",
+"lat": 39.751888,
+"lon": -121.631007,
+"segments": 1
+},
+{
+"name": "Union Court",
+"type": "street",
+"lat": 39.800355,
+"lon": -121.603465,
+"segments": 1
+},
+{
+"name": "Valle Vista Lane",
+"type": "street",
+"lat": 39.726135,
+"lon": -121.577157,
+"segments": 1
+},
+{
+"name": "Valley Ridge Drive",
+"type": "street",
+"lat": 39.759181,
+"lon": -121.647554,
+"segments": 1
+},
+{
+"name": "Valley View Drive",
+"type": "street",
+"lat": 39.759912,
+"lon": -121.640814,
+"segments": 2
+},
+{
+"name": "Valstream Drive",
+"type": "street",
+"lat": 39.761103,
+"lon": -121.629445,
+"segments": 1
+},
+{
+"name": "Van Fossen Road",
+"type": "street",
+"lat": 39.777972,
+"lon": -121.626709,
+"segments": 1
+},
+{
+"name": "Ventura Drive",
+"type": "street",
+"lat": 39.80879,
+"lon": -121.596329,
+"segments": 1
+},
+{
+"name": "Vera Mar Court",
+"type": "street",
+"lat": 39.732773,
+"lon": -121.618374,
+"segments": 1
+},
+{
+"name": "Via Las Lupes",
+"type": "street",
+"lat": 39.694267,
+"lon": -121.528206,
+"segments": 1
+},
+{
+"name": "Victoria Court",
+"type": "street",
+"lat": 39.81796,
+"lon": -121.603139,
+"segments": 1
+},
+{
+"name": "Victoria Way",
+"type": "street",
+"lat": 39.796593,
+"lon": -121.579032,
+"segments": 1
+},
+{
+"name": "View Acres Drive",
+"type": "street",
+"lat": 39.778369,
+"lon": -121.619968,
+"segments": 1
+},
+{
+"name": "Village Lane",
+"type": "street",
+"lat": 39.824655,
+"lon": -121.606039,
+"segments": 1
+},
+{
+"name": "Village Parkway",
+"type": "street",
+"lat": 39.745924,
+"lon": -121.609613,
+"segments": 1
+},
+{
+"name": "Vineyard Drive",
+"type": "street",
+"lat": 39.760827,
+"lon": -121.57217,
+"segments": 1
+},
+{
+"name": "Violet Way",
+"type": "street",
+"lat": 39.757965,
+"lon": -121.620016,
+"segments": 1
+},
+{
+"name": "Virginia Way",
+"type": "street",
+"lat": 39.772278,
+"lon": -121.584912,
+"segments": 1
+},
+{
+"name": "Vista Knolls Drive",
+"type": "street",
+"lat": 39.768631,
+"lon": -121.586039,
+"segments": 1
+},
+{
+"name": "Vista Village Drive",
+"type": "street",
+"lat": 39.744021,
+"lon": -121.652788,
+"segments": 2
+},
+{
+"name": "Vista Way",
+"type": "street",
+"lat": 39.749714,
+"lon": -121.636042,
+"segments": 1
+},
+{
+"name": "Waco Lane",
+"type": "street",
+"lat": 39.756282,
+"lon": -121.590986,
+"segments": 1
+},
+{
+"name": "Waggoner Road",
+"type": "street",
+"lat": 39.778919,
+"lon": -121.613886,
+"segments": 1
+},
+{
+"name": "Wagon Wheel Way",
+"type": "street",
+"lat": 39.765018,
+"lon": -121.630772,
+"segments": 1
+},
+{
+"name": "Wagstaff Road",
+"type": "street",
+"lat": 39.77758,
+"lon": -121.600066,
+"segments": 3
+},
+{
+"name": "Wake Court",
+"type": "street",
+"lat": 39.809971,
+"lon": -121.599215,
+"segments": 1
+},
+{
+"name": "Wall Lane",
+"type": "street",
+"lat": 39.77221,
+"lon": -121.618687,
+"segments": 1
+},
+{
+"name": "Walnut Lane",
+"type": "street",
+"lat": 39.795305,
+"lon": -121.583453,
+"segments": 1
+},
+{
+"name": "Walton's Mountain Road",
+"type": "street",
+"lat": 39.771557,
+"lon": -121.603311,
+"segments": 1
+},
+{
+"name": "Warnke Drive",
+"type": "street",
+"lat": 39.736645,
+"lon": -121.599492,
+"segments": 1
+},
+{
+"name": "Warren Road",
+"type": "street",
+"lat": 39.78864,
+"lon": -121.587446,
+"segments": 1
+},
+{
+"name": "Washo Court",
+"type": "street",
+"lat": 39.80276,
+"lon": -121.583204,
+"segments": 1
+},
+{
+"name": "Wayland Road",
+"type": "street",
+"lat": 39.728423,
+"lon": -121.644972,
+"segments": 2
+},
+{
+"name": "Wee Dell Road",
+"type": "street",
+"lat": 39.791688,
+"lon": -121.583946,
+"segments": 1
+},
+{
+"name": "Wendy Way",
+"type": "street",
+"lat": 39.726631,
+"lon": -121.573566,
+"segments": 2
+},
+{
+"name": "Wesleyan Court",
+"type": "street",
+"lat": 39.818504,
+"lon": -121.605429,
+"segments": 1
+},
+{
+"name": "West Acres Court",
+"type": "street",
+"lat": 39.758944,
+"lon": -121.644374,
+"segments": 2
+},
+{
+"name": "West Drive",
+"type": "street",
+"lat": 39.77592,
+"lon": -121.587554,
+"segments": 1
+},
+{
+"name": "West Park Drive",
+"type": "street",
+"lat": 39.808245,
+"lon": -121.602183,
+"segments": 1
+},
+{
+"name": "West Wagstaff Road",
+"type": "street",
+"lat": 39.773136,
+"lon": -121.630011,
+"segments": 1
+},
+{
+"name": "Westchester Way",
+"type": "street",
+"lat": 39.765771,
+"lon": -121.617794,
+"segments": 1
+},
+{
+"name": "Whatever Lane",
+"type": "street",
+"lat": 39.740603,
+"lon": -121.594396,
+"segments": 1
+},
+{
+"name": "Wheeler Road",
+"type": "street",
+"lat": 39.782362,
+"lon": -121.572556,
+"segments": 1
+},
+{
+"name": "Which Way",
+"type": "street",
+"lat": 39.76479,
+"lon": -121.582725,
+"segments": 1
+},
+{
+"name": "Whitaker Road",
+"type": "street",
+"lat": 39.775716,
+"lon": -121.57833,
+"segments": 1
+},
+{
+"name": "Whital Lane",
+"type": "street",
+"lat": 39.778043,
+"lon": -121.608334,
+"segments": 1
+},
+{
+"name": "White Horse Lane",
+"type": "street",
+"lat": 39.711763,
+"lon": -121.648335,
+"segments": 1
+},
+{
+"name": "White Springs Road",
+"type": "street",
+"lat": 39.707632,
+"lon": -121.64945,
+"segments": 1
+},
+{
+"name": "Wichita Drive",
+"type": "street",
+"lat": 39.801716,
+"lon": -121.602522,
+"segments": 1
+},
+{
+"name": "Wild Iris Lane",
+"type": "street",
+"lat": 39.72405,
+"lon": -121.669138,
+"segments": 1
+},
+{
+"name": "Wilder Drive",
+"type": "street",
+"lat": 39.782721,
+"lon": -121.70503,
+"segments": 2
+},
+{
+"name": "Wilderness Way",
+"type": "street",
+"lat": 39.72955,
+"lon": -121.571113,
+"segments": 1
+},
+{
+"name": "Wildwood Lane",
+"type": "street",
+"lat": 39.758308,
+"lon": -121.625584,
+"segments": 2
+},
+{
+"name": "Williams Drive",
+"type": "street",
+"lat": 39.765648,
+"lon": -121.607495,
+"segments": 1
+},
+{
+"name": "Willow Springs Road",
+"type": "street",
+"lat": 39.756208,
+"lon": -121.67979,
+"segments": 1
+},
+{
+"name": "Willow Street",
+"type": "street",
+"lat": 39.75726,
+"lon": -121.621751,
+"segments": 1
+},
+{
+"name": "Wills Drive",
+"type": "street",
+"lat": 39.739301,
+"lon": -121.629859,
+"segments": 1
+},
+{
+"name": "Wilson Lane",
+"type": "street",
+"lat": 39.735767,
+"lon": -121.643494,
+"segments": 1
+},
+{
+"name": "Winchester Lane",
+"type": "street",
+"lat": 39.82911,
+"lon": -121.578261,
+"segments": 1
+},
+{
+"name": "Winding Way",
+"type": "street",
+"lat": 39.746925,
+"lon": -121.622573,
+"segments": 1
+},
+{
+"name": "Windsor Drive",
+"type": "street",
+"lat": 39.758618,
+"lon": -121.619997,
+"segments": 1
+},
+{
+"name": "Windstar Drive",
+"type": "street",
+"lat": 39.743132,
+"lon": -121.582834,
+"segments": 1
+},
+{
+"name": "Windtune Place",
+"type": "street",
+"lat": 39.768314,
+"lon": -121.632465,
+"segments": 1
+},
+{
+"name": "Wingate Circle",
+"type": "street",
+"lat": 39.822859,
+"lon": -121.602634,
+"segments": 1
+},
+{
+"name": "Wirths Way",
+"type": "street",
+"lat": 39.729235,
+"lon": -121.634781,
+"segments": 1
+},
+{
+"name": "Wolf Lane",
+"type": "street",
+"lat": 39.742737,
+"lon": -121.592816,
+"segments": 1
+},
+{
+"name": "Woodbrook Circle",
+"type": "street",
+"lat": 39.763755,
+"lon": -121.605074,
+"segments": 1
+},
+{
+"name": "Woodbury Drive",
+"type": "street",
+"lat": 39.804558,
+"lon": -121.604136,
+"segments": 1
+},
+{
+"name": "Woodcraft Road",
+"type": "street",
+"lat": 39.765539,
+"lon": -121.601733,
+"segments": 1
+},
+{
+"name": "Woodglen Drive",
+"type": "street",
+"lat": 39.753571,
+"lon": -121.584387,
+"segments": 1
+},
+{
+"name": "Woodhall Court",
+"type": "street",
+"lat": 39.777236,
+"lon": -121.604427,
+"segments": 1
+},
+{
+"name": "Woodland Drive",
+"type": "street",
+"lat": 39.7862,
+"lon": -121.601636,
+"segments": 1
+},
+{
+"name": "Woodpecker Drive",
+"type": "street",
+"lat": 39.808534,
+"lon": -121.606819,
+"segments": 1
+},
+{
+"name": "Woodsdale Lane",
+"type": "street",
+"lat": 39.764875,
+"lon": -121.635121,
+"segments": 1
+},
+{
+"name": "Woodsmuir Lane",
+"type": "street",
+"lat": 39.74912,
+"lon": -121.585293,
+"segments": 1
+},
+{
+"name": "Worick Drive",
+"type": "street",
+"lat": 39.763828,
+"lon": -121.569879,
+"segments": 1
+},
+{
+"name": "Wright Way Lane",
+"type": "street",
+"lat": 39.78792,
+"lon": -121.588418,
+"segments": 1
+},
+{
+"name": "Wyack Court",
+"type": "street",
+"lat": 39.801189,
+"lon": -121.604748,
+"segments": 1
+},
+{
+"name": "Wycliff Way",
+"type": "street",
+"lat": 39.827199,
+"lon": -121.601423,
+"segments": 1
+},
+{
+"name": "Xanadu Way",
+"type": "street",
+"lat": 39.723797,
+"lon": -121.643478,
+"segments": 1
+},
+{
+"name": "Xeno Place",
+"type": "street",
+"lat": 39.739036,
+"lon": -121.569501,
+"segments": 1
+},
+{
+"name": "Yahi Court",
+"type": "street",
+"lat": 39.804208,
+"lon": -121.584234,
+"segments": 1
+},
+{
+"name": "Yakima Court",
+"type": "street",
+"lat": 39.820492,
+"lon": -121.602748,
+"segments": 1
+},
+{
+"name": "Yana Court",
+"type": "street",
+"lat": 39.803289,
+"lon": -121.585392,
+"segments": 1
+},
+{
+"name": "Yankee Hill Road",
+"type": "street",
+"lat": 39.706331,
+"lon": -121.525472,
+"segments": 1
+},
+{
+"name": "Yankee Vista Drive",
+"type": "street",
+"lat": 39.709313,
+"lon": -121.511742,
+"segments": 1
+},
+{
+"name": "Yeshua Way",
+"type": "street",
+"lat": 39.792411,
+"lon": -121.588025,
+"segments": 1
+},
+{
+"name": "York Road",
+"type": "street",
+"lat": 39.724902,
+"lon": -121.639104,
+"segments": 2
+},
+{
+"name": "York Towne Manor",
+"type": "street",
+"lat": 39.746006,
+"lon": -121.571478,
+"segments": 1
+},
+{
+"name": "Yorkshire Drive",
+"type": "street",
+"lat": 39.759468,
+"lon": -121.637371,
+"segments": 1
+},
+{
+"name": "Young Avenue",
+"type": "street",
+"lat": 39.766769,
+"lon": -121.584666,
+"segments": 2
+},
+{
+"name": "Zenith Lane",
+"type": "street",
+"lat": 39.786087,
+"lon": -121.575719,
+"segments": 1
+},
+{
+"name": "Zuckerman Court",
+"type": "street",
+"lat": 39.800245,
+"lon": -121.600876,
+"segments": 1
+},
+{
+"name": "Big Chico Creek",
+"type": "water",
+"lat": 39.808589,
+"lon": -121.751015,
+"segments": 1
+},
+{
+"name": "Butte Creek",
+"type": "water",
+"lat": 39.81243,
+"lon": -121.669979,
+"segments": 2
+},
+{
+"name": "Clear Creek",
+"type": "water",
+"lat": 39.718056,
+"lon": -121.604313,
+"segments": 8
+},
+{
+"name": "Concow Creek",
+"type": "water",
+"lat": 39.800202,
+"lon": -121.523378,
+"segments": 23
+},
+{
+"name": "Deadwood Creek",
+"type": "water",
+"lat": 39.739424,
+"lon": -121.532501,
+"segments": 1
+},
+{
+"name": "Dry Creek",
+"type": "water",
+"lat": 39.692053,
+"lon": -121.586986,
+"segments": 1
+},
+{
+"name": "Empire Creek",
+"type": "water",
+"lat": 39.830325,
+"lon": -121.559565,
+"segments": 1
+},
+{
+"name": "Hodapp Creek",
+"type": "water",
+"lat": 39.705798,
+"lon": -121.546745,
+"segments": 6
+},
+{
+"name": "Honey Run",
+"type": "water",
+"lat": 39.758846,
+"lon": -121.634084,
+"segments": 9
+},
+{
+"name": "Little Butte Creek",
+"type": "water",
+"lat": 39.781329,
+"lon": -121.634915,
+"segments": 13
+},
+{
+"name": "Little Chico Creek",
+"type": "water",
+"lat": 39.79214,
+"lon": -121.705159,
+"segments": 14
+},
+{
+"name": "Little Dry Creek",
+"type": "water",
+"lat": 39.724315,
+"lon": -121.6298,
+"segments": 10
+},
+{
+"name": "Middle Butte Creek",
+"type": "water",
+"lat": 39.821104,
+"lon": -121.612147,
+"segments": 6
+},
+{
+"name": "Rattlesnake Creek",
+"type": "water",
+"lat": 39.817595,
+"lon": -121.563128,
+"segments": 8
+},
+{
+"name": "Trickling Creek",
+"type": "water",
+"lat": 39.713925,
+"lon": -121.53761,
+"segments": 2
+},
+{
+"name": "West Branch Feather River",
+"type": "water",
+"lat": 39.768465,
+"lon": -121.560163,
+"segments": 5
+}
+]

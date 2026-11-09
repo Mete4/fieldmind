@@ -1,0 +1,51 @@
+# FieldMind sample radio traffic. SIMULATED SCENARIO ON REAL GEOGRAPHY.
+# Paradise, California: wind-driven wildfire entering town from the east and
+# running up the canyons on both sides of the ridge.
+# Place names are real (OpenStreetMap). Units and events are invented. No real people.
+# Format: "## <number> | <channel>" then the transcript. Record audio as audio/<number>.wav
+# Reports 12-15 are deliberately ambiguous and should score low confidence.
+
+## 1 | Engine 81
+Engine 81 to Command. We have a fully involved structure fire at Skyway and Bille Road, single-story residence, exposures on both sides. Neighbors report two residents still unaccounted for. Requesting a second alarm and a search team.
+
+## 2 | Battalion 3
+Battalion 3 to Command. Spot fires are landing on Pentz Road near Feather River Hospital. Hospital staff have started moving patients, they're estimating sixty patients to transport. We need every available ambulance and buses staged on Pentz Road, and an engine company to protect the hospital.
+
+## 3 | Medic 41
+Medic 41 to Command, at Paradise Community Park. One patient, elderly male, chest pain and heavy smoke inhalation, conscious and breathing, we're treating and transporting. Shelter crowd here is calm, about forty people waiting for buses.
+
+## 4 | Truck 82
+Truck 82 to Command, urgent traffic. Partial roof collapse on a two-story commercial building at Clark Road and Elliott Road. We can hear three people inside calling for help. Need technical rescue, the heavy rescue unit, and a medic unit staged. Fire has not reached this block yet.
+
+## 5 | Engine 83
+Engine 83 to Command. Spot fire has jumped Honey Run Road by the covered bridge and is running up the canyon wall toward the Skyway, large and fast. Two hikers were reported on the trail below the bridge, no contact with them. Requesting a strike team and a helicopter for the hikers.
+
+## 6 | Paradise PD 7
+PD 7 to Command. Skyway at Neal Road is blocked, abandoned vehicles in both northbound lanes and evacuation traffic is backed up to Pearson Road. No injuries. Need two tow trucks and a traffic control unit here, and consider contra-flow on Skyway.
+
+## 7 | Dispatch
+Dispatch to Command, relaying a 911 call. Family of four sheltering in the gym at Paradise Intermediate School, they report fire visible across the field and they have no vehicle. Caller is a parent with three children, one of them in a wheelchair. Requesting pickup and transport.
+
+## 8 | Engine 35
+Engine 35 to Command. Wind-driven vegetation fire at Wagstaff Road and Clark Road, running north with the wind, three structures immediately threatened. We're on the first structure with one line. Need two more engines and a water tender, hydrant pressure is dropping.
+
+## 9 | Station 26
+Station 26 to Command. Fire is in the canyon below Centerville and has cut Centerville Road at the bridge. Six homes above the road are cut off, we estimate fifteen people, no injuries reported, but they cannot get out toward the Skyway. Need an escort and a water drop on the road.
+
+## 10 | Medic 42
+Medic 42 to Command. Two-vehicle collision at Pearson Road and Clark Road, happened in the evacuation traffic. Three patients. One critical, unresponsive, trapped in the driver seat, two walking wounded. Need the jaws and a second ambulance.
+
+## 11 | Air Attack 230
+Air Attack 230 to Command. From the air the main fire front is about one mile east of Pentz Road, moving west at roughly one mile per hour, with spotting a half mile ahead of the front. No new structure involvement seen on this pass. Will update in fifteen minutes.
+
+## 12 | Unknown unit
+[static] ...to Command, we've got heavy smoke, can't see the... [unintelligible] ...we're somewhere off the Skyway above town, there's a... [static] ...might be a structure, might be brush, we can't tell from here... [static] ...say again, you're broken.
+
+## 13 | Citizen hotline
+Caller says her neighbor told her there's smoke coming up out of the canyon somewhere below Centerville, or maybe over toward Honey Run, she isn't sure which. Nobody hurt as far as she knows. She is calling from Chico and has not seen it herself.
+
+## 14 | Engine 12
+Engine 12 to Command, possible medical, maybe a fall, somewhere around the park, we got flagged down but the person who flagged us left. No further information, we're looking. Stand by.
+
+## 15 | Unknown unit
+Command, be advised, we're getting a social media post saying several people, maybe a dozen, are unaccounted for somewhere in the Magalia area. Unconfirmed, no address, no callback number. Passing it along for what it's worth.

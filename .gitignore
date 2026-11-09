@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+logs/
+bin/
+data/tiles/
+data/vendor/
+data/hazards/raw/
+data/*.sqlite
+data/samples/audio/*.wav
+data/samples/audio/*.mp3
+data/samples/images/*.jpg
+data/samples/images/*.png
+.env
+data/preview/

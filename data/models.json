@@ -1,0 +1,30 @@
+{
+ "live_llm": "qwen2.5:14b",
+ "summary_llm": "qwen2.5:32b",
+ "candidates_pulled": [
+  "qwen2.5:32b",
+  "qwen2.5:14b"
+ ],
+ "benchmarks": {
+  "qwen2.5:32b": {
+   "tokens_per_s": 9.8,
+   "prompt_tokens_per_s": 339.6,
+   "eval_tokens": 128,
+   "load_s": 6.9,
+   "total_s": 20.1
+  },
+  "qwen2.5:14b": {
+   "tokens_per_s": 21.6,
+   "prompt_tokens_per_s": 573.6,
+   "eval_tokens": 128,
+   "load_s": 3.4,
+   "total_s": 9.4
+  }
+ },
+ "memory_total_gib": 121.6,
+ "memory_budget_gib": 103.4,
+ "resident_models_gib": 32.4,
+ "num_parallel": 8,
+ "min_tokens_per_s": 10.0,
+ "ts": "2026-11-08T18:35:23"
+}
