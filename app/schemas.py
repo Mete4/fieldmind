@@ -50,6 +50,7 @@ class Extraction(BaseModel):
     severity: int = Field(3, ge=1, le=5)
     people_count: Optional[int] = Field(None, ge=0)
     needs: list[str] = Field(default_factory=list)
+    confidence: float = Field(0.5, ge=0.0, le=1.0)
     summary: str = ""
     department: str = "other"                 # FD | PD | EMS | other
     unit: str = ""                            # radio call sign of the reporting unit
@@ -169,6 +170,17 @@ class Extraction(BaseModel):
                 out.append(s[:40])
         return out[:8]
 
+    @field_validator("confidence", mode="before")
+    @classmethod
+    def _conf(cls, v):
+        try:
+            f = float(v)
+        except (TypeError, ValueError):
+            return 0.5
+        if f > 1.0:
+            f = f / 100.0 if f <= 100 else 1.0
+        return min(1.0, max(0.0, f))
+
     @field_validator("summary", mode="before")
     @classmethod
     def _summary(cls, v):
@@ -199,8 +211,7 @@ class Report(BaseModel):
     severity: Optional[int] = None
     people_count: Optional[int] = None
     location_text: Optional[str] = None
-    needs_review: bool = False
-    review_reasons: list[str] = Field(default_factory=list)
+    confidence: Optional[float] = None
     structure_part: Optional[str] = None
     fire_direction: Optional[str] = None
     fire_size: Optional[str] = None
@@ -242,8 +253,7 @@ class Incident(BaseModel):
     severity: int = 3
     people_count: Optional[int] = None
     needs: list[str] = Field(default_factory=list)
-    needs_review: bool = False
-    review_reasons: list[str] = Field(default_factory=list)
+    confidence: float = C.FALLBACK_CONFIDENCE
     hazard_zones: list[str] = Field(default_factory=list)
     in_hazard_zone: bool = False
     priority_score: float = 0.0

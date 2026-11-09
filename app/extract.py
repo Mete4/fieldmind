@@ -30,6 +30,7 @@ You read ONE emergency radio transmission or text report and return ONLY a JSON 
 - fire_direction: compass direction the fire comes FROM, one of N, NE, E, SE, S, SW, W, NW; null if not stated.
 - fire_size: small, medium or large if stated or clearly implied (a spot fire is small, a fully involved structure or a running fire front is large); else null.
 - details: one or two sentences with every fact that fits no other field (exposures, access, hazards, resources on scene, timing).
+- confidence: 0.0-1.0 = how sure you are about type, severity AND location. Use 0.6 or lower when the audio is garbled, the location is vague or missing, the report is unconfirmed or second-hand, or the type is unclear. Use 0.85 or higher only for clear, specific, first-hand reports.
 - summary: one line, at most 20 words, for a priority list.
 Never invent details that are not in the report."""
 
@@ -41,6 +42,7 @@ EXTRACTION_SCHEMA = {
         "severity": {"type": "integer", "minimum": 1, "maximum": 5},
         "people_count": {"type": ["integer", "null"]},
         "needs": {"type": "array", "items": {"type": "string"}},
+        "confidence": {"type": "number"},
         "summary": {"type": "string"},
         "department": {"type": "string", "enum": ["FD", "PD", "EMS", "other"]},
         "unit": {"type": "string"},
@@ -49,7 +51,7 @@ EXTRACTION_SCHEMA = {
         "fire_size": {"type": ["string", "null"], "enum": ["small", "medium", "large", None]},
         "details": {"type": "string"},
     },
-    "required": ["location_text", "type", "severity", "people_count", "needs", "summary",
+    "required": ["location_text", "type", "severity", "people_count", "needs", "confidence", "summary",
                  "department", "unit", "structure_part", "fire_direction", "fire_size", "details"],
 }
 
@@ -152,7 +154,7 @@ def llm_extract(transcript: str, model: Optional[str] = None, incident_id: Optio
     meta.update(fallback=True, error=last_err, latency_ms=int((time.perf_counter() - t0) * 1000))
     db.log_request(RequestLog(route="edge_llm", model=model, latency_ms=meta["latency_ms"], tokens_in=meta["tokens_in"],
                               tokens_out=meta["tokens_out"], ok=False, error=last_err, incident_id=incident_id))
-    return Extraction(type="other", summary="Extraction failed, needs manual review"), meta
+    return Extraction(confidence=C.FALLBACK_CONFIDENCE, type="other", summary="Extraction failed, needs manual review"), meta
 
 
 def process_text(transcript: str, channel: str = "text", input_type: str = "text",
@@ -163,9 +165,7 @@ def process_text(transcript: str, channel: str = "text", input_type: str = "text
     ext, meta = llm_extract(transcript, model, incident_id=inc.id)
     inc.location_text = ext.location_text
     inc.type, inc.severity, inc.people_count = ext.type, ext.severity, ext.people_count
-    inc.needs, inc.summary = ext.needs, ext.summary
-    if meta["fallback"]:
-        inc.review_reasons.append("extraction failed")
+    inc.needs, inc.confidence, inc.summary = ext.needs, ext.confidence, ext.summary
     inc.department, inc.unit = [ext.department], [ext.unit] if ext.unit else []
     inc.structure_part, inc.fire_direction, inc.fire_size, inc.details = ext.structure_part, ext.fire_direction, ext.fire_size, ext.details or ""
     inc.llm_model, inc.tokens_per_s = meta["model"], meta["tokens_per_s"]
@@ -178,10 +178,7 @@ def process_text(transcript: str, channel: str = "text", input_type: str = "text
         inc.lat, inc.lon, inc.geocode_match, inc.geocode_score = g["lat"], g["lon"], g["match"], g["score"]
     else:
         inc.lat, inc.lon, inc.location_unknown = C.TOWN_CENTER_LAT, C.TOWN_CENTER_LON, True
-        inc.review_reasons.append("address not found" if ext.location_text else "no location")
-    if re.search(r"\?|\b(can anybody confirm|can anyone confirm|confirm that|say again)\b", transcript, re.I):
-        inc.review_reasons.append("question in call")
-    inc.needs_review = bool(inc.review_reasons)
+        inc.confidence = round(max(0.0, inc.confidence - C.GEOCODE_FAIL_CONFIDENCE_PENALTY), 3)
     hazards.annotate(inc)
     inc.edge_latency_ms = int((time.perf_counter() - t0) * 1000)
     return inc

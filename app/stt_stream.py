@@ -60,7 +60,6 @@ class StreamSession:
         self.threshold = threshold
         self._pending = np.zeros(0, dtype=np.float32)
         self._seg: list[np.ndarray] = []
-        self._probs: list[float] = []
         self._in_speech = False
         self._silence = 0
         self._seg_started_at = 0.0
@@ -78,8 +77,6 @@ class StreamSession:
 
     def _frame(self, frame: np.ndarray) -> None:
         p = speech_prob(frame)
-        if self._in_speech or p >= self.threshold:
-            self._probs.append(p)
         if p >= self.threshold:
             if not self._in_speech:
                 self._in_speech, self._seg_started_at = True, time.time()
@@ -95,15 +92,14 @@ class StreamSession:
 
     def _end_segment(self, why: str) -> None:
         seg = np.concatenate(self._seg) if self._seg else np.zeros(0, dtype=np.float32)
-        mean_p = float(np.mean(self._probs)) if self._probs else None
-        self._seg, self._probs, self._in_speech, self._silence = [], [], False, 0
+        self._seg, self._in_speech, self._silence = [], False, 0
         if len(seg) < self.min_speech:
             return
         self.segments += 1
         idx, started = self.segments, self._seg_started_at
-        threading.Thread(target=self._transcribe, args=(seg, idx, why, started, mean_p), daemon=True).start()
+        threading.Thread(target=self._transcribe, args=(seg, idx, why, started), daemon=True).start()
 
-    def _transcribe(self, seg: np.ndarray, idx: int, why: str, started: float, mean_p=None) -> None:
+    def _transcribe(self, seg: np.ndarray, idx: int, why: str, started: float) -> None:
         t0 = time.perf_counter()
         eng = get_engine()
         try:
@@ -118,7 +114,7 @@ class StreamSession:
         with self._lock:
             try:
                 self.on_segment({"channel": self.channel, "segment": idx, "cut": why, "audio_s": round(dur, 2), "latency_ms": ms,
-                                 "rtf": round(ms / 1000 / dur, 3) if dur else None, "text": text, "error": err, "speech_prob": round(mean_p, 3) if mean_p is not None else None,
+                                 "rtf": round(ms / 1000 / dur, 3) if dur else None, "text": text, "error": err,
                                  "backend": eng.backend.name if eng.backend else None, "since_speech_start_s": round(time.time() - started, 2)})
             finally:
                 self.stats["delivered"] += 1

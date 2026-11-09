@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import datetime as dt
 import math
-import re
 import threading
 import time
 from typing import Optional
@@ -34,37 +33,10 @@ def haversine_m(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return 2 * r * math.asin(math.sqrt(a))
 
 
-COMMAND_RE = re.compile(r"(?i)\b(?:i(?:'ll| will) be|this is|establishing|will be)\s+([A-Z][a-z]+)\s+Command\b")
-SPEAKER_COMMAND_RE = re.compile(r"(?i)^(?:[\w ,.]{0,25}?)\b([A-Z][a-z]+)\s+Command\b")
-
-
-def remember_command_post(text: str, inc: Incident) -> None:
-    """"I'll be Maxwell Command" -> later calls from Maxwell Command belong to this incident."""
-    m = COMMAND_RE.search(text)
-    if m:
-        db.set_metric(f"command:{m.group(1).lower()}", inc.id)
-
-
-def note_command_post(text: str, cand: Incident) -> None:
-    """A call signed 'X Command' is a follow-up from that command post, not a place."""
-    m = SPEAKER_COMMAND_RE.search(text.strip())
-    if m and db.get_metric(f"command:{m.group(1).lower()}"):
-        cand.unit = [f"{m.group(1)} Command"] + [u for u in cand.unit if u]
-        if cand.location_text and "command" in cand.location_text.lower():
-            cand.location_text = None
-
-
 def find_link_target(cand: Incident) -> tuple[Optional[Incident], str]:
     """The nearest open incident the candidate may join, and why / why not."""
     if C.LINK_RADIUS_M <= 0:
         return None, "merging disabled"
-    for u in cand.unit:                                   # follow-up from a known command post
-        m = re.match(r"(?i)([A-Z][a-z]+)\s+Command$", u)
-        if m:
-            inc_id = db.get_metric(f"command:{m.group(1).lower()}")
-            inc = db.get_incident(inc_id) if inc_id else None
-            if inc is not None:
-                return inc, f"call from {u}, the command post of {inc.label or inc.id}"
     if cand.type == "medical" and (cand.people_count or 0) <= 2:
         pass                                       # a single patient still joins the event at the same place
     if cand.location_unknown:
@@ -109,19 +81,10 @@ def merge_into(inc: Incident, cand: Incident, report: Report) -> Incident:
     if cand.people_count is not None:
         inc.people_count = max(inc.people_count or 0, cand.people_count)
     inc.needs = (inc.needs + [n for n in cand.needs if n not in inc.needs])[:8]
-    if cand.summary:                                   # newest non-empty value wins
-        inc.summary = cand.summary
-    if cand.location_text and not cand.location_unknown and inc.location_unknown:
-        inc.location_text, inc.lat, inc.lon = cand.location_text, cand.lat, cand.lon
-        inc.geocode_match, inc.geocode_score, inc.location_unknown = cand.geocode_match, cand.geocode_score, False
-        inc.review_reasons = [r for r in inc.review_reasons if r not in ("address not found", "no location")]
-    if cand.type == "road_blocked" or inc.type == "road_blocked":
-        if re.search(r"(?i)\b(is open|open and moving|reopened|now open)\b", cand.transcript) and inc.type == "road_blocked":
-            cand.review_reasons.append(f"contradicts {inc.label or inc.id}")
-    for r in cand.review_reasons:
-        if r not in inc.review_reasons and r not in ("address not found", "no location"):
-            inc.review_reasons.append(r)
-    inc.needs_review = bool(inc.review_reasons)
+    if cand.confidence >= inc.confidence:
+        inc.confidence = round(cand.confidence, 3)
+        if cand.summary:
+            inc.summary = cand.summary
     inc.transcript = cand.transcript
     inc.last_ts = now_iso()
     inc.report_count += 1
@@ -146,18 +109,23 @@ def ingest_text(text: str, channel: str = "text", input_type: str = "text", sour
     action = "failed"
     try:
         cand = process_text(text, channel=channel, input_type=input_type, model=model)
-        if stt.get("speech_prob") is not None and stt["speech_prob"] < C.UNCLEAR_AUDIO_SPEECH_PROB:
-            cand.review_reasons.append("unclear audio")
-        cand.needs_review = bool(cand.review_reasons)
+        if cand.confidence < C.UNCLEAR_CONFIDENCE and not cand.fallback:   # unclear call: ask, do not guess a pin
+            unit = (cand.unit or [channel])[0] or channel
+            qid = db.add_open_question("", f"Unclear call from {unit}: \"{text.strip()[:140]}\" - where is it, and is it a new incident?", "edge")
+            report.department = cand.department[0] if cand.department else "other"
+            report.unit, report.type, report.severity, report.confidence = unit, cand.type, cand.severity, cand.confidence
+            report.status, report.link_action, report.link_reason = "processed", None, f"unclear: open question #{qid}"
+            report.processing_ms = int((time.perf_counter() - t0) * 1000)
+            report.pin_s = None
+            db.save_report(report)
+            return report, None, "question"
         cand.report_ids, cand.channels, cand.types = [report.id], [channel], [cand.type]
-        note_command_post(text, cand)
         if cand.details:
             cand.details = f"[{channel}] {cand.details}"
         report.department = cand.department[0] if cand.department else "other"
         report.unit = cand.unit[0] if cand.unit else ""
         report.type, report.severity, report.people_count = cand.type, cand.severity, cand.people_count
-        report.location_text = cand.location_text
-        report.needs_review, report.review_reasons = cand.needs_review, list(cand.review_reasons)
+        report.location_text, report.confidence = cand.location_text, cand.confidence
         report.structure_part, report.fire_direction, report.fire_size = cand.structure_part, cand.fire_direction, cand.fire_size
         report.details = cand.details
         with _link_lock:
@@ -167,11 +135,7 @@ def ingest_text(text: str, channel: str = "text", input_type: str = "text", sour
             else:
                 inc, action = cand, "new"
                 inc.label = db.next_label(LABEL_PREFIX.get(inc.type, "OTHER"))
-            remember_command_post(text, inc)
             db.save_incident(inc)
-        if "question in call" in cand.review_reasons:      # the call still has its pin; the question goes to the operator too
-            unit = (cand.unit or [channel])[0] or channel
-            db.add_open_question(inc.id, f"{inc.label}: {unit} asks: \"{text.strip()[:140]}\"", "edge")
         orchestrator.evaluate_async(inc.model_copy(deep=True), action)
         report.status, report.incident_id, report.link_action, report.link_reason = "processed", inc.id, action, reason
     except Exception as e:  # noqa: BLE001

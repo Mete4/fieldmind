@@ -28,12 +28,12 @@ SCHEMA_DOC = """Tables (DuckDB SQL, SQLite attached as schema fm, read-only):
 fm.reports  -- one row per raw radio call / text, newest first by ts
   id TEXT, ts TEXT (ISO UTC, e.g. 2026-11-09T01:10:22+00:00), channel TEXT, input_type TEXT ('audio'|'text'),
   department TEXT ('FD'|'PD'|'EMS'|'other'), unit TEXT (call sign), type TEXT ('fire'|'collapse'|'medical'|'road_blocked'|'trapped'|'other'),
-  severity INTEGER 1-5, people_count INTEGER, location_text TEXT, needs_review INTEGER 0/1, review_reasons TEXT (comma list: 'address not found','no location','unclear audio','question in call','contradicts FIRE-001','extraction failed'), structure_part TEXT, fire_direction TEXT ('N'..'NW'),
+  severity INTEGER 1-5, people_count INTEGER, location_text TEXT, confidence REAL 0-1, structure_part TEXT, fire_direction TEXT ('N'..'NW'),
   fire_size TEXT ('small'|'medium'|'large'), details TEXT, text TEXT (the transcript), status TEXT, incident_id TEXT (link to fm.incidents.id)
 
 fm.incidents -- one row per incident, aggregated from its linked reports
   id TEXT (internal), label TEXT (human id such as FIRE-001, MED-002, TRAP-001, ROAD-001; always select it), timestamp TEXT (first report), last_ts TEXT (latest report), type TEXT (same vocabulary), severity INTEGER 1-5 (max),
-  needs_review INTEGER 0/1, review_reasons TEXT (comma list), priority_score REAL, in_hazard_zone INTEGER 0/1, hazard_zones TEXT (comma list, e.g. 'fire_very_high'),
+  confidence REAL, priority_score REAL, in_hazard_zone INTEGER 0/1, hazard_zones TEXT (comma list, e.g. 'fire_very_high'),
   status TEXT ('local'|'queued'|'cloud_refined'), report_count INTEGER, location_text TEXT, geocode_match TEXT (place name), lat REAL, lon REAL,
   people_count INTEGER (max), needs TEXT (comma list), summary TEXT, transcript TEXT (latest report), department TEXT (comma list, e.g. 'FD,EMS'),
   unit TEXT (comma list), structure_part TEXT, fire_direction TEXT, fire_size TEXT, details TEXT (all reports, newest first), report_ids TEXT (comma list)

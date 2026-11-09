@@ -39,26 +39,8 @@ SCENARIO_BANNER = "Simulated scenario on real geography"
 # ---------------------------------------------------------------- map tiles
 TILE_MIN_ZOOM = 10
 TILE_MAX_ZOOM = 16          # OSM tile usage policy forbids bulk download at z17+
-TILE_SERVER_PORT = 8008     # static server for tiles + vendored JS/CSS; run.sh starts it for the whole Wi-Fi (MSG 4)
-
-
-def _lan_ip() -> str:
-    """Address of this computer's default route (a UDP connect sends no packet)."""
-    import socket
-
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        ip = s.getsockname()[0]
-        s.close()
-        return ip
-    except Exception:  # noqa: BLE001
-        return "localhost"
-
-
-PUBLIC_HOST = os.environ.get("FIELDMIND_PUBLIC_HOST") or _lan_ip()   # what browsers use for tiles + Leaflet
-TILE_BIND_HOST = os.environ.get("FIELDMIND_TILE_BIND", "127.0.0.1")  # run.sh sets 0.0.0.0 for other computers on the Wi-Fi
-TILE_URL_TEMPLATE = f"http://{PUBLIC_HOST}:{TILE_SERVER_PORT}/tiles/{{z}}/{{x}}/{{y}}.png"
+TILE_SERVER_PORT = 8008     # local static server: tiles + vendored JS/CSS
+TILE_URL_TEMPLATE = f"http://localhost:{TILE_SERVER_PORT}/tiles/{{z}}/{{x}}/{{y}}.png"
 MAP_ATTRIBUTION = (
     "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> "
     "contributors (ODbL) | Hazards: CAL FIRE FHSZ, CAL FIRE FRAP | Incidents: simulated"
@@ -112,10 +94,12 @@ CONNECTIVITY_CHECK_URL = "https://api.anthropic.com/"
 CONNECTIVITY_TIMEOUT_S = 2.0
 CONNECTIVITY_CACHE_S = 5.0
 
-# ---------------------------------------------------------------- triage
-# needs_review comes only from checkable facts (see app/pipeline.py); there is no self-scored confidence.
-UNCLEAR_AUDIO_SPEECH_PROB = 0.6   # mean Silero VAD speech probability over a segment below this -> 'unclear audio'
+# ---------------------------------------------------------------- router / triage
+CONFIDENCE_THRESHOLD = 0.7
+UNCLEAR_CONFIDENCE = 0.6       # below this a call becomes an open question for the operator instead of a pin     # below this -> cloud refine (online) or queue (offline)
+FALLBACK_CONFIDENCE = 0.3      # used when the LLM returns invalid JSON twice
 GEOCODE_MIN_SCORE = 70         # rapidfuzz score 0-100
+GEOCODE_FAIL_CONFIDENCE_PENALTY = 0.25
 HAZARD_PRIORITY_BONUS = 0      # all of Paradise is a hazard zone: the bonus carried no information
 # people factor added to priority_score: people_count >= threshold -> factor
 PEOPLE_FACTOR_BANDS = [(1, 1), (3, 2), (10, 3)]

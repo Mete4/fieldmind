@@ -120,7 +120,7 @@ async def ws_radio(ws: WebSocket, channel: str, source: Optional[str] = None):
             try:
                 metrics.inflight["audio"] += 1
                 report, inc, action = pipeline.ingest_text(seg["text"], channel=channel, input_type="audio", source_file=source or "live-stream",
-                                                           stt={"backend": seg.get("backend"), "latency_ms": seg["latency_ms"], "rtf": seg["rtf"], "audio_s": seg["audio_s"], "speech_prob": seg.get("speech_prob")})
+                                                           stt={"backend": seg.get("backend"), "latency_ms": seg["latency_ms"], "rtf": seg["rtf"], "audio_s": seg["audio_s"]})
                 seg.update(report_id=report.id, incident_id=inc.id if inc else None, link=action,
                            incident={k: inc.model_dump().get(k) for k in ("type", "severity", "people_count", "fire_direction", "fire_size", "geocode_match")} if inc else None)
             except Exception as e:  # noqa: BLE001
