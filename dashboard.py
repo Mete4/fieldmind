@@ -171,7 +171,8 @@ with tab_main:
                             f"<div><span class='fm-id'>{i.get('label')}</span> {TYPE_SHORT.get(i.get('type'), '')}"
                             f"{' · ' + str(i.get('people_count')) + ' ppl' if i.get('people_count') else ''}<br>"
                             f"<span class='fm-dim'>{where(i)} · {ago(i.get('last_ts'))}"
-                            f"{' · ' + ', '.join(units_by_inc.get(i['id'], [])) if units_by_inc.get(i['id']) else ''}</span></div></div>", unsafe_allow_html=True)
+                            f"{' · ' + ', '.join(units_by_inc.get(i['id'], [])) if units_by_inc.get(i['id']) else ''}</span>"
+                            f"{'<br><span style=color:#ffb74d>Needs review: ' + ', '.join(i.get('review_reasons') or []) + '</span>' if i.get('needs_review') else ''}</div></div>", unsafe_allow_html=True)
                 if r2.button("›", key=f"sel{i['id']}"):
                     ss["selected"] = i["id"]
                     st.rerun()
@@ -203,7 +204,8 @@ with tab_main:
                 if h2.button("✕"):
                     ss["selected"] = None
                     st.rerun()
-                st.markdown(f"<div class='fm-kf'>{what(i)}</div><div class='fm-sub'>{where(i)}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='fm-kf'>{what(i)}</div><div class='fm-sub'>{where(i)}</div>"
+                            + (f"<div style='color:#ffb74d'>Needs review: {', '.join(i.get('review_reasons') or [])}</div>" if i.get("needs_review") else ""), unsafe_allow_html=True)
                 facts = []
                 if i.get("people_count") is not None:
                     facts.append(f"<b>{i['people_count']}</b> people")
