@@ -16,6 +16,25 @@ radio calls were written for this exercise.
 
 ```mermaid
 flowchart LR
+    A["Radio call"] --> B["Transcribe"] --> C["Organize"] --> D["Map and alert"] --> E(["Operator"])
+    D -. "incident list" .-> F["Cloud agent"]
+    F -. "suggestions" .-> E
+```
+
+1. **Radio call:** a unit talks on the radio.
+2. **Transcribe:** Whisper turns the speech into text, on the PGX.
+3. **Organize:** a local model turns the text into an incident: what, where, how many people.
+4. **Map and alert:** the incident appears on the map. Serious incidents raise an alert.
+5. **Operator:** a person reads the alerts and decides what to do.
+6. **Cloud agent:** a larger model reads the list of incidents (no audio) and suggests
+   priorities. The operator accepts or rejects each suggestion.
+
+Steps 1 to 5 run on the PGX. Only step 6 uses the cloud.
+
+### Details
+
+```mermaid
+flowchart LR
     subgraph EDGE["Edge: ThinkStation PGX"]
         direction LR
         R["Radio channels<br/>FD · PD · EMS"] --> STT["Speech to text<br/>Silero VAD + Whisper large-v3 (GPU)"]
