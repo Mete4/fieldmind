@@ -109,7 +109,8 @@ def add_incident(m: folium.Map, inc: dict) -> None:
              + f"<small>status {_html.escape(str(inc.get('status', '')))} | id {inc.get('id', '')}</small>")
     review = inc.get("needs_review")
     folium.CircleMarker([lat, lon], radius=10, color="#fff" if review else "#222", weight=2.5 if review else 1, dash_array="4 3" if review else None,
-                        fill=True, fill_color=color, fill_opacity=0.95, popup=folium.Popup(popup, max_width=420)).add_to(m)
+                        fill=True, fill_color=color, fill_opacity=0.95, popup=folium.Popup(popup, max_width=420),
+                        tooltip=f"{label} | {inc.get('type', '?')} sev {sev} | {n} report(s) | {units}").add_to(m)
     badge = (f"<div style='position:absolute;left:8px;top:-12px;background:#fff;border:1.5px solid #222;border-radius:9px;"
              f"min-width:16px;height:16px;font:bold 10px/16px sans-serif;text-align:center;padding:0 3px'>{n}</div>" if n > 1 else "")
     folium.Marker([lat, lon], icon=folium.DivIcon(html=f"<div style='position:relative;font-size:14px;line-height:14px;margin:-7px 0 0 -7px'>{icon}{badge}</div>",

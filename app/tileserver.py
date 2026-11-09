@@ -40,6 +40,9 @@ _BLANK_TILE = bytes.fromhex(
 
 class Handler(SimpleHTTPRequestHandler):
     def do_GET(self) -> None:
+        if not self.path.startswith(("/tiles/", "/vendor/")):  # the rest of data/ (database, audio) stays private
+            self.send_error(404)
+            return
         if self.path.startswith("/tiles/") and self.path.endswith(".png"):
             local = Path(self.directory) / self.path.lstrip("/").split("?")[0]
             if not local.exists():
