@@ -132,7 +132,7 @@ class Geocoder:
         best_score = top[0][1]
         # near-ties: prefer the longer, more specific name ("Paradise High School" over "Paradise")
         cands = [t for t in top if t[1] >= best_score - 2]
-        name, score, idx = max(cands, key=lambda t: (len(t[0]), t[1]))
+        name, score, idx = max(cands, key=lambda t: (round(fuzz.ratio(q, t[0])), len(t[0])))
         if len(q) <= 3:
             score *= 0.6
         return self.entries[idx], float(score)
