@@ -118,18 +118,18 @@ next_step = "start" if not incidents else ("skip" if not ss["skipped"] else "clo
 kind = lambda step: "primary" if step == next_step else "secondary"
 with st.container(horizontal=True, gap="small", vertical_alignment="center"):
     st.markdown("<span class='fm-demo'>Demo</span>", width="content", unsafe_allow_html=True)
-    if st.button("1  Reset demo", width="content"):
+    if st.button("Reset demo", width="content"):
         subprocess.run(["pkill", "-f", "scripts/play_radio.py"], check=False)   # stop a replay that is still sending calls
         api("POST", "/reset")
         ss.update(selected=None, skipped=False, big_agent=None, seen_alert=0)
         st.rerun()
-    if st.button("2  Start demo", type=kind("start"), width="content"):
+    if st.button("Start demo", type=kind("start"), width="content"):
         launch(["scripts/play_radio.py", str(RADIO / "camp_live.json"), "--stream"])
         st.toast("Radio part 1: audio streamed through Whisper on the GPU")
-    if st.button("3  Skip ahead 30 min", type=kind("skip"), width="content"):
+    if st.button("Skip ahead 30 min", type=kind("skip"), width="content"):
         launch(["scripts/play_radio.py", str(RADIO / "camp_batch.json"), "--text", "--speed", "20"])
         ss["skipped"] = True
-    if st.button("4  Ask cloud agent", type=kind("cloud"), width="content"):
+    if st.button("Ask cloud agent", type=kind("cloud"), width="content"):
         ss["big_agent"] = api("POST", "/recorded_cloud", timeout=60) if (ss["skipped"] or len(incidents) >= 12) else api("POST", "/situation", timeout=300)
 if ss.get("api_error"):
     st.warning(ss.pop("api_error"))
