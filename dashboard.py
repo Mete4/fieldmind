@@ -13,7 +13,9 @@ import streamlit as st
 from streamlit_autorefresh import st_autorefresh
 
 from app import config as C
-from app.mapview import make_map
+import folium
+
+from app.mapview import add_incident, make_map
 
 API = C.API_URL
 ROOT = Path(__file__).resolve().parent
@@ -38,6 +40,8 @@ div[data-testid="stVerticalBlockBorderWrapper"]{padding:0}
 .fm-sub{font-size:14px;color:#ccc}
 .fm-call{border-left:3px solid #555;padding:4px 8px;margin:6px 0;font-size:13px;color:#ddd}
 .stButton>button{padding:2px 10px;font-size:13px}
+.stButton>button p{white-space:nowrap}
+.fm-demo{color:#999;font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin-right:4px}
 </style>""", unsafe_allow_html=True)
 ss = st.session_state
 ss.setdefault("selected", None)
@@ -106,23 +110,27 @@ for u in units:
         units_by_inc.setdefault(u["incident_id"], []).append(u["name"])
 
 # ---------------------------------------------------------------- top bar
-t = st.columns([4.4, 1.4, 1.2, 1.5, 1.4, 1.4])
-t[0].markdown(f"<div class='fm-top'><b>FieldMind&nbsp;·&nbsp;Paradise,&nbsp;CA</b> <span>{dt.datetime.now().strftime('%H:%M:%S')}</span>"
-              f"<span style='color:{'#43a047' if online else '#fb8c00'}'>●</span><span class='fm-dim'>{'Hybrid · cloud linked' if online else 'Edge only · cloud will catch up'} · {C.SCENARIO_BANNER}</span></div>", unsafe_allow_html=True)
-if t[1].button("Reset demo"):
-    subprocess.run(["pkill", "-f", "scripts/play_radio.py"], check=False)   # stop a replay that is still sending calls
-    api("POST", "/reset")
-    ss.update(selected=None, skipped=False, big_agent=None, seen_alert=0)
-    st.rerun()
-if t[2].button("Start demo", type="primary"):
-    launch(["scripts/play_radio.py", str(RADIO / "camp_live.json"), "--stream"])
-    st.toast("Radio part 1: audio streamed through Whisper on the GPU")
-if t[3].button("Skip ahead 30 min"):
-    launch(["scripts/play_radio.py", str(RADIO / "camp_batch.json"), "--text", "--speed", "20"])
-    ss["skipped"] = True
-if t[4].button("Ask cloud agent"):
-    ss["big_agent"] = api("POST", "/recorded_cloud", timeout=60) if (ss["skipped"] or len(incidents) >= 12) else api("POST", "/situation", timeout=300)
-t[5].caption(f"{len(incidents)} incidents · {sum(i.get('report_count', 1) for i in incidents)} radio calls")
+counts = f"{len(incidents)} incidents · {sum(i.get('report_count', 1) for i in incidents)} radio calls"
+st.markdown(f"<div class='fm-top'><b>FieldMind&nbsp;·&nbsp;Paradise,&nbsp;CA</b> <span>{dt.datetime.now().strftime('%H:%M:%S')}</span>"
+            f"<span style='color:{'#43a047' if online else '#fb8c00'}'>●</span><span class='fm-dim'>{'Hybrid · cloud linked' if online else 'Edge only · cloud will catch up'} · {C.SCENARIO_BANNER}</span>"
+            f"<span class='fm-dim' style='margin-left:auto'>{counts}</span></div>", unsafe_allow_html=True)
+next_step = "start" if not incidents else ("skip" if not ss["skipped"] else "cloud")   # the button to press next is the primary one
+kind = lambda step: "primary" if step == next_step else "secondary"
+with st.container(horizontal=True, gap="small", vertical_alignment="center"):
+    st.markdown("<span class='fm-demo'>Demo</span>", width="content", unsafe_allow_html=True)
+    if st.button("1  Reset demo", width="content"):
+        subprocess.run(["pkill", "-f", "scripts/play_radio.py"], check=False)   # stop a replay that is still sending calls
+        api("POST", "/reset")
+        ss.update(selected=None, skipped=False, big_agent=None, seen_alert=0)
+        st.rerun()
+    if st.button("2  Start demo", type=kind("start"), width="content"):
+        launch(["scripts/play_radio.py", str(RADIO / "camp_live.json"), "--stream"])
+        st.toast("Radio part 1: audio streamed through Whisper on the GPU")
+    if st.button("3  Skip ahead 30 min", type=kind("skip"), width="content"):
+        launch(["scripts/play_radio.py", str(RADIO / "camp_batch.json"), "--text", "--speed", "20"])
+        ss["skipped"] = True
+    if st.button("4  Ask cloud agent", type=kind("cloud"), width="content"):
+        ss["big_agent"] = api("POST", "/recorded_cloud", timeout=60) if (ss["skipped"] or len(incidents) >= 12) else api("POST", "/situation", timeout=300)
 if ss.get("api_error"):
     st.warning(ss.pop("api_error"))
 
@@ -183,8 +191,15 @@ with tab_main:
         try:
             from streamlit_folium import st_folium
 
-            m = make_map(incidents, enabled_layers=set(), show_pois=False)   # fixed figure: selection moves the view, not the HTML
+            m = make_map([], enabled_layers=set(), show_pois=False)   # fixed base map; pins go in a layer that updates in place
+            pins = folium.FeatureGroup(name="Incidents")
+            for inc in incidents:
+                try:
+                    add_incident(pins, inc)
+                except Exception:  # noqa: BLE001  one bad record must not stop the map
+                    continue
             out = st_folium(m, height=600, use_container_width=True, returned_objects=["last_object_clicked_tooltip"], key="map",
+                            feature_group_to_add=pins,
                             center=(sel["lat"], sel["lon"]) if sel else None, zoom=15 if sel else None)
             tip = (out or {}).get("last_object_clicked_tooltip")
             if tip:
