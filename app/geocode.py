@@ -27,7 +27,11 @@ _PREFIX = re.compile(
     r"\d+(?:\.\d+)?\s*(?:blocks?|miles?|mi|yards?|yds|feet|ft|km|meters?|m)\s*(?:north|south|east|west|n|s|e|w)?\s*(?:of)?)\s+)+",
     re.I)
 _SUFFIX = re.compile(r"\s*(?:area|vicinity|neighborhood|neighbourhood|district|intersection|region|zone|side)$", re.I)
-_SPLIT = re.compile(r"\s+(?:and|&|at|/|@|x|crossing|cross|intersection with|near|by|next to|across from|below|above|past|before|after|between)\s+", re.I)
+_SPLIT = re.compile(r"\s+(?:and|&|at|/|@|x|crossing|cross|intersection with|near|by|next to|across from|below|above|past|before|after|between|on|along|off)\s+", re.I)
+# words that describe the incident, not a place: a split part made only of these is ignored
+_NONPLACE = {"spot", "fire", "fires", "smoke", "structure", "vehicle", "patient", "collision", "crash", "evacuation", "traffic",
+             "people", "residents", "medical", "rescue", "brush", "vegetation", "roof", "collapse", "building", "house", "home",
+             "flames", "heavy", "possible", "report", "reports", "working", "fully", "involved", "incident", "scene", "unit", "units"}
 _GENERIC = {"park", "school", "church", "road", "street", "creek", "bridge", "station", "hospital", "store", "market",
             "lake", "canyon", "ridge", "highway", "house", "home", "building", "structure", "town", "city", "river",
             "parking lot", "lot", "yard", "field", "intersection", "scene", "area", "residence", "unknown"}
@@ -143,6 +147,7 @@ class Geocoder:
             e = self.entries[self.alias_index[q]]
             return {"lat": e["lat"], "lon": e["lon"], "match": e["name"], "score": 100.0, "method": "alias"}
         parts = [p.strip() for p in _SPLIT.split(q) if p and p.strip()]
+        parts = [p for p in parts if not all(w in _NONPLACE or w in _GENERIC or len(w) < 3 for w in p.split())] or parts
         if len(parts) >= 2:
             a, sa = self.match_one(parts[0])
             b, sb = self.match_one(parts[1])

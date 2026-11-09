@@ -8,7 +8,7 @@ import contextlib
 import threading
 from typing import Optional
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
@@ -94,6 +94,67 @@ async def ingest_audio(file: UploadFile = File(...), channel: str = Form("audio"
             metrics.inflight["audio"] -= 1
 
     return await asyncio.to_thread(work)
+
+
+@app.websocket("/ws/radio/{channel}")
+async def ws_radio(ws: WebSocket, channel: str):
+    """Live radio channel: binary frames of PCM16 little-endian 16 kHz mono (any chunk size,
+    0.5 s recommended), text 'END' to close. Each speech segment (cut at pauses by VAD) is
+    transcribed as soon as it ends and becomes a report; one JSON message per segment."""
+    import numpy as np
+
+    from app.stt_stream import StreamSession
+
+    await ws.accept()
+    loop = asyncio.get_running_loop()
+    outq: asyncio.Queue = asyncio.Queue()
+
+    def on_segment(seg: dict) -> None:
+        if seg.get("text"):
+            try:
+                metrics.inflight["audio"] += 1
+                report, inc, action = pipeline.ingest_text(seg["text"], channel=channel, input_type="audio", source_file="live-stream",
+                                                           stt={"backend": seg.get("backend"), "latency_ms": seg["latency_ms"], "rtf": seg["rtf"], "audio_s": seg["audio_s"]})
+                seg.update(report_id=report.id, incident_id=inc.id if inc else None, link=action,
+                           incident={k: inc.model_dump().get(k) for k in ("type", "severity", "people_count", "fire_direction", "fire_size", "geocode_match")} if inc else None)
+            except Exception as e:  # noqa: BLE001
+                seg["error"] = f"{type(e).__name__}: {str(e)[:120]}"
+            finally:
+                metrics.inflight["audio"] -= 1
+        loop.call_soon_threadsafe(outq.put_nowait, seg)
+
+    session = StreamSession(channel, on_segment)
+
+    async def pump() -> None:
+        while True:
+            msg = await outq.get()
+            await ws.send_json(msg)
+
+    pumper = asyncio.create_task(pump())
+    try:
+        while True:
+            m = await ws.receive()
+            if m.get("bytes"):
+                pcm = np.frombuffer(m["bytes"], dtype=np.int16).astype(np.float32) / 32768.0
+                await asyncio.to_thread(session.feed, pcm)
+            elif m.get("text") == "END" or m.get("type") == "websocket.disconnect":
+                break
+        await asyncio.to_thread(session.flush)
+        for _ in range(400):                     # wait for in-flight transcriptions + ingest (max ~2 min)
+            if session.pending() <= 0:
+                break
+            await asyncio.sleep(0.3)
+        while not outq.empty():                  # let the pump flush queued segment messages
+            await asyncio.sleep(0.05)
+        await ws.send_json({"done": True, "stats": session.stats, "segments": session.segments})
+    except WebSocketDisconnect:
+        pass
+    finally:
+        pumper.cancel()
+        try:
+            await ws.close()
+        except Exception:  # noqa: BLE001
+            pass
 
 
 @app.get("/incidents")

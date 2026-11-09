@@ -161,6 +161,12 @@ class STTEngine:
                 "load_ms": self.load_ms, "errors": self.errors,
                 "avg_rtf": round(sum(self.recent_rtf) / len(self.recent_rtf), 3) if self.recent_rtf else None}
 
+    def transcribe_array(self, audio: np.ndarray) -> str:
+        """Transcribe decoded 16 kHz mono float32 audio under the GPU semaphore (thread-safe entry)."""
+        b = self.load()
+        with self._sem:
+            return b.transcribe(audio)
+
     def transcribe(self, source: AudioSource, channel: str = "audio") -> dict:
         """Never raises: on failure returns text='' and error set."""
         t0 = time.perf_counter()

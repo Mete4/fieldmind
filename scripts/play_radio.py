@@ -43,7 +43,40 @@ async def send(client: httpx.AsyncClient, call: dict, base: Path, use_text: bool
     print(line, flush=True)
 
 
-async def run(path: Path, speed: float, use_text: bool) -> None:
+async def stream_call(call: dict, base: Path, speed: float, started: float, results: list) -> None:
+    """Section 6: push the clip as 0.5 s PCM16 chunks over the websocket at (compressed) real time."""
+    import websockets
+
+    from app.stt import load_audio
+
+    audio, dur = load_audio(base / call["audio"])
+    pcm = (audio * 32767).astype("int16").tobytes()
+    channel = f"{call['department']} {call['channel']}".strip().replace(" ", "_")
+    chunk = int(0.5 * 16000) * 2
+    t0 = time.perf_counter()
+    try:
+        async with websockets.connect(f"{C.API_URL.replace('http', 'ws')}/ws/radio/{channel}", max_size=None) as ws:
+            async def reader() -> None:
+                async for msg in ws:
+                    d = json.loads(msg)
+                    if d.get("done"):
+                        return
+                    inc = d.get("incident") or {}
+                    print(f"t+{time.time() - started:5.0f}s {call['unit']:<16} seg {d.get('segment')} ({d.get('audio_s')}s, cut {d.get('cut')}) stt {d.get('latency_ms')} ms rtf {d.get('rtf')} "
+                          f"-> {d.get('link', '-'):<6} {inc.get('type', '?')} sev {inc.get('severity', '?')} ppl {inc.get('people_count')} | {str(d.get('text', ''))[:70]}", flush=True)
+                    results.append(d)
+
+            rtask = asyncio.create_task(reader())
+            for i in range(0, len(pcm), chunk):
+                await ws.send(pcm[i:i + chunk])
+                await asyncio.sleep(0.5 / speed)
+            await ws.send("END")
+            await asyncio.wait_for(rtask, timeout=120)
+    except Exception as e:  # noqa: BLE001
+        print(f"t+{time.time() - started:5.0f}s {call['unit']:<16} STREAM FAILED {type(e).__name__}: {e}", flush=True)
+
+
+async def run(path: Path, speed: float, use_text: bool, stream: bool = False) -> None:
     data = json.loads(path.read_text())
     calls = data["calls"]
     base = path.parent
@@ -53,7 +86,10 @@ async def run(path: Path, speed: float, use_text: bool) -> None:
     async with httpx.AsyncClient(timeout=180) as client:
         async def at(call: dict) -> None:
             await asyncio.sleep(call["offset_s"] / speed)
-            await send(client, call, base, use_text, started, results)
+            if stream and call.get("audio") and (base / call["audio"]).exists() and not use_text:
+                await stream_call(call, base, speed, started, results)
+            else:
+                await send(client, call, base, use_text, started, results)
 
         await asyncio.gather(*(at(c) for c in calls))
     incs = {(r.get("incident") or {}).get("id") for r in results if r.get("incident")}
@@ -66,8 +102,9 @@ def main() -> int:
     ap.add_argument("scenario_json")
     ap.add_argument("--speed", type=float, default=1.0, help="time compression, e.g. 4 = four times faster")
     ap.add_argument("--text", action="store_true", help="send text even when audio exists")
+    ap.add_argument("--stream", action="store_true", help="stream audio in 0.5 s chunks over the websocket (VAD-cut live transcription)")
     a = ap.parse_args()
-    asyncio.run(run(Path(a.scenario_json), a.speed, a.text))
+    asyncio.run(run(Path(a.scenario_json), a.speed, a.text, a.stream))
     return 0
 
 
