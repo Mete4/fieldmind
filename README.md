@@ -12,6 +12,12 @@ The scenario is simulated on real geography: Paradise, California, on the mornin
 Camp Fire. The streets come from OpenStreetMap, and the hazard zones come from CAL FIRE. The
 radio calls were written for this exercise.
 
+![Console map after Skip ahead: 21 incidents in Paradise, one pin each](docs/console_map.png)
+
+*The console map after Skip ahead: one pin for each incident, colored by severity (red is the
+highest), with a type letter (F fire, M medical, T trapped, R road blocked, O other). The small
+number is the count of radio calls on that incident. A white outline means "Needs review".*
+
 ## How it works
 
 ```mermaid
