@@ -87,7 +87,7 @@ LLM_CANDIDATES = ["llama3.3:70b", "qwen2.5:72b", "qwen2.5:32b", "qwen2.5:14b"]
 LLM_MODEL = os.environ.get("FIELDMIND_LLM", "auto")
 # The ORGANIZER does extraction, SQL writing and the edge situation. qwen3.6:35b-a3b takes over when pulled
 # (measured ~64 tok/s on GB10, "think": false); until then qwen2.5:32b. The 14B is the fallback when the organizer is too slow.
-ORGANIZER_CANDIDATES = ["qwen3.6:35b-a3b", "qwen2.5:32b"]
+ORGANIZER_CANDIDATES = ["qwen2.5:32b"]   # kept on 32B for the demo
 FALLBACK_MODEL = "qwen2.5:14b"
 ORGANIZER_TIMEOUT_S = 45       # per extraction call before stepping down to the fallback
 LLM_THINK = False              # Qwen 3 models think by default; always off
