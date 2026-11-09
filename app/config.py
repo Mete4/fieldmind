@@ -17,7 +17,7 @@ HAZARD_MANIFEST = HAZARD_DIR / "layers.json"
 TILE_DIR = DATA_DIR / "tiles"
 VENDOR_DIR = DATA_DIR / "vendor"          # cached Leaflet/folium JS+CSS for offline use
 SAMPLE_DIR = DATA_DIR / "samples"
-DB_PATH = DATA_DIR / "fieldmind.sqlite"
+DB_PATH = Path(os.environ.get("FIELDMIND_DB") or DATA_DIR / "fieldmind.sqlite")   # FIELDMIND_DB: a separate database, e.g. to build the skip-ahead state
 BENCHMARK_MD = ROOT / "benchmark.md"
 LOG_DIR = ROOT / "logs"
 
@@ -150,7 +150,7 @@ LINK_MAX_REPORTS = 20
 
 # ---------------------------------------------------------------- API / UI
 API_HOST = "127.0.0.1"
-API_PORT = 8000
+API_PORT = int(os.environ.get("FIELDMIND_API_PORT", "8000"))
 API_URL = f"http://{API_HOST}:{API_PORT}"
 DASHBOARD_PORT = 8501
 DASHBOARD_REFRESH_MS = 4000   # 2 s dropped button clicks that landed during a rerun

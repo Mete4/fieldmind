@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import datetime as dt
 import math
+import os
+import signal
 import subprocess
 import sys
 from pathlib import Path
@@ -18,6 +20,7 @@ import html as _html
 import folium
 
 from app.mapview import add_incident, make_map
+from app.skip_ahead import is_skip_ahead_ready, load_skip_ahead
 
 API = C.API_URL
 ROOT = Path(__file__).resolve().parent
@@ -64,13 +67,29 @@ def api(method: str, path: str, timeout: float = 5, **kw):
         return None
 
 
+REPLAY_PID_FILE = ROOT / "logs" / "demo_replay.pid"
+
+
 def replay_running() -> bool:
-    """True while a demo radio replay is still sending calls."""
-    return subprocess.run(["pgrep", "-f", "scripts/play_radio.py"], capture_output=True).returncode == 0
+    """True while the replay that this console started is still sending calls."""
+    try:
+        os.kill(int(REPLAY_PID_FILE.read_text()), 0)
+        return True
+    except (OSError, ValueError):
+        return False
+
+
+def stop_replay() -> None:
+    """Stops only the replay that this console started (it runs in its own process group)."""
+    try:
+        os.killpg(int(REPLAY_PID_FILE.read_text()), signal.SIGTERM)
+    except (OSError, ValueError):
+        pass
 
 
 def launch(args: list[str]) -> None:
-    subprocess.Popen([sys.executable, *args], cwd=ROOT, stdout=open(ROOT / "logs" / "demo_play.log", "a"), stderr=subprocess.STDOUT, start_new_session=True)
+    proc = subprocess.Popen([sys.executable, *args], cwd=ROOT, stdout=open(ROOT / "logs" / "demo_play.log", "a"), stderr=subprocess.STDOUT, start_new_session=True)
+    REPLAY_PID_FILE.write_text(str(proc.pid))
 
 
 def ago(ts: str | None) -> str:
@@ -128,7 +147,7 @@ kind = lambda step: "primary" if step == next_step else "secondary"
 with st.container(horizontal=True, gap="small", vertical_alignment="center"):
     st.markdown("<span class='fm-demo'>Demo</span>", width="content", unsafe_allow_html=True)
     if st.button("Reset demo", width="content"):
-        subprocess.run(["pkill", "-f", "scripts/play_radio.py"], check=False)   # stop a replay that is still sending calls
+        stop_replay()
         api("POST", "/reset")
         ss.update(selected=None, skipped=False, big_agent=None, seen_alert=0)
         st.rerun()
@@ -139,11 +158,14 @@ with st.container(horizontal=True, gap="small", vertical_alignment="center"):
             launch(["scripts/play_radio.py", str(RADIO / "camp_live.json"), "--stream"])
             st.toast("Radio part 1: audio streamed through Whisper on the GPU")
     if st.button("Skip ahead 30 min", type=kind("skip"), width="content"):
-        if replay_running():
-            st.toast("Wait until the current radio calls are in")
+        if not is_skip_ahead_ready():
+            st.toast("Skip ahead is not built yet: run scripts/build_skip_ahead.sh")
         else:
-            launch(["scripts/play_radio.py", str(RADIO / "camp_batch.json"), "--text", "--speed", "20"])
-            ss["skipped"] = True
+            stop_replay()   # the skip replaces the rest of part 1
+            load_skip_ahead()
+            latest = api("GET", "/alerts", params={"limit": 1}) or []
+            ss.update(skipped=True, selected=None, seen_alert=latest[0]["id"] if latest else 0)
+            st.rerun()
     if st.button("Ask cloud agent", type=kind("cloud"), width="content"):
         ss["big_agent"] = api("POST", "/recorded_cloud", timeout=60) if (ss["skipped"] or len(incidents) >= 12) else api("POST", "/situation", timeout=300)
 if ss.get("api_error"):
@@ -155,25 +177,35 @@ if alerts and alerts[0]["id"] > ss["seen_alert"]:
     for a in reversed([x for x in alerts if x["id"] > ss["seen_alert"]][:3]):
         st.toast(a["headline"])
     ss["seen_alert"] = alerts[0]["id"]
-if alerts:
-    a = alerts[0]
+def acknowledge(incident_id: str) -> None:
+    """Marks every unseen alert of one incident as seen and opens the incident."""
+    for x in alerts:
+        if x["incident_id"] == incident_id and x.get("status") != "seen":
+            api("POST", f"/alerts/{x['id']}/seen")
+    ss["selected"] = incident_id
+    st.rerun()
+
+
+unseen = [x for x in alerts if x.get("status") != "seen"]
+if unseen:
+    a = unseen[0]
     inc_a = by_id.get(a["incident_id"], {})
     col = "#c62828" if a["level"] == "critical" else "#ef6c00"
-    c1, c2 = st.columns([9, 1])
-    c1.markdown(f"<div class='fm-alert' style='background:{col}'>{a['label']} &nbsp; {what(inc_a) or a['headline']} · {where(inc_a)}"
-                f"{' · ' + str(inc_a.get('people_count')) + ' people' if inc_a.get('people_count') else ''}"
-                f"<br><small>{a['why']} · {ago(a['ts'])}</small></div>", unsafe_allow_html=True)
-    if c2.button("Open", key="open_top"):
-        ss["selected"] = a["incident_id"]
-        st.rerun()
-    if len(alerts) > 1:
-        with st.expander(f"{len(alerts) - 1} earlier alerts"):
-            for a2 in alerts[1:]:
-                e1, e2 = st.columns([9, 1])
-                e1.markdown(f"<span style='color:{'#e53935' if a2['level'] == 'critical' else '#fb8c00'}'>●</span> <b>{a2['label']}</b> {a2['headline'].split(' · ', 1)[-1]} <span class='fm-dim'>{ago(a2['ts'])}</span>", unsafe_allow_html=True)
-                if e2.button("Open", key=f"open{a2['id']}"):
-                    ss["selected"] = a2["incident_id"]
-                    st.rerun()
+    people = f" · {inc_a.get('people_count')} people" if inc_a.get("people_count") else ""
+    st.markdown(f"<style>.st-key-alert_banner button{{background:{col};border:none;width:100%;justify-content:flex-start;text-align:left;padding:10px 14px}}"
+                ".st-key-alert_banner button p{color:#fff;font-size:20px;font-weight:700;white-space:normal}.st-key-alert_banner button div{justify-content:flex-start;text-align:left}"
+                ".st-key-alert_banner button:hover{filter:brightness(1.1)}</style>", unsafe_allow_html=True)
+    if st.button(f"{a['label']}   {what(inc_a) or a['headline']} · {where(inc_a)}{people}", key="alert_banner", width="stretch"):
+        acknowledge(a["incident_id"])
+    st.markdown(f"<div class='fm-dim' style='margin:-6px 0 4px 4px'>{a['why']} · {ago(a['ts'])}"
+                + (f" · {len(unseen) - 1} more new" if len(unseen) > 1 else "") + "</div>", unsafe_allow_html=True)
+others = [x for x in alerts if not (unseen and x["id"] == unseen[0]["id"])]
+if others:
+    with st.expander(f"{len(others)} earlier alerts"):
+        for a2 in others:
+            mark = "" if a2.get("status") == "seen" else "New · "
+            if st.button(f"{mark}{a2['label']}  {a2['headline'].split(' · ', 1)[-1]}  ·  {ago(a2['ts'])}", key=f"alert{a2['id']}", type="tertiary"):
+                acknowledge(a2["incident_id"])
 
 # ---------------------------------------------------------------- open questions and info requests (always on the main view)
 unit_name = {u["id"]: u["name"] for u in units}
