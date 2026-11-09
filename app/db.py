@@ -434,6 +434,13 @@ def next_label(prefix: str) -> str:
     return f"{prefix}-{(max(nums) + 1 if nums else 1):03d}"
 
 
+def relabel_incident(incident_id: str, old_label: str, new_label: str) -> None:
+    """Replaces old_label with new_label in the alerts and open questions of one incident."""
+    with connect() as c:
+        c.execute("UPDATE alerts SET label=?, headline=REPLACE(headline, ?, ?) WHERE incident_id=?", (new_label, old_label, new_label, incident_id))
+        c.execute("UPDATE open_questions SET text=REPLACE(text, ?, ?) WHERE incident_id=?", (old_label, new_label, incident_id))
+
+
 def last_alert_score(incident_id: str) -> Optional[tuple]:
     with connect() as c:
         row = c.execute("SELECT score FROM alerts WHERE incident_id=? ORDER BY id DESC LIMIT 1", (incident_id,)).fetchone()

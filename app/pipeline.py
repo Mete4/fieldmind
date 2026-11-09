@@ -97,7 +97,7 @@ def merge_into(inc: Incident, cand: Incident, report: Report) -> Incident:
     if cand.type not in inc.types:
         inc.types.append(cand.type)
     if TYPE_SEVERITY_ORDER.get(cand.type, 0) > TYPE_SEVERITY_ORDER.get(inc.type, 0):
-        inc.type = cand.type                       # most severe type of its reports; label stays stable
+        inc.type = cand.type                       # most severe type of its reports; the label follows it (see relabel below)
     inc.department = inc.department + [d for d in cand.department if d not in inc.department]
     inc.unit = inc.unit + [u for u in cand.unit if u not in inc.unit]
     if _SIZE_RANK.get(cand.fire_size, 0) > _SIZE_RANK.get(inc.fire_size, 0):
@@ -164,6 +164,10 @@ def ingest_text(text: str, channel: str = "text", input_type: str = "text", sour
             target, reason = find_link_target(cand)
             if target is not None:
                 inc, action = merge_into(target, cand, report), "merged"
+                prefix = LABEL_PREFIX.get(inc.type, "OTHER")
+                if inc.label and not inc.label.startswith(prefix + "-"):
+                    old_label, inc.label = inc.label, db.next_label(prefix)
+                    db.relabel_incident(inc.id, old_label, inc.label)
             else:
                 inc, action = cand, "new"
                 inc.label = db.next_label(LABEL_PREFIX.get(inc.type, "OTHER"))

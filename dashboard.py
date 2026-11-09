@@ -106,10 +106,11 @@ for u in units:
         units_by_inc.setdefault(u["incident_id"], []).append(u["name"])
 
 # ---------------------------------------------------------------- top bar
-t = st.columns([5, 0.8, 1.2, 1.5, 1.4, 1.4])
+t = st.columns([4.4, 1.4, 1.2, 1.5, 1.4, 1.4])
 t[0].markdown(f"<div class='fm-top'><b>FieldMind&nbsp;·&nbsp;Paradise,&nbsp;CA</b> <span>{dt.datetime.now().strftime('%H:%M:%S')}</span>"
               f"<span style='color:{'#43a047' if online else '#fb8c00'}'>●</span><span class='fm-dim'>{'Hybrid · cloud linked' if online else 'Edge only · cloud will catch up'} · {C.SCENARIO_BANNER}</span></div>", unsafe_allow_html=True)
-if t[1].button("Reset"):
+if t[1].button("Reset demo"):
+    subprocess.run(["pkill", "-f", "scripts/play_radio.py"], check=False)   # stop a replay that is still sending calls
     api("POST", "/reset")
     ss.update(selected=None, skipped=False, big_agent=None, seen_alert=0)
     st.rerun()
@@ -182,8 +183,9 @@ with tab_main:
         try:
             from streamlit_folium import st_folium
 
-            m = make_map(incidents, enabled_layers={"fire"}, show_pois=False, center=(sel["lat"], sel["lon"]) if sel else None, zoom=15 if sel else None)
-            out = st_folium(m, height=600, use_container_width=True, returned_objects=["last_object_clicked_tooltip"], key="map")
+            m = make_map(incidents, enabled_layers=set(), show_pois=False)   # fixed figure: selection moves the view, not the HTML
+            out = st_folium(m, height=600, use_container_width=True, returned_objects=["last_object_clicked_tooltip"], key="map",
+                            center=(sel["lat"], sel["lon"]) if sel else None, zoom=15 if sel else None)
             tip = (out or {}).get("last_object_clicked_tooltip")
             if tip:
                 lab = tip.split(" | ")[0].strip()
