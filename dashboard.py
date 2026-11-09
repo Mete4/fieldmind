@@ -13,6 +13,8 @@ import streamlit as st
 from streamlit_autorefresh import st_autorefresh
 
 from app import config as C
+import html as _html
+
 import folium
 
 from app.mapview import add_incident, make_map
@@ -41,6 +43,8 @@ div[data-testid="stVerticalBlockBorderWrapper"]{padding:0}
 .fm-call{border-left:3px solid #555;padding:4px 8px;margin:6px 0;font-size:13px;color:#ddd}
 .stButton>button{padding:2px 10px;font-size:13px}
 .stButton>button p{white-space:nowrap}
+.fm-q-head{border-left:4px solid #ffb300;background:#2a2410;color:#ffd54f;font-weight:700;font-size:15px;padding:6px 12px;margin:6px 0 2px 0;border-radius:4px}
+.fm-q{color:#ffe082;font-size:14px;padding-top:6px}
 .fm-demo{color:#999;font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin-right:4px}
 </style>""", unsafe_allow_html=True)
 ss = st.session_state
@@ -58,6 +62,11 @@ def api(method: str, path: str, timeout: float = 5, **kw):
     except Exception as e:  # noqa: BLE001
         ss["api_error"] = f"{method} {path}: {type(e).__name__}: {str(e)[:120]}"
         return None
+
+
+def replay_running() -> bool:
+    """True while a demo radio replay is still sending calls."""
+    return subprocess.run(["pgrep", "-f", "scripts/play_radio.py"], capture_output=True).returncode == 0
 
 
 def launch(args: list[str]) -> None:
@@ -124,11 +133,17 @@ with st.container(horizontal=True, gap="small", vertical_alignment="center"):
         ss.update(selected=None, skipped=False, big_agent=None, seen_alert=0)
         st.rerun()
     if st.button("Start demo", type=kind("start"), width="content"):
-        launch(["scripts/play_radio.py", str(RADIO / "camp_live.json"), "--stream"])
-        st.toast("Radio part 1: audio streamed through Whisper on the GPU")
+        if replay_running():
+            st.toast("The demo radio is already playing")
+        else:
+            launch(["scripts/play_radio.py", str(RADIO / "camp_live.json"), "--stream"])
+            st.toast("Radio part 1: audio streamed through Whisper on the GPU")
     if st.button("Skip ahead 30 min", type=kind("skip"), width="content"):
-        launch(["scripts/play_radio.py", str(RADIO / "camp_batch.json"), "--text", "--speed", "20"])
-        ss["skipped"] = True
+        if replay_running():
+            st.toast("Wait until the current radio calls are in")
+        else:
+            launch(["scripts/play_radio.py", str(RADIO / "camp_batch.json"), "--text", "--speed", "20"])
+            ss["skipped"] = True
     if st.button("Ask cloud agent", type=kind("cloud"), width="content"):
         ss["big_agent"] = api("POST", "/recorded_cloud", timeout=60) if (ss["skipped"] or len(incidents) >= 12) else api("POST", "/situation", timeout=300)
 if ss.get("api_error"):
@@ -160,7 +175,35 @@ if alerts:
                     ss["selected"] = a2["incident_id"]
                     st.rerun()
 
-tab_main, tab_ask, tab_units, tab_q, tab_hw, tab_src = st.tabs(["Console", "Ask the data", "Units", "Questions & info requests", "Hardware", "Data sources"])
+# ---------------------------------------------------------------- open questions and info requests (always on the main view)
+unit_name = {u["id"]: u["name"] for u in units}
+open_qs = api("GET", "/questions", params={"status": "open"}) or []
+waiting = [r_ for r_ in (api("GET", "/info_requests") or []) if r_.get("status") != "answered"]
+if open_qs or waiting:
+    n_q = len(open_qs) + len(waiting)
+    st.markdown(f"<div class='fm-q-head'>{n_q} open question{'s' if n_q != 1 else ''} need{'s' if n_q == 1 else ''} an answer</div>", unsafe_allow_html=True)
+
+    def question_row(key: str, incident_id: str, text: str, ts: str, endpoint: str) -> None:
+        with st.form(key, clear_on_submit=True, border=False):
+            q1, q2, q3, q4 = st.columns([1.1, 5, 3, 1])
+            if q1.form_submit_button(by_id.get(incident_id, {}).get("label") or "Incident"):
+                ss["selected"] = incident_id
+                st.rerun()
+            q2.markdown(f"<div class='fm-q'>{_html.escape(text)} <span class='fm-dim'>{ago(ts)}</span></div>", unsafe_allow_html=True)
+            ans = q3.text_input("Answer", key=f"{key}_text", label_visibility="collapsed", placeholder="Answer")
+            if q4.form_submit_button("Answer") and ans.strip():
+                api("POST", endpoint, json={"answer": ans})
+                st.rerun()
+
+    for q_ in open_qs[:4]:
+        question_row(f"q{q_['id']}", q_["incident_id"], q_["text"], q_["ts"], f"/questions/{q_['id']}/answer")
+    for r_ in waiting[:3]:
+        question_row(f"r{r_['id']}", r_["incident_id"], f"Waiting on {unit_name.get(r_['unit_id'], r_['unit_id'])}: {r_['what_to_find']}",
+                     r_["ts"], f"/info_requests/{r_['id']}/answer")
+    if len(open_qs) > 4 or len(waiting) > 3:
+        st.caption("More in the Log tab")
+
+tab_main, tab_ask, tab_units, tab_q, tab_hw, tab_src = st.tabs(["Console", "Ask the data", "Units", "Log", "Hardware", "Data sources"])
 
 with tab_main:
     left, mid, right = st.columns([1, 2, 1])
@@ -223,6 +266,16 @@ with tab_main:
                     st.rerun()
                 st.markdown(f"<div class='fm-kf'>{what(i)}</div><div class='fm-sub'>{where(i)}</div>"
                             + (f"<div style='color:#ffb74d'>Needs review: {', '.join(i.get('review_reasons') or [])}</div>" if i.get("needs_review") else ""), unsafe_allow_html=True)
+                for q_ in [q for q in open_qs if q["incident_id"] == i["id"]]:
+                    st.markdown(f"<div class='fm-q'>Open question: {_html.escape(q_['text'])}</div>", unsafe_allow_html=True)
+                with st.expander("Ask a unit"):
+                    with st.form(f"ask_{i['id']}", clear_on_submit=True, border=False):
+                        names = {u["name"]: u["id"] for u in units}
+                        who = st.selectbox("Unit", list(names)) if names else None
+                        what_q = st.text_input("What to find out")
+                        if st.form_submit_button("Send") and who and what_q.strip():
+                            api("POST", "/info_requests", json={"incident_id": i["id"], "unit_id": names[who], "what_to_find": what_q})
+                            st.rerun()
                 facts = []
                 if i.get("people_count") is not None:
                     facts.append(f"<b>{i['people_count']}</b> people")
@@ -348,14 +401,9 @@ with tab_units:
 with tab_q:
     c1, c2 = st.columns(2)
     with c1:
-        st.markdown("**Open questions**")
-        for q_ in (api("GET", "/questions", params={"status": "open"}) or [])[:8]:
-            with st.form(f"q{q_['id']}"):
-                st.markdown(f"{q_['text']} <span class='fm-dim'>{by_id.get(q_['incident_id'], {}).get('label', '')}</span>", unsafe_allow_html=True)
-                ans = st.text_input("Answer", key=f"ans{q_['id']}")
-                if st.form_submit_button("Answer") and ans.strip():
-                    api("POST", f"/questions/{q_['id']}/answer", json={"answer": ans})
-                    st.rerun()
+        st.markdown("**Answered questions**")
+        for q_ in (api("GET", "/questions", params={"status": "answered"}) or [])[:12]:
+            st.caption(f"{by_id.get(q_['incident_id'], {}).get('label', '')}: {q_['text'][:90]} → {q_.get('answer') or ''}")
     with c2:
         st.markdown("**Info request**")
         with st.form("info_req"):
