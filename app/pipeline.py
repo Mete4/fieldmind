@@ -18,6 +18,7 @@ import threading
 import time
 from typing import Optional
 
+from app import question_resolver
 from app import config as C
 from app import db, hazards, orchestrator
 from app.extract import process_text
@@ -177,6 +178,7 @@ def ingest_text(text: str, channel: str = "text", input_type: str = "text", sour
             unit = (cand.unit or [channel])[0] or channel
             db.add_open_question(inc.id, f"{inc.label}: {unit} asks: \"{text.strip()[:140]}\"", "edge")
         orchestrator.evaluate_async(inc.model_copy(deep=True), action)
+        question_resolver.resolve_open_questions_async(text, (cand.unit or [channel])[0] or channel)
         report.status, report.incident_id, report.link_action, report.link_reason = "processed", inc.id, action, reason
     except Exception as e:  # noqa: BLE001
         report.status, report.error = "failed", f"{type(e).__name__}: {str(e)[:180]}"

@@ -179,29 +179,35 @@ if alerts:
 unit_name = {u["id"]: u["name"] for u in units}
 open_qs = api("GET", "/questions", params={"status": "open"}) or []
 waiting = [r_ for r_ in (api("GET", "/info_requests") or []) if r_.get("status") != "answered"]
-if open_qs or waiting:
-    n_q = len(open_qs) + len(waiting)
-    st.markdown(f"<div class='fm-q-head'>{n_q} open question{'s' if n_q != 1 else ''} need{'s' if n_q == 1 else ''} an answer</div>", unsafe_allow_html=True)
+def render_questions() -> None:
+    """One line with the open questions; it opens to answer or dismiss each one."""
+    if open_qs or waiting:
+        n_q = len(open_qs) + len(waiting)
+        newest = open_qs[0]["text"] if open_qs else f"Waiting on {unit_name.get(waiting[0]['unit_id'], waiting[0]['unit_id'])}: {waiting[0]['what_to_find']}"
+        head = f":orange[**{n_q} open question{'s' if n_q != 1 else ''} need{'s' if n_q == 1 else ''} an answer**] · newest: {newest[:90]}"
 
-    def question_row(key: str, incident_id: str, text: str, ts: str, endpoint: str) -> None:
-        with st.form(key, clear_on_submit=True, border=False):
-            q1, q2, q3, q4 = st.columns([1.1, 5, 3, 1])
-            if q1.form_submit_button(by_id.get(incident_id, {}).get("label") or "Incident"):
-                ss["selected"] = incident_id
-                st.rerun()
-            q2.markdown(f"<div class='fm-q'>{_html.escape(text)} <span class='fm-dim'>{ago(ts)}</span></div>", unsafe_allow_html=True)
-            ans = q3.text_input("Answer", key=f"{key}_text", label_visibility="collapsed", placeholder="Answer")
-            if q4.form_submit_button("Answer") and ans.strip():
-                api("POST", endpoint, json={"answer": ans})
-                st.rerun()
+        def question_row(key: str, incident_id: str, text: str, ts: str, endpoint: str) -> None:
+            with st.form(key, clear_on_submit=True, border=False):
+                q1, q2, q3, q4, q5 = st.columns([1.1, 5, 3, 1, 1])
+                if q1.form_submit_button(by_id.get(incident_id, {}).get("label") or "Incident"):
+                    ss["selected"] = incident_id
+                    st.rerun()
+                q2.markdown(f"<div class='fm-q'>{_html.escape(text)} <span class='fm-dim'>{ago(ts)}</span></div>", unsafe_allow_html=True)
+                ans = q3.text_input("Answer", key=f"{key}_text", label_visibility="collapsed", placeholder="Answer")
+                if q4.form_submit_button("Answer") and ans.strip():
+                    api("POST", endpoint, json={"answer": ans})
+                    st.rerun()
+                if q5.form_submit_button("Dismiss"):
+                    api("POST", endpoint, json={"answer": "Dismissed by operator"})
+                    st.rerun()
 
-    for q_ in open_qs[:4]:
-        question_row(f"q{q_['id']}", q_["incident_id"], q_["text"], q_["ts"], f"/questions/{q_['id']}/answer")
-    for r_ in waiting[:3]:
-        question_row(f"r{r_['id']}", r_["incident_id"], f"Waiting on {unit_name.get(r_['unit_id'], r_['unit_id'])}: {r_['what_to_find']}",
-                     r_["ts"], f"/info_requests/{r_['id']}/answer")
-    if len(open_qs) > 4 or len(waiting) > 3:
-        st.caption("More in the Log tab")
+        with st.expander(head):
+            with st.container(height=220, border=False):
+                for q_ in open_qs:
+                    question_row(f"q{q_['id']}", q_["incident_id"], q_["text"], q_["ts"], f"/questions/{q_['id']}/answer")
+                for r_ in waiting:
+                    question_row(f"r{r_['id']}", r_["incident_id"], f"Waiting on {unit_name.get(r_['unit_id'], r_['unit_id'])}: {r_['what_to_find']}",
+                                 r_["ts"], f"/info_requests/{r_['id']}/answer")
 
 tab_main, tab_ask, tab_units, tab_q, tab_hw, tab_src = st.tabs(["Console", "Ask the data", "Units", "Log", "Hardware", "Data sources"])
 
@@ -245,13 +251,15 @@ with tab_main:
                             feature_group_to_add=pins,
                             center=(sel["lat"], sel["lon"]) if sel else None, zoom=15 if sel else None)
             tip = (out or {}).get("last_object_clicked_tooltip")
-            if tip:
+            if tip and tip != ss.get("map_tip_handled"):   # the component repeats the last click on every rerun
+                ss["map_tip_handled"] = tip
                 lab = tip.split(" | ")[0].strip()
                 if lab in by_label and by_label[lab] != ss["selected"]:
                     ss["selected"] = by_label[lab]
                     st.rerun()
         except Exception as e:  # noqa: BLE001
             st.error(f"map: {e}")
+        render_questions()
     # -------- drawer / radio feed
     with right:
         with st.container(height=600):
