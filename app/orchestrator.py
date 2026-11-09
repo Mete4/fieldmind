@@ -49,7 +49,7 @@ def headline(inc: Incident) -> str:
 
 
 def _why(inc: Incident, reasons: list[str]) -> tuple[str, str, int]:
-    model = resolve_model()
+    model = C.FALLBACK_MODEL          # the fast model: an alert line must never wait behind the organizer
     t0 = time.perf_counter()
     try:
         import ollama
@@ -66,7 +66,7 @@ def _why(inc: Incident, reasons: list[str]) -> tuple[str, str, int]:
         db.log_request(RequestLog(route="edge_alert", model=model, latency_ms=ms, tokens_in=int(r.prompt_eval_count or 0), tokens_out=int(r.eval_count or 0), ok=True, incident_id=inc.id))
         return (r.message.content or "").strip().split("\n")[0][:220], model, ms
     except Exception as e:  # noqa: BLE001
-        return f"Rules: {', '.join(reasons)} ({type(e).__name__})", model, int((time.perf_counter() - t0) * 1000)
+        return "Rules: " + ", ".join(reasons), model, int((time.perf_counter() - t0) * 1000)
 
 
 _eval_lock = threading.Lock()

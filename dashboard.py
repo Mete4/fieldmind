@@ -106,8 +106,8 @@ for u in units:
         units_by_inc.setdefault(u["incident_id"], []).append(u["name"])
 
 # ---------------------------------------------------------------- top bar
-t = st.columns([3.2, 0.9, 1.3, 1.5, 1.3, 1.5])
-t[0].markdown(f"<div class='fm-top'><b>FieldMind · Paradise, CA</b> <span>{dt.datetime.now().strftime('%H:%M:%S')}</span>"
+t = st.columns([5, 0.8, 1.2, 1.5, 1.4, 1.4])
+t[0].markdown(f"<div class='fm-top'><b>FieldMind&nbsp;·&nbsp;Paradise,&nbsp;CA</b> <span>{dt.datetime.now().strftime('%H:%M:%S')}</span>"
               f"<span style='color:{'#43a047' if online else '#e53935'}'>●</span><span class='fm-dim'>{C.SCENARIO_BANNER}</span></div>", unsafe_allow_html=True)
 if t[1].button("Reset"):
     api("POST", "/reset")

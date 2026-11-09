@@ -107,6 +107,14 @@ class Extraction(BaseModel):
         s = str(v).strip()
         return None if s.lower() in ("null", "none", "unknown", "n/a") else s[:600]
 
+    @field_validator("unit", mode="after")
+    @classmethod
+    def _unit(cls, v):
+        s = (v or "").strip()
+        if re.fullmatch(r"(?i)(butte\s+)?(ecc|command|ic|ops|dispatch center|[a-z]+ command)", s):
+            return ""                        # the dispatcher / IC is who they talk to, not the reporting unit
+        return s
+
     @field_validator("location_text", mode="before")
     @classmethod
     def _loc(cls, v):
