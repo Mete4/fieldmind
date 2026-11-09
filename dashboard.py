@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent
 RADIO = C.SAMPLE_DIR / "radio"
 SEV = {5: ("Critical", "#e53935"), 4: ("High", "#fb8c00"), 3: ("Medium", "#fdd835"), 2: ("Low", "#42a5f5"), 1: ("Info", "#90a4ae")}
 TYPE_SHORT = {"fire": "FIRE", "trapped": "TRAPPED", "medical": "MEDICAL", "road_blocked": "ROAD", "collapse": "COLLAPSE", "other": "OTHER"}
-st.set_page_config(page_title="FieldMind", layout="wide", page_icon="🔥", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="FieldMind", layout="wide", initial_sidebar_state="collapsed")
 st_autorefresh(interval=C.DASHBOARD_REFRESH_MS, key="tick")
 st.markdown("""<style>
 .block-container{padding-top:0.6rem;padding-bottom:0;max-width:100%}
@@ -113,13 +113,13 @@ if t[1].button("Reset"):
     api("POST", "/reset")
     ss.update(selected=None, skipped=False, big_agent=None, seen_alert=0)
     st.rerun()
-if t[2].button("▶ Play radio", type="primary"):
+if t[2].button("Play radio", type="primary"):
     launch(["scripts/play_radio.py", str(RADIO / "camp_live.json"), "--stream"])
-    st.toast("Radio part 1: audio streamed through Whisper on the GPU", icon="📻")
-if t[3].button("⏩ Skip ahead 30 min"):
+    st.toast("Radio part 1: audio streamed through Whisper on the GPU")
+if t[3].button("Skip ahead 30 min"):
     launch(["scripts/play_radio.py", str(RADIO / "camp_batch.json"), "--text", "--speed", "20"])
     ss["skipped"] = True
-if t[4].button("☁ Ask cloud agent"):
+if t[4].button("Ask cloud agent"):
     ss["big_agent"] = api("POST", "/recorded_cloud", timeout=60) if (ss["skipped"] or len(incidents) >= 12) else api("POST", "/situation", timeout=300)
 t[5].caption(f"{len(incidents)} incidents · {sum(i.get('report_count', 1) for i in incidents)} radio calls")
 if ss.get("api_error"):
@@ -129,7 +129,7 @@ if ss.get("api_error"):
 alerts = api("GET", "/alerts", params={"limit": 12}) or []
 if alerts and alerts[0]["id"] > ss["seen_alert"]:
     for a in reversed([x for x in alerts if x["id"] > ss["seen_alert"]][:3]):
-        st.toast(a["headline"], icon="🚨")
+        st.toast(a["headline"])
     ss["seen_alert"] = alerts[0]["id"]
 if alerts:
     a = alerts[0]
@@ -201,7 +201,7 @@ with tab_main:
                 word, col = sev_of(i)
                 h1, h2 = st.columns([5, 1])
                 h1.markdown(f"<span class='fm-kf'>{i.get('label')}</span> &nbsp;<span style='background:{col};color:#000;border-radius:4px;padding:1px 8px;font-weight:700'>{word}</span>", unsafe_allow_html=True)
-                if h2.button("✕"):
+                if h2.button("Close"):
                     ss["selected"] = None
                     st.rerun()
                 st.markdown(f"<div class='fm-kf'>{what(i)}</div><div class='fm-sub'>{where(i)}</div>"
@@ -254,7 +254,7 @@ with tab_main:
     # -------- cloud agent output (below the main view)
     ba = ss.get("big_agent")
     if ba:
-        st.markdown("#### " + ("☁ Recorded cloud response" if ba.get("recorded") else f"☁ {ba.get('label', 'Situation')}"))
+        st.markdown("#### " + ("Recorded cloud response" if ba.get("recorded") else ba.get('label', 'Situation')))
         sent = ba.get("sent") or {}
         upto = ""
         try:

@@ -15,8 +15,8 @@ import folium
 from app import config as C
 
 SEVERITY_COLORS = {1: "#2b83ba", 2: "#74add1", 3: "#fdae61", 4: "#f46d43", 5: "#d7191c"}
-TYPE_ICONS = {"fire": "🔥", "collapse": "🏚", "medical": "🚑",
-              "road_blocked": "🚧", "trapped": "🆘", "other": "❓"}
+TYPE_LETTERS = {"fire": "F", "collapse": "C", "medical": "M",
+                "road_blocked": "R", "trapped": "T", "other": "O"}
 POI_TYPES = {"hospital": ("H", "#c51b7d"), "fire_station": ("F", "#d73027"),
              "police": ("P", "#1a9850"), "school": ("S", "#4575b4")}
 
@@ -90,7 +90,7 @@ def add_incident(m: folium.Map, inc: dict) -> None:
         return
     sev = int(inc.get("severity") or 3)
     color = SEVERITY_COLORS.get(sev, "#999")
-    icon = TYPE_ICONS.get(inc.get("type", "other"), "❓")
+    letter = TYPE_LETTERS.get(inc.get("type", "other"), "O")
     zones = inc.get("hazard_zones") or []
     units = ", ".join(inc.get("unit") or []) or "-"
     depts = "/".join(inc.get("department") or []) or "-"
@@ -113,7 +113,7 @@ def add_incident(m: folium.Map, inc: dict) -> None:
                         tooltip=f"{label} | {inc.get('type', '?')} sev {sev} | {n} report(s) | {units}").add_to(m)
     badge = (f"<div style='position:absolute;left:8px;top:-12px;background:#fff;border:1.5px solid #222;border-radius:9px;"
              f"min-width:16px;height:16px;font:bold 10px/16px sans-serif;text-align:center;padding:0 3px'>{n}</div>" if n > 1 else "")
-    folium.Marker([lat, lon], icon=folium.DivIcon(html=f"<div style='position:relative;font-size:14px;line-height:14px;margin:-7px 0 0 -7px'>{icon}{badge}</div>",
+    folium.Marker([lat, lon], icon=folium.DivIcon(html=f"<div style='position:relative;width:14px;height:14px;margin:-7px 0 0 -7px;text-align:center;font:bold 11px/14px sans-serif;color:#fff'>{letter}{badge}</div>",
                                                   icon_size=(14, 14), icon_anchor=(0, 0)),
                   tooltip=f"{label} | {inc.get('type', '?')} sev {sev} | {n} report(s) | {units}").add_to(m)
 
