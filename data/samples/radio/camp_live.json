@@ -5,25 +5,85 @@
  "writer_model": "claude-opus-5-5 (review session, written in chat; a different model family from the extractor)",
  "created": "2026-11-08T17:25:00-08:00",
  "calls": [
-  {"offset_s": 0, "channel": "FD Tact 1", "department": "FD", "unit": "Engine 81",
-   "text": "Engine 81 to Butte Command, on scene Paradise High School, Maxwell Drive. East wing is fully involved, fire is coming in from the north with the wind behind it. This is a large fire. Be advised, approximately one hundred twenty three students and staff are sheltering in the gym."},
-  {"offset_s": 16, "channel": "PD Tact 1", "department": "PD", "unit": "Paradise PD 7",
-   "text": "Paradise PD 7 to dispatch, Skyway southbound is at a standstill at Neal Road. Evacuation traffic is not moving at all. I need two more units for traffic control at Skyway and Neal."},
-  {"offset_s": 31, "channel": "EMS Tact 1", "department": "EMS", "unit": "Medic 41",
-   "text": "Medic 41 to Command, we have an elderly female on Bille Road near Bille Park. She is non-ambulatory and cannot self-evacuate. Requesting a unit with a gurney."},
-  {"offset_s": 46, "channel": "FD Tact 1", "department": "FD", "unit": "Battalion 3",
-   "text": "Battalion 3 to Butte Command, I confirm Paradise High School. The gym is not involved yet. I want all one hundred twenty three occupants out before the fire reaches the gym. Requesting two buses to Maxwell Drive, priority one."},
-  {"offset_s": 62, "channel": "FD Tact 2", "department": "FD", "unit": "Engine 82",
-   "text": "Engine 82, multiple spot fires along Pearson Road east of Skyway. About a quarter acre each and growing. We will hold the line here."},
-  {"offset_s": 79, "channel": "PD Tact 2", "department": "PD", "unit": "Butte SO 12",
-   "text": "Butte SO 12, Pentz Road at Wagstaff Road. A vehicle is in the ditch with two occupants, fire on both sides of the road. They are not hurt yet, but we need to get them out."},
-  {"offset_s": 95, "channel": "EMS Tact 1", "department": "EMS", "unit": "Medic 44",
-   "text": "Medic 44 to Command, Adventist Health Feather River is evacuating. About thirty patients are waiting at the front entrance. We need every ambulance you can send."},
-  {"offset_s": 111, "channel": "FD Tact 2", "department": "FD", "unit": "Engine 35",
-   "text": "Engine 35, uh, we have fire at a school, I think the one off Pentz. Are there still kids inside? Can somebody confirm."},
-  {"offset_s": 126, "channel": "PD Tact 1", "department": "PD", "unit": "Paradise PD 3",
-   "text": "Paradise PD 3, Clark Road northbound is open and moving. Recommend we send evacuation traffic to Clark Road instead of Skyway."},
-  {"offset_s": 141, "channel": "FD Tact 1", "department": "FD", "unit": "Battalion 3",
-   "text": "Battalion 3, update on Paradise High School. Fire is now in the east wing roof. The wind shifted, fire is coming from the northeast. Occupants are still in the gym. Where are those buses?"}
+  {
+   "offset_s": 0,
+   "channel": "FD Tact 1",
+   "department": "FD",
+   "unit": "Engine 81",
+   "text": "Engine 81 to Butte Command, on scene Paradise High School, Maxwell Drive. East wing is fully involved, fire is coming in from the north with the wind behind it. This is a large fire. Be advised, approximately one hundred twenty three students and staff are sheltering in the gym.",
+   "audio": "camp_live/1.wav"
+  },
+  {
+   "offset_s": 16,
+   "channel": "PD Tact 1",
+   "department": "PD",
+   "unit": "Paradise PD 7",
+   "text": "Paradise PD 7 to dispatch, Skyway southbound is at a standstill at Neal Road. Evacuation traffic is not moving at all. I need two more units for traffic control at Skyway and Neal.",
+   "audio": "camp_live/2.wav"
+  },
+  {
+   "offset_s": 31,
+   "channel": "EMS Tact 1",
+   "department": "EMS",
+   "unit": "Medic 41",
+   "text": "Medic 41 to Command, we have an elderly female on Bille Road near Bille Park. She is non-ambulatory and cannot self-evacuate. Requesting a unit with a gurney.",
+   "audio": "camp_live/3.wav"
+  },
+  {
+   "offset_s": 46,
+   "channel": "FD Tact 1",
+   "department": "FD",
+   "unit": "Battalion 3",
+   "text": "Battalion 3 to Butte Command, I confirm Paradise High School. The gym is not involved yet. I want all one hundred twenty three occupants out before the fire reaches the gym. Requesting two buses to Maxwell Drive, priority one.",
+   "audio": "camp_live/4.wav"
+  },
+  {
+   "offset_s": 62,
+   "channel": "FD Tact 2",
+   "department": "FD",
+   "unit": "Engine 82",
+   "text": "Engine 82, multiple spot fires along Pearson Road east of Skyway. About a quarter acre each and growing. We will hold the line here.",
+   "audio": "camp_live/5.wav"
+  },
+  {
+   "offset_s": 79,
+   "channel": "PD Tact 2",
+   "department": "PD",
+   "unit": "Butte SO 12",
+   "text": "Butte SO 12, Pentz Road at Wagstaff Road. A vehicle is in the ditch with two occupants, fire on both sides of the road. They are not hurt yet, but we need to get them out.",
+   "audio": "camp_live/6.wav"
+  },
+  {
+   "offset_s": 95,
+   "channel": "EMS Tact 1",
+   "department": "EMS",
+   "unit": "Medic 44",
+   "text": "Medic 44 to Command, Adventist Health Feather River is evacuating. About thirty patients are waiting at the front entrance. We need every ambulance you can send.",
+   "audio": "camp_live/7.wav"
+  },
+  {
+   "offset_s": 111,
+   "channel": "FD Tact 2",
+   "department": "FD",
+   "unit": "Engine 35",
+   "text": "Engine 35, uh, we have fire at a school, I think the one off Pentz. Are there still kids inside? Can somebody confirm.",
+   "audio": "camp_live/8.wav"
+  },
+  {
+   "offset_s": 126,
+   "channel": "PD Tact 1",
+   "department": "PD",
+   "unit": "Paradise PD 3",
+   "text": "Paradise PD 3, Clark Road northbound is open and moving. Recommend we send evacuation traffic to Clark Road instead of Skyway.",
+   "audio": "camp_live/9.wav"
+  },
+  {
+   "offset_s": 141,
+   "channel": "FD Tact 1",
+   "department": "FD",
+   "unit": "Battalion 3",
+   "text": "Battalion 3, update on Paradise High School. Fire is now in the east wing roof. The wind shifted, fire is coming from the northeast. Occupants are still in the gym. Where are those buses?",
+   "audio": "camp_live/10.wav"
+  }
  ]
 }

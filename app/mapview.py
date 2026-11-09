@@ -75,14 +75,13 @@ def _legend_html(layers: list[dict]) -> str:
     sev = "".join(f"<span style='display:inline-block;width:12px;height:12px;border-radius:50%;background:{c};"
                   f"border:1px solid #333;margin:0 2px 0 6px;vertical-align:middle'></span>{s}" for s, c in SEVERITY_COLORS.items())
     return f"""
-<div style="position:fixed; bottom:28px; left:12px; z-index:9999; background:rgba(255,255,255,.93);
-     padding:8px 10px; border:1px solid #999; border-radius:6px; font:12px/1.35 sans-serif; max-width:330px">
-  <div style="font-weight:700;margin-bottom:4px">{_html.escape(C.SCENARIO_BANNER)}</div>
+<details style="position:fixed; bottom:28px; left:12px; z-index:9999; background:rgba(255,255,255,.93);
+     padding:6px 10px; border:1px solid #999; border-radius:6px; font:12px/1.35 sans-serif; max-width:330px">
+  <summary style="font-weight:700;cursor:pointer">{_html.escape(C.SCENARIO_BANNER)} - legend</summary>
   <div style="color:#555;margin-bottom:6px">{_html.escape(C.TOWN_NAME)} - {_html.escape(C.SCENARIO_NAME)}</div>
   {''.join(rows)}
-  <div style="margin-top:6px;border-top:1px solid #ddd;padding-top:4px">Incident severity: {sev}
-  <br>Black ring = inside a real hazard zone</div>
-</div>"""
+  <div style="margin-top:6px;border-top:1px solid #ddd;padding-top:4px">Incident severity: {sev}</div>
+</details>"""
 
 
 def add_incident(m: folium.Map, inc: dict) -> None:
@@ -97,7 +96,8 @@ def add_incident(m: folium.Map, inc: dict) -> None:
     depts = "/".join(inc.get("department") or []) or "-"
     n = int(inc.get("report_count") or 1)
     details = _html.escape(str(inc.get("details") or "")).replace("\n", "<br>")
-    popup = (f"<b>{_html.escape(str(inc.get('type', '?')).upper())}</b> severity {sev} | people {inc.get('people_count', '?')} | "
+    label = inc.get("label") or inc.get("id", "")[:6]
+    popup = (f"<b>{_html.escape(label)}</b> &nbsp; <b>{_html.escape(str(inc.get('type', '?')).upper())}</b> severity {sev} | people {inc.get('people_count', '?')} | "
              f"{n} report{'s' if n != 1 else ''} | {_html.escape(depts)}: {_html.escape(units)}<br>"
              f"<b>Where:</b> {_html.escape(str(inc.get('geocode_match') or inc.get('location_text') or 'unknown'))}"
              f"{' (location unknown, pinned at town center)' if inc.get('location_unknown') else ''}<br>"
@@ -106,15 +106,13 @@ def add_incident(m: folium.Map, inc: dict) -> None:
              f"<i>{_html.escape(str(inc.get('summary') or inc.get('transcript') or '')[:300])}</i><br>"
              f"<b>Details:</b> {details[:700]}<br>"
              f"<small>confidence {inc.get('confidence', '')} | priority {inc.get('priority_score', '')} | status {_html.escape(str(inc.get('status', '')))} | id {inc.get('id', '')}</small>")
-    if inc.get("in_hazard_zone"):
-        folium.CircleMarker([lat, lon], radius=15, color="#000", weight=2.5, fill=False).add_to(m)
     folium.CircleMarker([lat, lon], radius=10, color="#222", weight=1, fill=True, fill_color=color, fill_opacity=0.95,
                         popup=folium.Popup(popup, max_width=420)).add_to(m)
     badge = (f"<div style='position:absolute;left:8px;top:-12px;background:#fff;border:1.5px solid #222;border-radius:9px;"
              f"min-width:16px;height:16px;font:bold 10px/16px sans-serif;text-align:center;padding:0 3px'>{n}</div>" if n > 1 else "")
     folium.Marker([lat, lon], icon=folium.DivIcon(html=f"<div style='position:relative;font-size:14px;line-height:14px;margin:-7px 0 0 -7px'>{icon}{badge}</div>",
                                                   icon_size=(14, 14), icon_anchor=(0, 0)),
-                  tooltip=f"{inc.get('type', '?')} sev {sev} | {n} report(s) | {units}").add_to(m)
+                  tooltip=f"{label} | {inc.get('type', '?')} sev {sev} | {n} report(s) | {units}").add_to(m)
 
 
 def build_map(incidents: Iterable[dict] = (), enabled_layers: set[str] | None = None,
@@ -144,11 +142,15 @@ def build_map(incidents: Iterable[dict] = (), enabled_layers: set[str] | None = 
             pip = L["pip"]
 
             def style(feat, zones=zones, pip=pip):
-                col = zones.get(feat["properties"].get("zone"), {}).get("color", "#777")
-                return {"fillColor": col, "color": col if pip else "#333", "weight": 1 if pip else 2.5,
-                        "fillOpacity": 0.38 if pip else 0.04, "dashArray": None if pip else "8 6"}
+                z = feat["properties"].get("zone")
+                col = zones.get(z, {}).get("color", "#777")
+                if not pip:                                   # context layer (Camp Fire perimeter): outline only
+                    return {"fillColor": col, "color": "#333", "weight": 2.5, "fillOpacity": 0.0, "dashArray": "8 6"}
+                if z == "fire_high":                          # outline only, so streets stay readable
+                    return {"fillColor": col, "color": col, "weight": 1.5, "fillOpacity": 0.05}
+                return {"fillColor": col, "color": col, "weight": 0, "fillOpacity": 0.12}
 
-            folium.GeoJson(data, name=L["name"], style_function=style,
+            folium.GeoJson(data, name=L["name"], style_function=style, show=bool(L["pip"]),
                            tooltip=folium.GeoJsonTooltip(fields=["label"], labels=False)).add_to(m)
     if show_pois and C.GAZETTEER_PATH.exists():
         fg = folium.FeatureGroup(name="Key facilities (OpenStreetMap)", show=True)

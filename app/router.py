@@ -42,7 +42,7 @@ def situation_context(limit: int = 30) -> tuple[str, int, str]:
     for zone, items in by_zone.items():
         lines.append(f"\n## zone {zone} ({len(items)} incidents)")
         for inc in sorted(items, key=lambda x: -x.priority_score)[:limit]:
-            lines.append(f"- incident {inc.id} | reports {','.join(inc.report_ids) or '-'} | {inc.type} sev {inc.severity} prio {inc.priority_score:g} | "
+            lines.append(f"- incident {inc.label or inc.id} (id {inc.id}) | reports {','.join(inc.report_ids) or '-'} | {inc.type} sev {inc.severity} prio {inc.priority_score:g} | "
                          f"{inc.geocode_match or 'unknown location'}{' (location unknown)' if inc.location_unknown else ''} | people {inc.people_count if inc.people_count is not None else '?'} | "
                          f"units {','.join(inc.unit) or '-'} ({','.join(inc.department) or '-'}) | part {inc.structure_part or '-'} | fire from {inc.fire_direction or '?'} size {inc.fire_size or '?'} | "
                          f"needs {','.join(inc.needs) or '-'} | last {inc.last_ts[11:19]} | {inc.summary or inc.transcript[:120]} | details: {inc.details[:220]}")

@@ -85,14 +85,11 @@ def resolve_model(force: Optional[str] = None) -> str:
     if C.LLM_MODEL and C.LLM_MODEL != "auto":
         _model = C.LLM_MODEL
         return _model
-    try:                                   # choice made by scripts/setup_models.py (tok/s rule)
-        chosen = json.loads(C.MODELS_JSON.read_text()).get("live_llm") if C.MODELS_JSON.exists() else None
-        if chosen and chosen in available_models():
-            _model = chosen
-            return _model
-    except Exception:  # noqa: BLE001
-        pass
     avail = available_models()
+    for cand in C.ORGANIZER_CANDIDATES:        # the organizer: first candidate that is pulled
+        if cand in avail:
+            _model = cand
+            return _model
     for cand in C.LLM_CANDIDATES:
         if any(a == cand or a.split(":")[0] == cand.split(":")[0] and a.startswith(cand) for a in avail):
             _model = cand
@@ -134,8 +131,12 @@ def llm_extract(transcript: str, model: Optional[str] = None, incident_id: Optio
         meta["attempts"] = attempt + 1
         try:
             fmt = EXTRACTION_SCHEMA if attempt == 0 else "json"
-            r = client().chat(model=model, messages=messages, format=fmt, keep_alive=C.OLLAMA_KEEP_ALIVE,
-                              options={"temperature": C.LLM_TEMPERATURE, "num_ctx": C.LLM_NUM_CTX, "num_predict": C.LLM_NUM_PREDICT})
+            if attempt == 1 and last_err and "Timeout" in last_err and C.FALLBACK_MODEL in available_models():
+                model = C.FALLBACK_MODEL          # organizer too slow right now: step down
+                meta["model"] = model
+            c = ollama.Client(host=C.OLLAMA_HOST, timeout=C.ORGANIZER_TIMEOUT_S if attempt == 0 else C.LLM_TIMEOUT_S)
+            r = c.chat(model=model, messages=messages, format=fmt, keep_alive=C.OLLAMA_KEEP_ALIVE, think=C.LLM_THINK if model.startswith("qwen3") else None,
+                       options={"temperature": C.LLM_TEMPERATURE, "num_ctx": C.LLM_NUM_CTX, "num_predict": C.LLM_NUM_PREDICT})
             meta["tokens_in"] += int(getattr(r, "prompt_eval_count", 0) or 0)
             out = int(getattr(r, "eval_count", 0) or 0)
             meta["tokens_out"] += out

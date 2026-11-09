@@ -1,0 +1,62 @@
+{
+ "id": "cloud_recorded_camp",
+ "label": "Recorded cloud response",
+ "note": "Written in advance by claude-opus-5-5 (the review session) from camp_live.json + camp_batch.json, to replay what the cloud agent would return after 'Skip ahead 30 minutes'. It is NOT a live API call. The dashboard must show the label above. Each item has a 'match' block; the replay code finds the real incident with the same type nearest to that place and shows its real ID (for example FIRE-001). If no incident matches, show the place name instead of an ID.",
+ "model": "claude-opus-5-5",
+ "data_as_of_rule": "show the time of the newest report in the database when the replay is shown",
+ "situation": "Fire is moving through Paradise from the north and northeast, ahead of the main front. Three life-safety incidents are open now: six civilians sheltering behind Engine 33 after a burnover on Edgewood Lane at Pentz Road, an elderly couple trapped on Oliver Road, and about 200 evacuees in the Holiday Market parking lot on Skyway with fire getting near. Skyway is blocked at Elliott Road and at Neal Road, so Clark Road is the only open evacuation route in these reports. Paradise High School and Adventist Health Feather River are now empty of people. Reports from 3 departments agree on these points, except one PD report that says Skyway is open at Neal Road.",
+ "priorities": [
+  {"rank": 1, "match": {"type": "trapped", "location_text": "Edgewood Lane at Pentz Road"},
+   "text": "Burnover with 6 civilians and one injured firefighter. The way out depends on Dozer 1 clearing Pentz Road south of Edgewood Lane."},
+  {"rank": 2, "match": {"type": "trapped", "location_text": "Oliver Road"},
+   "text": "2 people trapped in a house with the garage on fire. Engine 35 is going in alone."},
+  {"rank": 3, "match": {"type": "other", "location_text": "Holiday Market, Skyway"},
+   "text": "About 200 evacuees with no instructions and fire getting near. Skyway is blocked on both sides of them."},
+  {"rank": 4, "match": {"type": "fire", "location_text": "Coutolenc Road, Magalia"},
+   "text": "About 10 homes with spot fires and residents who refuse to leave."}
+ ],
+ "suggestions": [
+  {"match": {"type": "road_blocked", "location_text": "Pentz Road south of Edgewood Lane"},
+   "text": "Send one engine to cover Dozer 1 on Pentz Road now. When the road is clear, move the 6 civilians at Edgewood Lane south on Pentz Road.",
+   "reason": "Dozer 1 says it can clear the road in about 15 minutes but needs cover. Engine 33 says it can move the civilians after that."},
+  {"match": {"type": "trapped", "location_text": "Oliver Road"},
+   "text": "Send a second unit to Oliver Road. Engine 82 or Engine 26 are the nearest units that report no life-safety work.",
+   "reason": "Engine 26 reports its spot fire in Paradise Community Park is under control and needs no help."},
+  {"match": {"type": "other", "location_text": "Holiday Market, Skyway"},
+   "text": "Tell Paradise PD 9 to hold the 200 evacuees in the Holiday Market parking lot as a temporary refuge, away from vegetation, until a route to Clark Road is confirmed.",
+   "reason": "Skyway is blocked at Elliott Road and at Neal Road. Moving 200 people onto a blocked road is a greater risk than holding them on a paved lot."},
+  {"match": {"type": "road_blocked", "location_text": "Skyway at Neal Road"},
+   "text": "Send one message to all PD units: Skyway is blocked at Elliott Road and at Neal Road. Use Clark Road.",
+   "reason": "Paradise PD 11 sends cars to Skyway at Neal Road because of a report that it is open. Paradise PD 7 corrected that report later."},
+  {"match": {"type": "fire", "location_text": "Buschmann Road"},
+   "text": "Send a second water tender to Buschmann Road.",
+   "reason": "Water Tender 2 reports low hydrant pressure, and engines on Buschmann Road are running out of water."},
+  {"match": {"type": "fire", "location_text": "Coutolenc Road, Magalia"},
+   "text": "Send 2 more deputies to Coutolenc Road in Magalia for door-to-door evacuation.",
+   "reason": "Butte SO 4 asks for more deputies. Residents refuse to leave near active spot fires."}
+ ],
+ "contradictions": [
+  {"text": "Paradise PD 11 says Skyway is open at Neal Road. Paradise PD 7 says Skyway is still blocked at Neal Road and at Elliott Road. The later report is from PD 7.",
+   "match": {"type": "road_blocked", "location_text": "Skyway at Neal Road"}}
+ ],
+ "open_questions": [
+  {"match": {"type": "other", "location_text": "Holiday Market, Skyway"},
+   "text": "Is any route from the Holiday Market lot to Clark Road open now?"},
+  {"match": {"type": "trapped", "location_text": "Oliver Road"},
+   "text": "Did Engine 35 get the 2 people out of the house on Oliver Road?"},
+  {"match": {"type": "fire", "location_text": "Paradise Fire Station 81, Skyway"},
+   "text": "Can the crews at Paradise Fire Station 81 stay safely, or must they leave?"}
+ ],
+ "resolved": [
+  {"match": {"type": "fire", "location_text": "Paradise High School, Maxwell Drive"},
+   "text": "All 123 occupants are out. The gym is now involved, and crews are defensive."},
+  {"match": {"type": "medical", "location_text": "Adventist Health Feather River"},
+   "text": "All patients are out, including both patients on ventilators. The building is burning."},
+  {"match": {"type": "medical", "location_text": "Bille Road"},
+   "text": "The patient is loaded and goes to Chico, stable."},
+  {"match": {"type": "trapped", "location_text": "Pentz Road at Wagstaff Road"},
+   "text": "Both occupants of the vehicle are out, with minor smoke exposure."},
+  {"match": {"type": "fire", "location_text": "Ponderosa Elementary School, Pentz Road"},
+   "text": "The school was empty. This answers the unclear call from Engine 35 about 'a school off Pentz'."}
+ ]
+}

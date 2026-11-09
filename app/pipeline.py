@@ -18,9 +18,9 @@ import time
 from typing import Optional
 
 from app import config as C
-from app import db, hazards
+from app import db, hazards, orchestrator
 from app.extract import process_text
-from app.schemas import Incident, Report, now_iso
+from app.schemas import LABEL_PREFIX, TYPE_SEVERITY_ORDER, Incident, Report, now_iso
 
 _link_lock = threading.Lock()      # serialize "find target + save" so parallel channels cannot double-open
 
@@ -37,6 +37,8 @@ def find_link_target(cand: Incident) -> tuple[Optional[Incident], str]:
     """The nearest open incident the candidate may join, and why / why not."""
     if C.LINK_RADIUS_M <= 0:
         return None, "merging disabled"
+    if cand.type == "medical" and (cand.people_count or 0) <= 2:
+        pass                                       # a single patient still joins the event at the same place
     if cand.location_unknown:
         return None, "location unknown, opened separately"
     since = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(minutes=C.LINK_WINDOW_MIN)).isoformat(timespec="seconds")
@@ -48,8 +50,8 @@ def find_link_target(cand: Incident) -> tuple[Optional[Incident], str]:
         if d <= C.LINK_RADIUS_M and (best_d is None or d < best_d):
             best, best_d = inc, d
     if best is None:
-        return None, f"no open {cand.type} incident within {C.LINK_RADIUS_M} m / {C.LINK_WINDOW_MIN} min"
-    return best, f"same type, {best_d:.0f} m from incident {best.id} reported {best.report_count}x"
+        return None, f"no open incident within {C.LINK_RADIUS_M} m / {C.LINK_WINDOW_MIN} min"
+    return best, f"{best_d:.0f} m from {best.label or best.id} ({best.type}) reported {best.report_count}x"
 
 
 _SIZE_RANK = {None: 0, "small": 1, "medium": 2, "large": 3}
@@ -57,6 +59,10 @@ _SIZE_RANK = {None: 0, "small": 1, "medium": 2, "large": 3}
 
 def merge_into(inc: Incident, cand: Incident, report: Report) -> Incident:
     inc.severity = max(inc.severity, cand.severity)
+    if cand.type not in inc.types:
+        inc.types.append(cand.type)
+    if TYPE_SEVERITY_ORDER.get(cand.type, 0) > TYPE_SEVERITY_ORDER.get(inc.type, 0):
+        inc.type = cand.type                       # most severe type of its reports; label stays stable
     inc.department = inc.department + [d for d in cand.department if d not in inc.department]
     inc.unit = inc.unit + [u for u in cand.unit if u not in inc.unit]
     if _SIZE_RANK.get(cand.fire_size, 0) > _SIZE_RANK.get(inc.fire_size, 0):
@@ -96,7 +102,7 @@ def ingest_text(text: str, channel: str = "text", input_type: str = "text", sour
     action = "failed"
     try:
         cand = process_text(text, channel=channel, input_type=input_type, model=model)
-        cand.report_ids, cand.channels = [report.id], [channel]
+        cand.report_ids, cand.channels, cand.types = [report.id], [channel], [cand.type]
         if cand.details:
             cand.details = f"[{channel}] {cand.details}"
         report.department = cand.department[0] if cand.department else "other"
@@ -111,7 +117,9 @@ def ingest_text(text: str, channel: str = "text", input_type: str = "text", sour
                 inc, action = merge_into(target, cand, report), "merged"
             else:
                 inc, action = cand, "new"
+                inc.label = db.next_label(LABEL_PREFIX.get(inc.type, "OTHER"))
             db.save_incident(inc)
+        orchestrator.evaluate_async(inc.model_copy(deep=True), action)
         report.status, report.incident_id, report.link_action, report.link_reason = "processed", inc.id, action, reason
     except Exception as e:  # noqa: BLE001
         report.status, report.error = "failed", f"{type(e).__name__}: {str(e)[:180]}"

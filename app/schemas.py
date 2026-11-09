@@ -23,6 +23,8 @@ _TYPE_SYNONYMS = [
     (r"road|debris|tree down|closure|blocked|impass|traffic|bridge out", "road_blocked"),
     (r"trap|entrap|pinned|stuck|stranded|missing|search", "trapped"),
 ]
+TYPE_SEVERITY_ORDER = {"trapped": 5, "collapse": 4, "fire": 3, "medical": 2, "road_blocked": 1, "other": 0}
+LABEL_PREFIX = {"fire": "FIRE", "medical": "MED", "trapped": "TRAP", "road_blocked": "ROAD", "collapse": "COLL", "other": "OTHER"}
 DEPARTMENTS = ("FD", "PD", "EMS", "other")
 FIRE_SIZES = ("small", "medium", "large")
 DIRECTIONS = ("N", "NE", "E", "SE", "S", "SW", "W", "NW")
@@ -222,12 +224,14 @@ class Incident(BaseModel):
     model_config = ConfigDict(extra="ignore")
 
     id: str = Field(default_factory=lambda: uuid.uuid4().hex[:12])
+    label: str = ""                                      # human id: FIRE-001, MED-002, ...
     timestamp: str = Field(default_factory=now_iso)      # first report
     last_ts: str = Field(default_factory=now_iso)        # latest report
     channel: str = "unknown"                             # first reporter
     channels: list[str] = Field(default_factory=list)    # every reporter
     report_ids: list[str] = Field(default_factory=list)
     report_count: int = 1
+    types: list[str] = Field(default_factory=list)       # every type reported; .type is the most severe
     input_type: InputType = "text"
     transcript: str = ""                                 # latest report text
     location_text: Optional[str] = None

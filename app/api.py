@@ -62,17 +62,23 @@ def _ingest_text_sync(text: str, channel: str, input_type: str = "text", source_
 
 @app.get("/health")
 async def health():
+    from app.extract import resolve_model
+
     return {"ok": True, "town": C.TOWN_NAME, "banner": C.SCENARIO_BANNER, "network": network.state().model_dump(),
-            "cloud_ready": network.cloud_ready(), "models_loaded": metrics.models_loaded()}
+            "cloud_ready": network.cloud_ready(), "models_loaded": metrics.models_loaded(),
+            "organizer": resolve_model(), "fallback": C.FALLBACK_MODEL, "stt": db.get_metric("stt_backend", {}).get("model")}
 
 
 @app.post("/ingest/text")
-async def ingest_text(body: Optional[TextIn] = None, text: Optional[str] = Form(None), channel: Optional[str] = Form(None)):
-    t = body.text if body else text
-    ch = (body.channel if body else channel) or "text"
-    if not t or not t.strip():
+async def ingest_text(body: TextIn):
+    if not body.text.strip():
         raise HTTPException(400, "text is required")
-    return await asyncio.to_thread(_ingest_text_sync, t, ch)
+    return await asyncio.to_thread(_ingest_text_sync, body.text, body.channel or "text")
+
+
+@app.post("/ingest/text_form")
+async def ingest_text_form(text: str = Form(...), channel: str = Form("text")):
+    return await asyncio.to_thread(_ingest_text_sync, text, channel)
 
 
 @app.post("/ingest/audio")
@@ -97,7 +103,7 @@ async def ingest_audio(file: UploadFile = File(...), channel: str = Form("audio"
 
 
 @app.websocket("/ws/radio/{channel}")
-async def ws_radio(ws: WebSocket, channel: str):
+async def ws_radio(ws: WebSocket, channel: str, source: Optional[str] = None):
     """Live radio channel: binary frames of PCM16 little-endian 16 kHz mono (any chunk size,
     0.5 s recommended), text 'END' to close. Each speech segment (cut at pauses by VAD) is
     transcribed as soon as it ends and becomes a report; one JSON message per segment."""
@@ -113,7 +119,7 @@ async def ws_radio(ws: WebSocket, channel: str):
         if seg.get("text"):
             try:
                 metrics.inflight["audio"] += 1
-                report, inc, action = pipeline.ingest_text(seg["text"], channel=channel, input_type="audio", source_file="live-stream",
+                report, inc, action = pipeline.ingest_text(seg["text"], channel=channel, input_type="audio", source_file=source or "live-stream",
                                                            stt={"backend": seg.get("backend"), "latency_ms": seg["latency_ms"], "rtf": seg["rtf"], "audio_s": seg["audio_s"]})
                 seg.update(report_id=report.id, incident_id=inc.id if inc else None, link=action,
                            incident={k: inc.model_dump().get(k) for k in ("type", "severity", "people_count", "fire_direction", "fire_size", "geocode_match")} if inc else None)
@@ -282,6 +288,17 @@ async def info_request_answer(rid: int, body: AnswerIn):
     if row is None:
         raise HTTPException(404, "no such info request")
     return row
+
+
+@app.get("/alerts")
+async def alerts(limit: int = 50):
+    return db.list_alerts(limit)
+
+
+@app.post("/alerts/{alert_id}/seen")
+async def alert_seen(alert_id: int):
+    db.mark_alert(alert_id, "seen")
+    return {"ok": True}
 
 
 @app.get("/decisions")

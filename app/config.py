@@ -55,6 +55,12 @@ OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434")
 # Order of preference. LLM_MODEL "auto" = the first candidate that is pulled.
 LLM_CANDIDATES = ["llama3.3:70b", "qwen2.5:72b", "qwen2.5:32b", "qwen2.5:14b"]
 LLM_MODEL = os.environ.get("FIELDMIND_LLM", "auto")
+# The ORGANIZER does extraction, SQL writing and the edge situation. qwen3.6:35b-a3b takes over when pulled
+# (measured ~64 tok/s on GB10, "think": false); until then qwen2.5:32b. The 14B is the fallback when the organizer is too slow.
+ORGANIZER_CANDIDATES = ["qwen3.6:35b-a3b", "qwen2.5:32b"]
+FALLBACK_MODEL = "qwen2.5:14b"
+ORGANIZER_TIMEOUT_S = 45       # per extraction call before stepping down to the fallback
+LLM_THINK = False              # Qwen 3 models think by default; always off
 LLM_MIN_TOKENS_PER_S = 10.0    # below this, step down one size for live extraction
 LLM_TEMPERATURE = 0.1
 LLM_NUM_CTX = 4096
@@ -93,7 +99,7 @@ CONFIDENCE_THRESHOLD = 0.7     # below this -> cloud refine (online) or queue (o
 FALLBACK_CONFIDENCE = 0.3      # used when the LLM returns invalid JSON twice
 GEOCODE_MIN_SCORE = 70         # rapidfuzz score 0-100
 GEOCODE_FAIL_CONFIDENCE_PENALTY = 0.25
-HAZARD_PRIORITY_BONUS = 2
+HAZARD_PRIORITY_BONUS = 0      # all of Paradise is a hazard zone: the bonus carried no information
 # people factor added to priority_score: people_count >= threshold -> factor
 PEOPLE_FACTOR_BANDS = [(1, 1), (3, 2), (10, 3)]
 NEEDS_VOCAB = ["fire_suppression", "technical_rescue", "medical", "ambulance", "evacuation",
@@ -110,7 +116,7 @@ SITUATION_INTERVAL_S = 60          # cloud situation + suggestions refresh when 
 # LINK_RADIUS_M = 0 disables merging: one report = one incident.
 LINK_RADIUS_M = 250
 LINK_WINDOW_MIN = 30
-LINK_SAME_TYPE = True
+LINK_SAME_TYPE = False      # link by place and time for any type (review defect 1)
 LINK_MAX_REPORTS = 20
 
 # ---------------------------------------------------------------- API / UI

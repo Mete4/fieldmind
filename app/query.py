@@ -32,7 +32,7 @@ fm.reports  -- one row per raw radio call / text, newest first by ts
   fire_size TEXT ('small'|'medium'|'large'), details TEXT, text TEXT (the transcript), status TEXT, incident_id TEXT (link to fm.incidents.id)
 
 fm.incidents -- one row per incident, aggregated from its linked reports
-  id TEXT, timestamp TEXT (first report), last_ts TEXT (latest report), type TEXT (same vocabulary), severity INTEGER 1-5 (max),
+  id TEXT (internal), label TEXT (human id such as FIRE-001, MED-002, TRAP-001, ROAD-001; always select it), timestamp TEXT (first report), last_ts TEXT (latest report), type TEXT (same vocabulary), severity INTEGER 1-5 (max),
   confidence REAL, priority_score REAL, in_hazard_zone INTEGER 0/1, hazard_zones TEXT (comma list, e.g. 'fire_very_high'),
   status TEXT ('local'|'queued'|'cloud_refined'), report_count INTEGER, location_text TEXT, geocode_match TEXT (place name), lat REAL, lon REAL,
   people_count INTEGER (max), needs TEXT (comma list), summary TEXT, transcript TEXT (latest report), department TEXT (comma list, e.g. 'FD,EMS'),
@@ -46,7 +46,7 @@ Text matching: use lower(col) LIKE '%high school%'. Department lists: department
 
 EXAMPLES = [
     ("Which incidents have people trapped inside?",
-     "SELECT id, type, severity, people_count, geocode_match, structure_part, summary FROM fm.incidents "
+     "SELECT id, label, type, severity, people_count, geocode_match, structure_part, summary FROM fm.incidents "
      "WHERE type = 'trapped' OR (type IN ('fire','collapse') AND llm_filter({'model_name': 'local'}, "
      "{'prompt': 'Does this radio report say people are trapped inside or unable to get out? Answer yes or no. Report: {t}', "
      "'context_columns': [{'data': transcript, 'name': 't'}]})) ORDER BY priority_score DESC LIMIT 50"),
@@ -55,7 +55,7 @@ EXAMPLES = [
      "AND ts >= strftime(now() AT TIME ZONE 'UTC' - INTERVAL 30 MINUTE, '%Y-%m-%dT%H:%M:%S') "
      "AND (lower(text) LIKE '%high school%' OR lower(location_text) LIKE '%high school%') ORDER BY ts DESC LIMIT 50"),
     ("List large fires coming from the north with more than 50 people.",
-     "SELECT id, geocode_match, fire_size, fire_direction, people_count, severity, summary FROM fm.incidents "
+     "SELECT id, label, geocode_match, fire_size, fire_direction, people_count, severity, summary FROM fm.incidents "
      "WHERE type = 'fire' AND fire_size = 'large' AND fire_direction = 'N' AND people_count > 50 ORDER BY people_count DESC LIMIT 50"),
     ("Give me a one-line summary of each EMS report.",
      "SELECT id, ts, unit, llm_complete({'model_name': 'local'}, {'prompt': 'Summarize this radio report in one line of at most 12 words: {t}', "
@@ -69,7 +69,7 @@ only when the question needs reading the text; always include id columns (id, in
 """ + SCHEMA_DOC + "\n\nExamples:\n" + "\n".join(f"Q: {q}\nSQL: {s}" for q, s in EXAMPLES)
 
 ANSWER_SYSTEM = ("You are the operator's assistant in a disaster command center. Answer the question in at most 3 short sentences "
-                 "using ONLY the rows given (JSON). Mention counts, places and people numbers. If there are no rows, say so plainly.")
+                 "using ONLY the rows given (JSON). Refer to incidents by their label (FIRE-001 etc.) when present. Mention counts, places and people numbers. If there are no rows, say so plainly.")
 
 
 def _setup() -> duckdb.DuckDBPyConnection:

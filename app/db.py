@@ -52,6 +52,9 @@ CREATE TABLE IF NOT EXISTS info_requests (
   status TEXT DEFAULT 'sent', answer TEXT, answered_ts TEXT);
 CREATE TABLE IF NOT EXISTS decisions (
   id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT, kind TEXT, target_id TEXT, detail TEXT);
+CREATE TABLE IF NOT EXISTS alerts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT, incident_id TEXT, label TEXT, level TEXT, headline TEXT, why TEXT,
+  reasons TEXT, trigger TEXT, score TEXT, status TEXT DEFAULT 'new', model TEXT, latency_ms INTEGER);
 """
 
 SEED_UNITS = [("E81", "Engine 81", "FD"), ("E82", "Engine 82", "FD"), ("E83", "Engine 83", "FD"), ("E35", "Engine 35", "FD"),
@@ -75,7 +78,7 @@ def connect() -> Iterator[sqlite3.Connection]:
 REPORT_COLS = {"text": "TEXT", "department": "TEXT", "unit": "TEXT", "type": "TEXT", "severity": "INTEGER",
                "people_count": "INTEGER", "location_text": "TEXT", "confidence": "REAL", "structure_part": "TEXT",
                "fire_direction": "TEXT", "fire_size": "TEXT", "details": "TEXT", "source_file": "TEXT"}
-INCIDENT_COLS = {"location_text": "TEXT", "geocode_match": "TEXT", "lat": "REAL", "lon": "REAL", "people_count": "INTEGER",
+INCIDENT_COLS = {"label": "TEXT", "types": "TEXT", "location_text": "TEXT", "geocode_match": "TEXT", "lat": "REAL", "lon": "REAL", "people_count": "INTEGER",
                  "needs": "TEXT", "hazard_zones": "TEXT", "summary": "TEXT", "transcript": "TEXT", "department": "TEXT",
                  "unit": "TEXT", "structure_part": "TEXT", "fire_direction": "TEXT", "fire_size": "TEXT", "details": "TEXT",
                  "report_ids": "TEXT"}
@@ -113,14 +116,14 @@ def reset_db() -> None:
     """Demo reset: wipe every table (keeps the schema)."""
     with _write_lock, connect() as c:
         for t in ("reports", "incidents", "cloud_queue", "requests", "metrics", "summaries", "situations", "suggestions",
-                  "open_questions", "info_requests", "decisions"):
+                  "open_questions", "info_requests", "decisions", "alerts"):
             c.execute(f"DELETE FROM {t}")
         c.execute("UPDATE units SET status='available', incident_id=NULL, updated_ts=?", (now_iso(),))
 
 
 # ------------------------------------------------------------------ incidents
 def save_incident(inc: Incident) -> Incident:
-    row = {"id": inc.id, "timestamp": inc.timestamp, "last_ts": inc.last_ts, "channel": inc.channel, "type": inc.type,
+    row = {"id": inc.id, "label": inc.label, "types": ",".join(inc.types), "timestamp": inc.timestamp, "last_ts": inc.last_ts, "channel": inc.channel, "type": inc.type,
            "severity": inc.severity, "confidence": inc.confidence, "priority_score": inc.priority_score,
            "in_hazard_zone": int(inc.in_hazard_zone), "status": inc.status, "source": inc.source, "report_count": inc.report_count,
            "location_text": inc.location_text, "geocode_match": inc.geocode_match, "lat": inc.lat, "lon": inc.lon,
@@ -420,3 +423,36 @@ def log_decision(kind: str, target_id: str, detail: str) -> None:
 
 def list_decisions(limit: int = 100) -> list[dict]:
     return _rows("SELECT * FROM decisions ORDER BY id DESC LIMIT ?", (limit,))
+
+
+# ------------------------------------------------------------------ human ids + alerts
+def next_label(prefix: str) -> str:
+    """FIRE-001, FIRE-002 ... per type prefix (call under the caller's lock)."""
+    with connect() as c:
+        rows = c.execute("SELECT label FROM incidents WHERE label LIKE ?", (f"{prefix}-%",)).fetchall()
+    nums = [int(r[0].split("-")[-1]) for r in rows if r[0] and r[0].split("-")[-1].isdigit()]
+    return f"{prefix}-{(max(nums) + 1 if nums else 1):03d}"
+
+
+def last_alert_score(incident_id: str) -> Optional[tuple]:
+    with connect() as c:
+        row = c.execute("SELECT score FROM alerts WHERE incident_id=? ORDER BY id DESC LIMIT 1", (incident_id,)).fetchone()
+    return tuple(json.loads(row[0])) if row and row[0] else None
+
+
+def add_alert(incident_id: str, label: str, level: str, headline: str, why: str, reasons: list[str], trigger: str,
+              score: tuple, model: str = "", latency_ms: int = 0) -> dict:
+    with _write_lock, connect() as c:
+        cur = c.execute("INSERT INTO alerts (ts,incident_id,label,level,headline,why,reasons,trigger,score,status,model,latency_ms) VALUES (?,?,?,?,?,?,?,?,?,'new',?,?)",
+                        (now_iso(), incident_id, label, level, headline, why, ",".join(reasons), trigger, json.dumps(list(score)), model, latency_ms))
+        row = c.execute("SELECT * FROM alerts WHERE id=?", (cur.lastrowid,)).fetchone()
+    return dict(row)
+
+
+def list_alerts(limit: int = 50) -> list[dict]:
+    return _rows("SELECT * FROM alerts ORDER BY id DESC LIMIT ?", (limit,))
+
+
+def mark_alert(alert_id: int, status: str = "seen") -> None:
+    with _write_lock, connect() as c:
+        c.execute("UPDATE alerts SET status=? WHERE id=?", (status, alert_id))
