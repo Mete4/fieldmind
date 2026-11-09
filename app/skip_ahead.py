@@ -3,6 +3,7 @@ scripts/build_skip_ahead.sh made with the real pipeline, and shifts its times
 so that the batch calls spread over the last 30 minutes and the newest is now."""
 from __future__ import annotations
 
+import json
 import sqlite3
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -63,6 +64,19 @@ def load_skip_ahead(now: datetime | None = None) -> int:
                         if t:
                             con.execute(f"UPDATE main.{tab} SET {col}=? WHERE rowid=?",
                                         (shift(t).isoformat(timespec="seconds"), rowid))
+                if "data" in cols:   # the console reads the stored record, so its times move too
+                    for rowid, value in con.execute(f"SELECT rowid, data FROM main.{tab} WHERE data IS NOT NULL").fetchall():
+                        try:
+                            record = json.loads(value)
+                        except ValueError:
+                            continue
+                        if not isinstance(record, dict):
+                            continue
+                        for key in TIME_COLUMNS:
+                            t = _parse(record.get(key)) if isinstance(record.get(key), str) else None
+                            if t:
+                                record[key] = shift(t).isoformat(timespec="seconds")
+                        con.execute(f"UPDATE main.{tab} SET data=? WHERE rowid=?", (json.dumps(record), rowid))
         count = con.execute("SELECT COUNT(*) FROM main.incidents").fetchone()[0]
     finally:
         con.close()

@@ -12,11 +12,16 @@ The scenario is simulated on real geography: Paradise, California, on the mornin
 Camp Fire. The streets come from OpenStreetMap, and the hazard zones come from CAL FIRE. The
 radio calls were written for this exercise.
 
-![Console map after Skip ahead: 21 incidents in Paradise, one pin each](docs/console_map.png)
+![The FieldMind operator console after Skip ahead 30 min](docs/console.png)
 
-*The console map after Skip ahead: one pin for each incident, colored by severity (red is the
-highest), with a type letter (F fire, M medical, T trapped, R road blocked, O other). The small
-number is the count of radio calls on that incident. A white outline means "Needs review".*
+*The operator console after **Skip ahead 30 min**: 21 incidents from 32 radio calls.*
+
+- **Top:** the demo buttons, and the newest alert in red.
+- **Left:** the incident queue, most urgent first, with the "Needs review" reasons.
+- **Center:** the map, with one pin for each incident. The color shows the severity (red is the
+  highest), and the letter shows the type (F fire, M medical, T trapped, R road blocked, O other).
+  The small number is the count of radio calls on that incident.
+- **Right:** the radio feed, with each transcript and the incident that it went to.
 
 ## How it works
 

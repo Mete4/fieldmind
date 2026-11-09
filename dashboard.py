@@ -57,9 +57,16 @@ ss.setdefault("skipped", False)
 ss.setdefault("big_agent", None)
 
 
+@st.cache_resource
+def api_client() -> httpx.Client:
+    """One client for all reruns: it keeps the connection to the API open, and it loads the TLS
+    certificate store once, not on each request."""
+    return httpx.Client(base_url=API)
+
+
 def api(method: str, path: str, timeout: float = 5, **kw):
     try:
-        r = httpx.request(method, f"{API}{path}", timeout=timeout, **kw)
+        r = api_client().request(method, path, timeout=timeout, **kw)
         r.raise_for_status()
         return r.json()
     except Exception as e:  # noqa: BLE001
