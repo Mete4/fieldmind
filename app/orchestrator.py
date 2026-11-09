@@ -69,11 +69,19 @@ def _why(inc: Incident, reasons: list[str]) -> tuple[str, str, int]:
         return f"Rules: {', '.join(reasons)} ({type(e).__name__})", model, int((time.perf_counter() - t0) * 1000)
 
 
+_eval_lock = threading.Lock()
+
+
 def evaluate(inc: Incident, action: str) -> dict | None:
     """Called after every save. Returns the alert dict or None."""
     important, reasons, score = assess(inc)
     if not important:
         return None
+    with _eval_lock:
+        return _evaluate_locked(inc, reasons, score)
+
+
+def _evaluate_locked(inc: Incident, reasons: list[str], score: tuple) -> dict | None:
     prev = db.last_alert_score(inc.id)
     if prev is not None:
         if tuple(score) <= tuple(prev):

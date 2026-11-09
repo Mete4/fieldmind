@@ -40,6 +40,13 @@ def find_link_target(cand: Incident) -> tuple[Optional[Incident], str]:
     if cand.type == "medical" and (cand.people_count or 0) <= 2:
         pass                                       # a single patient still joins the event at the same place
     if cand.location_unknown:
+        # no place in the call: join the incident this unit reported most recently (follow-up traffic)
+        since = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(minutes=C.LINK_WINDOW_MIN)).isoformat(timespec="seconds")
+        unit = (cand.unit or [""])[0]
+        if unit:
+            for inc in db.candidates_for_link(None, since):
+                if unit in inc.unit and inc.report_count < C.LINK_MAX_REPORTS:
+                    return inc, f"no place given; follow-up from {unit}, which last reported {inc.label or inc.id}"
         return None, "location unknown, opened separately"
     since = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(minutes=C.LINK_WINDOW_MIN)).isoformat(timespec="seconds")
     best, best_d = None, None
