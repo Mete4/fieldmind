@@ -159,6 +159,12 @@ class Geocoder:
                 return {"lat": cand["lat"], "lon": cand["lon"], "match": cand["name"], "score": round(score, 1), "method": "place"}
             return None
         e, s = self.match_one(q)
+        words = q.split()
+        if e and e["name"].lower() == C.TOWN_NAME.split(",")[0].lower() and len(words) > 2:
+            # "Unseen Paradise High School" (misheard word) -> try without the first word before accepting the town itself
+            e2, s2 = self.match_one(" ".join(words[1:]))
+            if e2 and s2 >= 90:
+                e, s = e2, s2
         if e and s >= C.GEOCODE_MIN_SCORE:
             return {"lat": e["lat"], "lon": e["lon"], "match": e["name"], "score": round(s, 1), "method": "place"}
         return None
