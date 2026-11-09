@@ -28,7 +28,7 @@ async def send(client: httpx.AsyncClient, call: dict, base: Path, use_text: bool
     try:
         if audio and audio.exists() and not use_text:
             with open(audio, "rb") as f:
-                r = await client.post(f"{C.API_URL}/ingest/audio", files={"file": (str(audio.relative_to(C.SAMPLE_DIR / "radio")), f, "audio/wav")}, data={"channel": channel})
+                r = await client.post(f"{C.API_URL}/ingest/audio", files={"file": (str(audio.resolve().relative_to((C.SAMPLE_DIR / "radio").resolve())), f, "audio/wav")}, data={"channel": channel})
         else:
             r = await client.post(f"{C.API_URL}/ingest/text", json={"text": call["text"], "channel": channel})
         d = r.json()
@@ -49,13 +49,13 @@ async def stream_call(call: dict, base: Path, speed: float, started: float, resu
 
     from app.stt import load_audio
 
-    audio, dur = load_audio(base / call["audio"])
+    audio, dur = load_audio((base / call["audio"]).resolve())
     pcm = (audio * 32767).astype("int16").tobytes()
     channel = f"{call['department']} {call['channel']}".strip().replace(" ", "_")
     chunk = int(0.5 * 16000) * 2
     t0 = time.perf_counter()
     try:
-        src = str((base / call["audio"]).relative_to(C.SAMPLE_DIR / "radio"))
+        src = str((base / call["audio"]).resolve().relative_to((C.SAMPLE_DIR / "radio").resolve()))
         async with websockets.connect(f"{C.API_URL.replace('http', 'ws')}/ws/radio/{channel}?source={src}", max_size=None) as ws:
             async def reader() -> None:
                 async for msg in ws:
@@ -80,7 +80,7 @@ async def stream_call(call: dict, base: Path, speed: float, started: float, resu
 async def run(path: Path, speed: float, use_text: bool, stream: bool = False) -> None:
     data = json.loads(path.read_text())
     calls = data["calls"]
-    base = path.parent
+    base = path.resolve().parent
     print(f"playing {len(calls)} calls from {path.name} at {speed}x ({'text' if use_text else 'audio where available'})")
     started = time.time()
     results: list = []

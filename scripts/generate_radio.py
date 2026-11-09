@@ -95,23 +95,39 @@ def ensure_voices(n: int) -> list[Path]:
     return _voice_files()
 
 
-def radio_fx(wav_in: Path, wav_out: Path, seed: int) -> None:
-    """Band-pass (300-3400 Hz), a little noise, a squelch click: cheap radio feel."""
+def radio_fx(wav_in: Path, wav_out: Path, seed: int, department: str = "FD") -> None:
+    """Scanner-recording feel: band-pass 300-3000 Hz, light compression and clipping, key-up click,
+    squelch tail, a low noise floor and (FD) a little pump/wind rumble."""
     import numpy as np
     import soundfile as sf
 
     x, sr = sf.read(wav_in, dtype="float32")
     if x.ndim > 1:
         x = x.mean(axis=1)
+    rng = np.random.default_rng(seed)
+    # band-pass in the frequency domain
     spec = np.fft.rfft(x)
     f = np.fft.rfftfreq(len(x), 1 / sr)
-    spec[(f < 300) | (f > 3400)] *= 0.05
-    y = np.fft.irfft(spec, n=len(x))
-    rng = np.random.default_rng(seed)
-    y = np.clip(y * 1.6, -0.9, 0.9) * 0.8 + rng.normal(0, 0.012, len(y)).astype(np.float32)
-    click = np.zeros(int(0.08 * sr), dtype=np.float32)
-    click[: int(0.01 * sr)] = rng.normal(0, 0.25, int(0.01 * sr))
-    y = np.concatenate([click, y, click]).astype(np.float32)
+    spec[(f < 300) | (f > 3000)] *= 0.03
+    spec[(f >= 300) & (f < 450)] *= 0.5
+    y = np.fft.irfft(spec, n=len(x)).astype(np.float32)
+    # light compression + a little clipping (hot mic)
+    y = y / (np.max(np.abs(y)) + 1e-6)
+    y = np.sign(y) * (np.abs(y) ** 0.7)
+    y = np.clip(y * 1.35, -0.85, 0.85)
+    # noise floor + (FD) pump/wind rumble
+    noise = rng.normal(0, 0.006, len(y)).astype(np.float32)
+    if department == "FD":
+        t = np.arange(len(y)) / sr
+        rumble = 0.012 * np.sin(2 * np.pi * 38 * t) * (0.6 + 0.4 * np.sin(2 * np.pi * 0.7 * t)) + rng.normal(0, 0.01, len(y)) * 0.5
+        rs = np.fft.rfft(rumble.astype(np.float32)); rs[f > 400] *= 0.1
+        noise = noise + np.fft.irfft(rs, n=len(y)).astype(np.float32)
+    y = 0.9 * y + noise
+    # key-up click, squelch tail
+    click = rng.normal(0, 0.3, int(0.012 * sr)).astype(np.float32) * np.linspace(1, 0, int(0.012 * sr))
+    gap = np.zeros(int(0.06 * sr), dtype=np.float32)
+    tail = rng.normal(0, 0.18, int(0.09 * sr)).astype(np.float32) * np.linspace(1, 0, int(0.09 * sr)) ** 0.5
+    y = np.concatenate([click, gap, y, gap[: int(0.02 * sr)], tail]).astype(np.float32)
     sf.write(wav_out, y, sr, subtype="PCM_16")
 
 
@@ -133,9 +149,12 @@ def voice_calls(calls: list[dict], out_dir: Path) -> int:
         if vf not in voices:
             voices[vf] = PiperVoice.load(str(vf))
         raw = out_dir / f"{i}.raw.wav"
+        from piper import SynthesisConfig
+
         with wave.open(str(raw), "wb") as w:
-            voices[vf].synthesize_wav(c["text"].replace("[static]", "...").replace("[unintelligible]", "..."), w)
-        radio_fx(raw, out_dir / f"{i}.wav", seed=i)
+            voices[vf].synthesize_wav(c["text"].replace("[static]", "...").replace("[unintelligible]", "..."), w,
+                                      syn_config=SynthesisConfig(length_scale=0.88, noise_scale=0.6, noise_w_scale=0.7))
+        radio_fx(raw, out_dir / f"{i}.wav", seed=i, department=str(c.get("department", "FD")).upper())
         raw.unlink()
         c["audio"] = f"{out_dir.name}/{i}.wav"
         done += 1
