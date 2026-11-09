@@ -14,5 +14,13 @@ sleep 20   # Whisper warm-up on the second API
 sleep 60   # alerts, open-question checks and background work finish
 kill "$API_PID"; sleep 2
 .venv/bin/python -c "import sqlite3; c=sqlite3.connect('data/skip_build.sqlite'); c.execute('PRAGMA wal_checkpoint(TRUNCATE)'); c.close()"
-cp data/skip_build.sqlite data/samples/skip_ahead.sqlite
+# Replace the state only when the build is complete, with an atomic rename: a Skip ahead
+# press during the build reads the old file or the new one, never a partial copy.
+if ! .venv/bin/python scripts/check_skip_build.py data/skip_build.sqlite \
+     data/samples/radio/camp_live.json data/samples/radio/camp_batch.json; then
+  echo "skip-ahead state NOT replaced; the previous file stays"
+  exit 1
+fi
+cp data/skip_build.sqlite data/samples/skip_ahead.sqlite.new
+mv -f data/samples/skip_ahead.sqlite.new data/samples/skip_ahead.sqlite
 echo "skip-ahead state written: data/samples/skip_ahead.sqlite"

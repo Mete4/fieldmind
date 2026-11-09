@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 # Restarts Ollama (and reloads the models) and the API if they die. Started detached by run.sh.
 cd "$(dirname "$0")/.."
+# A busy Ollama can miss one probe while requests wait in its queue; restart only after
+# OLLAMA_FAILED_PROBES_LIMIT failed probes in a row, or at once when /api/version is down.
+OLLAMA_FAILED_PROBES_LIMIT=3
+failed_probe_count=0
 while true; do
   sleep 30
   # generation probe: the server can answer /api/version while its runners are wedged
   PROBE=$(curl -s -m 40 http://127.0.0.1:11434/api/generate -d '{"model":"qwen2.5:14b","prompt":"Say OK.","stream":false,"keep_alive":-1,"options":{"num_predict":3}}' | grep -c '"done":true')
-  if ! curl -s -m 2 http://127.0.0.1:11434/api/version >/dev/null || [ "$PROBE" != "1" ]; then
-    echo "$(date '+%H:%M:%S') ollama not generating (probe=$PROBE) -> restart" >> logs/watchdog.log
+  if [ "$PROBE" = "1" ]; then failed_probe_count=0; else failed_probe_count=$((failed_probe_count + 1)); fi
+  if ! curl -s -m 2 http://127.0.0.1:11434/api/version >/dev/null || [ "$failed_probe_count" -ge "$OLLAMA_FAILED_PROBES_LIMIT" ]; then
+    failed_probe_count=0
+    echo "$(date '+%H:%M:%S') ollama not generating ($OLLAMA_FAILED_PROBES_LIMIT failed probes) -> restart" >> logs/watchdog.log
     scripts/ollama_ctl.sh stop >> logs/watchdog.log 2>&1; sleep 2
     echo "$(date '+%H:%M:%S') ollama down -> restart" >> logs/watchdog.log
     scripts/ollama_ctl.sh start >> logs/watchdog.log 2>&1

@@ -17,3 +17,4 @@ data/samples/radio/**/*.wav
 data/skip_build.sqlite*
 logs/demo_replay.pid
 data/archive/
+data/samples/skip_ahead.sqlite.new
