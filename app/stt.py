@@ -80,12 +80,30 @@ class TransformersBackend(_Backend):
             raise RuntimeError("torch.cuda.is_available() is False")
         self.name, self.device = "transformers", torch.cuda.get_device_name(0)
         self.model_name = C.WHISPER_HF_MODEL
-        self.pipe = pipeline("automatic-speech-recognition", model=C.WHISPER_HF_MODEL, torch_dtype=torch.float16,
+        self.pipe = pipeline("automatic-speech-recognition", model=C.WHISPER_HF_MODEL, dtype=torch.float16,
                              device="cuda:0", model_kwargs={"attn_implementation": "sdpa"})
+        # vocabulary prompt: real place names + radio call signs, so Whisper spells them right
+        self.prompt_ids = None
+        try:
+            import json
+
+            names = [e["name"] for e in json.loads(C.GAZETTEER_PATH.read_text()) if e["type"] in ("school", "hospital", "major_road", "neighborhood", "park", "fire_station")]
+            streets = ["Pentz Road", "Wagstaff Road", "Bille Road", "Clark Road", "Pearson Road", "Neal Road", "Elliott Road", "Edgewood Lane", "Oliver Road", "Skyway", "Maxwell Drive"]
+            vocab = "Butte ECC, Engine 81, Battalion 3, Medic 41, Paradise PD 7. " + ", ".join(dict.fromkeys(streets + names[:40])) + "."
+            self.prompt_ids = self.pipe.tokenizer.get_prompt_ids(vocab, return_tensors="pt").to("cuda:0")
+        except Exception:  # noqa: BLE001
+            self.prompt_ids = None
 
     def transcribe(self, audio: np.ndarray) -> str:
-        out = self.pipe({"raw": audio, "sampling_rate": SAMPLE_RATE}, chunk_length_s=30, batch_size=8,
-                        generate_kwargs={"language": C.WHISPER_LANGUAGE, "task": "transcribe"}, return_timestamps=False)
+        gk = {"language": C.WHISPER_LANGUAGE, "task": "transcribe"}
+        if self.prompt_ids is not None:
+            gk["prompt_ids"] = self.prompt_ids
+        try:
+            out = self.pipe({"raw": audio, "sampling_rate": SAMPLE_RATE}, chunk_length_s=30, batch_size=8, generate_kwargs=gk, return_timestamps=False)
+        except Exception:  # noqa: BLE001  (prompt unsupported by this transformers version)
+            gk.pop("prompt_ids", None)
+            self.prompt_ids = None
+            out = self.pipe({"raw": audio, "sampling_rate": SAMPLE_RATE}, chunk_length_s=30, batch_size=8, generate_kwargs=gk, return_timestamps=False)
         return str(out.get("text", "")).strip()
 
 
