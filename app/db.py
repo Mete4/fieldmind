@@ -456,3 +456,9 @@ def list_alerts(limit: int = 50) -> list[dict]:
 def mark_alert(alert_id: int, status: str = "seen") -> None:
     with _write_lock, connect() as c:
         c.execute("UPDATE alerts SET status=? WHERE id=?", (status, alert_id))
+
+
+def add_open_question(incident_id: str, text: str, source: str = "edge") -> int:
+    with _write_lock, connect() as c:
+        cur = c.execute("INSERT INTO open_questions (ts,incident_id,text,source,status) VALUES (?,?,?,?,'open')", (now_iso(), incident_id, text, source))
+        return cur.lastrowid

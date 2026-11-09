@@ -108,7 +108,7 @@ for u in units:
 # ---------------------------------------------------------------- top bar
 t = st.columns([5, 0.8, 1.2, 1.5, 1.4, 1.4])
 t[0].markdown(f"<div class='fm-top'><b>FieldMind&nbsp;·&nbsp;Paradise,&nbsp;CA</b> <span>{dt.datetime.now().strftime('%H:%M:%S')}</span>"
-              f"<span style='color:{'#43a047' if online else '#e53935'}'>●</span><span class='fm-dim'>{C.SCENARIO_BANNER}</span></div>", unsafe_allow_html=True)
+              f"<span style='color:{'#43a047' if online else '#fb8c00'}'>●</span><span class='fm-dim'>{'Hybrid · cloud linked' if online else 'Edge only · cloud will catch up'} · {C.SCENARIO_BANNER}</span></div>", unsafe_allow_html=True)
 if t[1].button("Reset"):
     api("POST", "/reset")
     ss.update(selected=None, skipped=False, big_agent=None, seen_alert=0)
@@ -245,15 +245,22 @@ with tab_main:
                     st.caption("Waiting for radio traffic.")
                 for r in reps:
                     inc = by_id.get(r.get("incident_id") or "")
-                    tag = f" → <b>{inc.get('label')}</b> {what(inc)}" if inc else (" · extracting..." if r.get("status") == "received" else "")
+                    tag = (f" → <b>{inc.get('label')}</b> {what(inc)}" + (f" <span class='fm-dim'>· pin in {r.get('pin_s')} s</span>" if r.get("pin_s") else "")) if inc else \
+                        (" · extracting..." if r.get("status") == "received" else (" · <i>unclear: open question</i>" if (r.get("link_reason") or "").startswith("unclear") else ""))
                     st.markdown(f"<div class='fm-call'><b>{r.get('unit') or r.get('channel')}</b> <span class='fm-dim'>{r.get('department')} · {ago(r['ts'])}</span>{tag}<br>{r.get('text', '')}</div>", unsafe_allow_html=True)
                     audio_for(r)
     # -------- cloud agent output (below the main view)
     ba = ss.get("big_agent")
     if ba:
         st.markdown("#### " + ("☁ Recorded cloud response" if ba.get("recorded") else f"☁ {ba.get('label', 'Situation')}"))
+        sent = ba.get("sent") or {}
+        upto = ""
+        try:
+            upto = dt.datetime.fromisoformat(ba.get("data_as_of").replace("Z", "+00:00")).astimezone().strftime("%H:%M")
+        except Exception:  # noqa: BLE001
+            pass
         st.caption((f"Replayed from a response written in advance by {ba.get('model')}; not a live API call" if ba.get("recorded") else f"{ba.get('model')} · {ba.get('latency_ms')} ms")
-                   + f" · data as of {ago(ba.get('data_as_of'))}")
+                   + (f" · Sent: {sent.get('incidents')} incidents, {sent.get('kb')} KB, no audio" if sent else "") + (f" · Based on data up to {upto}" if upto else ""))
         st.write(ba.get("situation", ""))
         cA, cB = st.columns(2)
         with cA:

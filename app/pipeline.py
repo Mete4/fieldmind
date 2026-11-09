@@ -109,6 +109,16 @@ def ingest_text(text: str, channel: str = "text", input_type: str = "text", sour
     action = "failed"
     try:
         cand = process_text(text, channel=channel, input_type=input_type, model=model)
+        if cand.location_unknown and cand.confidence < 0.6 and not cand.fallback:
+            unit = (cand.unit or [channel])[0] or channel
+            qid = db.add_open_question("", f"Unclear call from {unit}: \"{text.strip()[:140]}\" - where is it, and is it a new incident?", "edge")
+            report.department = cand.department[0] if cand.department else "other"
+            report.unit, report.type, report.severity, report.confidence = unit, cand.type, cand.severity, cand.confidence
+            report.status, report.link_action, report.link_reason = "processed", None, f"unclear: open question #{qid}"
+            report.processing_ms = int((time.perf_counter() - t0) * 1000)
+            report.pin_s = None
+            db.save_report(report)
+            return report, None, "question"
         cand.report_ids, cand.channels, cand.types = [report.id], [channel], [cand.type]
         if cand.details:
             cand.details = f"[{channel}] {cand.details}"
@@ -131,6 +141,7 @@ def ingest_text(text: str, channel: str = "text", input_type: str = "text", sour
     except Exception as e:  # noqa: BLE001
         report.status, report.error = "failed", f"{type(e).__name__}: {str(e)[:180]}"
     report.processing_ms = int((time.perf_counter() - t0) * 1000)
+    report.pin_s = round(((stt.get("latency_ms") or 0) + report.processing_ms) / 1000, 1)
     db.save_report(report)
     return report, inc, action
 

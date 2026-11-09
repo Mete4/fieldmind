@@ -221,6 +221,7 @@ class Report(BaseModel):
     link_action: Optional[Literal["new", "merged"]] = None
     link_reason: Optional[str] = None
     processing_ms: Optional[int] = None
+    pin_s: Optional[float] = None           # measured seconds from end of call (audio) / receipt (text) to its pin
     error: Optional[str] = None
 
 

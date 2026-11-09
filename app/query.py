@@ -38,6 +38,9 @@ fm.incidents -- one row per incident, aggregated from its linked reports
   people_count INTEGER (max), needs TEXT (comma list), summary TEXT, transcript TEXT (latest report), department TEXT (comma list, e.g. 'FD,EMS'),
   unit TEXT (comma list), structure_part TEXT, fire_direction TEXT, fire_size TEXT, details TEXT (all reports, newest first), report_ids TEXT (comma list)
 
+fm.units -- unit status board
+  id TEXT, name TEXT (e.g. 'Engine 81'), department TEXT, status TEXT ('available'|'assigned'|'out_of_service'), incident_id TEXT (fm.incidents.id when assigned)
+
 LLM functions (local models, slow: ~1 s per row; ALWAYS put normal SQL filters first so few rows reach them; use them only on text columns text/details/summary/transcript):
   llm_filter({'model_name': 'local'}, {'prompt': 'yes/no question about {t}', 'context_columns': [{'data': <text column>, 'name': 't'}]})  -> BOOLEAN
   llm_complete({'model_name': 'local'}, {'prompt': 'instruction mentioning {t}', 'context_columns': [{'data': <text column>, 'name': 't'}]}) -> VARCHAR
@@ -57,13 +60,17 @@ EXAMPLES = [
     ("List large fires coming from the north with more than 50 people.",
      "SELECT id, label, geocode_match, fire_size, fire_direction, people_count, severity, summary FROM fm.incidents "
      "WHERE type = 'fire' AND fire_size = 'large' AND fire_direction = 'N' AND people_count > 50 ORDER BY people_count DESC LIMIT 50"),
+    ("Which incidents have people trapped and no unit assigned?",
+     "SELECT i.id, i.label, i.type, i.severity, i.people_count, i.geocode_match FROM fm.incidents i "
+     "WHERE i.type = 'trapped' AND NOT EXISTS (SELECT 1 FROM fm.units u WHERE u.incident_id = i.id AND u.status = 'assigned') "
+     "ORDER BY i.priority_score DESC LIMIT 50"),
     ("Give me a one-line summary of each EMS report.",
      "SELECT id, ts, unit, llm_complete({'model_name': 'local'}, {'prompt': 'Summarize this radio report in one line of at most 12 words: {t}', "
      "'context_columns': [{'data': text, 'name': 't'}]}) AS one_line FROM fm.reports WHERE department = 'EMS' ORDER BY ts DESC LIMIT 20"),
 ]
 
 SQL_SYSTEM = """You translate an emergency-operations question into ONE DuckDB SQL SELECT statement. Return only the SQL, no prose, no code fences.
-Rules: a single SELECT (WITH ... SELECT is allowed); only the tables fm.reports and fm.incidents; put ordinary WHERE filters (department, type,
+Rules: a single SELECT (WITH ... SELECT is allowed); only the tables fm.reports, fm.incidents and fm.units; put ordinary WHERE filters (department, type,
 severity, fire_size, fire_direction, people_count, time) BEFORE any llm_ function so that few rows reach the model; use llm_filter / llm_complete
 only when the question needs reading the text; always include id columns (id, incident_id or report_ids) so the operator can trace rows; end with LIMIT 50 or less.
 """ + SCHEMA_DOC + "\n\nExamples:\n" + "\n".join(f"Q: {q}\nSQL: {s}" for q, s in EXAMPLES)

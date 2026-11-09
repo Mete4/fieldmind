@@ -67,6 +67,8 @@ def replay() -> dict:
            "open_questions": [{"text": q["text"], "incident_id": q["ref"]["incident_id"] or ""} for q in payload["open_questions"]],
            "data_as_of": newest}
     sid = db.save_situation("cloud", f"{raw.get('model')} (recorded)", 0, newest, {**sit, "recorded": True, "label": payload["label"]}, len(incidents), "recorded")
+    rows = [{k: getattr(i, k) for k in ("label", "type", "severity", "people_count", "geocode_match", "fire_direction", "fire_size", "structure_part", "summary")} for i in incidents]
+    payload["sent"] = {"incidents": len(incidents), "kb": round(len(json.dumps(rows).encode()) / 1024, 1), "audio": "none"}
     payload["situation_id"] = sid
     payload["db_suggestions"] = db.list_suggestions()
     return {"ok": True, **payload}
