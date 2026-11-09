@@ -10,7 +10,7 @@
    "channel": "FD Tact 1",
    "department": "FD",
    "unit": "Engine 81",
-   "text": "Engine 81 to Butte Command, on scene Paradise High School, Maxwell Drive. East wing is fully involved, fire is coming in from the north with the wind behind it. This is a large fire. Be advised, approximately one hundred twenty three students and staff are sheltering in the gym.",
+   "text": "Butte ECC, Engine 81. On scene Paradise High School, Maxwell Drive. East wing is fully involved, fire's pushing in from the north with the wind behind it. Large fire. Be advised, approximately a hundred twenty-three students and staff sheltering in the gym.",
    "audio": "camp_live/1.wav"
   },
   {
@@ -18,7 +18,7 @@
    "channel": "PD Tact 1",
    "department": "PD",
    "unit": "Paradise PD 7",
-   "text": "Paradise PD 7 to dispatch, Skyway southbound is at a standstill at Neal Road. Evacuation traffic is not moving at all. I need two more units for traffic control at Skyway and Neal.",
+   "text": "Paradise, Paradise 7. Skyway southbound is at a standstill at Neal. Nothing's moving. Start me two more units for traffic control, Skyway and Neal.",
    "audio": "camp_live/2.wav"
   },
   {
@@ -26,7 +26,7 @@
    "channel": "EMS Tact 1",
    "department": "EMS",
    "unit": "Medic 41",
-   "text": "Medic 41 to Command, we have an elderly female on Bille Road near Bille Park. She is non-ambulatory and cannot self-evacuate. Requesting a unit with a gurney.",
+   "text": "Butte ECC, Medic 41. Got an elderly female on Bille Road near Bille Park, non-ambulatory, unable to self-evac. Need a unit with a gurney, priority one.",
    "audio": "camp_live/3.wav"
   },
   {
@@ -34,7 +34,7 @@
    "channel": "FD Tact 1",
    "department": "FD",
    "unit": "Battalion 3",
-   "text": "Battalion 3 to Butte Command, I confirm Paradise High School. The gym is not involved yet. I want all one hundred twenty three occupants out before the fire reaches the gym. Requesting two buses to Maxwell Drive, priority one.",
+   "text": "Butte ECC, Battalion 3. Copy Paradise High School, I'll be Maxwell Command. Gym is not involved at this time. I want all hundred twenty-three occupants out before it gets there. Start me two buses to Maxwell Drive.",
    "audio": "camp_live/4.wav"
   },
   {
@@ -42,7 +42,7 @@
    "channel": "FD Tact 2",
    "department": "FD",
    "unit": "Engine 82",
-   "text": "Engine 82, multiple spot fires along Pearson Road east of Skyway. About a quarter acre each and growing. We will hold the line here.",
+   "text": "Battalion 3, Engine 82. Multiple spot fires along Pearson Road east of Skyway, quarter acre each and growing. We'll hold here.",
    "audio": "camp_live/5.wav"
   },
   {
@@ -50,7 +50,7 @@
    "channel": "PD Tact 2",
    "department": "PD",
    "unit": "Butte SO 12",
-   "text": "Butte SO 12, Pentz Road at Wagstaff Road. A vehicle is in the ditch with two occupants, fire on both sides of the road. They are not hurt yet, but we need to get them out.",
+   "text": "Butte, Butte 12. Pentz at Wagstaff, vehicle in the ditch, two occupants, fire both sides of the roadway. No injuries at this time, need to get them out of there.",
    "audio": "camp_live/6.wav"
   },
   {
@@ -58,7 +58,7 @@
    "channel": "EMS Tact 1",
    "department": "EMS",
    "unit": "Medic 44",
-   "text": "Medic 44 to Command, Adventist Health Feather River is evacuating. About thirty patients are waiting at the front entrance. We need every ambulance you can send.",
+   "text": "Butte ECC, Medic 44. Adventist Health Feather River is evacuating, approximately thirty patients staged at the front entrance. Need every ambulance you can send.",
    "audio": "camp_live/7.wav"
   },
   {
@@ -66,7 +66,7 @@
    "channel": "FD Tact 2",
    "department": "FD",
    "unit": "Engine 35",
-   "text": "Engine 35, uh, we have fire at a school, I think the one off Pentz. Are there still kids inside? Can somebody confirm.",
+   "text": "Butte, Engine 35, uh, we've got fire at a school, I think it's the one off Pentz? Can anybody confirm, are there still kids inside?",
    "audio": "camp_live/8.wav"
   },
   {
@@ -74,7 +74,7 @@
    "channel": "PD Tact 1",
    "department": "PD",
    "unit": "Paradise PD 3",
-   "text": "Paradise PD 3, Clark Road northbound is open and moving. Recommend we send evacuation traffic to Clark Road instead of Skyway.",
+   "text": "Paradise, Paradise 3. Clark northbound is open and moving. Recommend we push evac traffic to Clark instead of Skyway.",
    "audio": "camp_live/9.wav"
   },
   {
@@ -82,8 +82,9 @@
    "channel": "FD Tact 1",
    "department": "FD",
    "unit": "Battalion 3",
-   "text": "Battalion 3, update on Paradise High School. Fire is now in the east wing roof. The wind shifted, fire is coming from the northeast. Occupants are still in the gym. Where are those buses?",
+   "text": "Butte ECC, Maxwell Command. Fire's in the east wing roof now, wind shifted, coming out of the northeast. Occupants still in the gym. What's the ETA on those buses?",
    "audio": "camp_live/10.wav"
   }
- ]
+ ],
+ "style": "Real radio conventions: dispatch called by name (Butte ECC), clear text, copy, start me, short cross-street phrases."
 }

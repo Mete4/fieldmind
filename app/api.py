@@ -229,6 +229,14 @@ class InfoRequestIn(BaseModel):
     what_to_find: str
 
 
+@app.post("/recorded_cloud")
+async def recorded_cloud():
+    """Replay the recorded cloud response (never a live call); matches items to real incident IDs."""
+    from app import recorded
+
+    return await asyncio.to_thread(recorded.replay)
+
+
 @app.get("/suggestions")
 async def suggestions(status: Optional[str] = None):
     return db.list_suggestions(status)

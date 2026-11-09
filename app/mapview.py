@@ -116,9 +116,15 @@ def add_incident(m: folium.Map, inc: dict) -> None:
 
 
 def build_map(incidents: Iterable[dict] = (), enabled_layers: set[str] | None = None,
-              show_pois: bool = True) -> str:
+              show_pois: bool = True, center: tuple[float, float] | None = None, zoom: int | None = None) -> str:
     """Return self-contained HTML for the offline map (open in an iframe)."""
-    m = folium.Map(location=[C.TOWN_CENTER_LAT, C.TOWN_CENTER_LON], zoom_start=C.MAP_ZOOM, tiles=None,
+    return make_offline(make_map(incidents, enabled_layers, show_pois, center, zoom).get_root().render())
+
+
+def make_map(incidents: Iterable[dict] = (), enabled_layers: set[str] | None = None,
+             show_pois: bool = True, center: tuple[float, float] | None = None, zoom: int | None = None) -> folium.Map:
+    """The folium Map object (for st_folium click handling)."""
+    m = folium.Map(location=list(center) if center else [C.TOWN_CENTER_LAT, C.TOWN_CENTER_LON], zoom_start=zoom or C.MAP_ZOOM, tiles=None,
                    control_scale=True, prefer_canvas=True)
     folium.TileLayer(tiles=C.TILE_URL_TEMPLATE, attr=C.MAP_ATTRIBUTION, name="OpenStreetMap (offline cache z10-16)",
                      min_zoom=C.TILE_MIN_ZOOM, max_zoom=18, max_native_zoom=C.TILE_MAX_ZOOM,
@@ -167,6 +173,6 @@ def build_map(incidents: Iterable[dict] = (), enabled_layers: set[str] | None = 
             add_incident(m, inc)
         except Exception:  # noqa: BLE001  never let one bad record kill the map
             continue
-    folium.LayerControl(collapsed=False).add_to(m)
+    folium.LayerControl(collapsed=True).add_to(m)
     m.get_root().html.add_child(folium.Element(_legend_html(layers)))
-    return make_offline(m.get_root().render())
+    return m
