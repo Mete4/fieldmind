@@ -56,7 +56,19 @@ def _lan_ip() -> str:
         return "localhost"
 
 
-PUBLIC_HOST = os.environ.get("FIELDMIND_PUBLIC_HOST") or _lan_ip()   # what browsers use for tiles + Leaflet
+def _reachable(host: str, port: int) -> bool:
+    import socket
+
+    try:
+        with socket.create_connection((host, port), timeout=0.3):
+            return True
+    except OSError:
+        return False
+
+
+# What browsers use for tiles + Leaflet: the LAN address once the tile server listens on it
+# (run.sh starts it with FIELDMIND_TILE_BIND=0.0.0.0), else localhost so the local console still works.
+PUBLIC_HOST = os.environ.get("FIELDMIND_PUBLIC_HOST") or (_lan_ip() if _reachable(_lan_ip(), 8008) else "localhost")
 TILE_BIND_HOST = os.environ.get("FIELDMIND_TILE_BIND", "127.0.0.1")  # run.sh sets 0.0.0.0 for other computers on the Wi-Fi
 TILE_URL_TEMPLATE = f"http://{PUBLIC_HOST}:{TILE_SERVER_PORT}/tiles/{{z}}/{{x}}/{{y}}.png"
 MAP_ATTRIBUTION = (
