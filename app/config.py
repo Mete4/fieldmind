@@ -125,7 +125,7 @@ API_HOST = "127.0.0.1"
 API_PORT = 8000
 API_URL = f"http://{API_HOST}:{API_PORT}"
 DASHBOARD_PORT = 8501
-DASHBOARD_REFRESH_MS = 2000
+DASHBOARD_REFRESH_MS = 4000   # 2 s dropped button clicks that landed during a rerun
 DEVICE_LABEL = "Lenovo ThinkStation PGX (NVIDIA GB10 Grace Blackwell)"
 
 # ---------------------------------------------------------------- hazard zones

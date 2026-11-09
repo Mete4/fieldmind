@@ -12,6 +12,10 @@ while true; do
     scripts/ollama_ctl.sh start >> logs/watchdog.log 2>&1
     .venv/bin/python scripts/setup_models.py --preload >> logs/watchdog.log 2>&1
   fi
+  if ! curl -s -m 2 http://127.0.0.1:8008/ >/dev/null; then
+    echo "$(date '+%H:%M:%S') tile server down -> restart" >> logs/watchdog.log
+    (setsid nohup .venv/bin/python app/tileserver.py >> logs/tileserver.log 2>&1 < /dev/null &)
+  fi
   if ! curl -s -m 2 http://127.0.0.1:8000/health >/dev/null; then
     echo "$(date '+%H:%M:%S') api down -> restart" >> logs/watchdog.log
     scripts/api_ctl.sh start >> logs/watchdog.log 2>&1
