@@ -52,8 +52,19 @@ def find_link_target(cand: Incident) -> tuple[Optional[Incident], str]:
     return best, f"same type, {best_d:.0f} m from incident {best.id} reported {best.report_count}x"
 
 
+_SIZE_RANK = {None: 0, "small": 1, "medium": 2, "large": 3}
+
+
 def merge_into(inc: Incident, cand: Incident, report: Report) -> Incident:
     inc.severity = max(inc.severity, cand.severity)
+    inc.department = inc.department + [d for d in cand.department if d not in inc.department]
+    inc.unit = inc.unit + [u for u in cand.unit if u not in inc.unit]
+    if _SIZE_RANK.get(cand.fire_size, 0) > _SIZE_RANK.get(inc.fire_size, 0):
+        inc.fire_size = cand.fire_size
+    inc.fire_direction = cand.fire_direction or inc.fire_direction
+    inc.structure_part = cand.structure_part or inc.structure_part
+    if cand.details:
+        inc.details = f"[{report.channel}] {cand.details}\n{inc.details}".strip()
     if cand.people_count is not None:
         inc.people_count = max(inc.people_count or 0, cand.people_count)
     inc.needs = (inc.needs + [n for n in cand.needs if n not in inc.needs])[:8]
@@ -86,6 +97,14 @@ def ingest_text(text: str, channel: str = "text", input_type: str = "text", sour
     try:
         cand = process_text(text, channel=channel, input_type=input_type, model=model)
         cand.report_ids, cand.channels = [report.id], [channel]
+        if cand.details:
+            cand.details = f"[{channel}] {cand.details}"
+        report.department = cand.department[0] if cand.department else "other"
+        report.unit = cand.unit[0] if cand.unit else ""
+        report.type, report.severity, report.people_count = cand.type, cand.severity, cand.people_count
+        report.location_text, report.confidence = cand.location_text, cand.confidence
+        report.structure_part, report.fire_direction, report.fire_size = cand.structure_part, cand.fire_direction, cand.fire_size
+        report.details = cand.details
         with _link_lock:
             target, reason = find_link_target(cand)
             if target is not None:

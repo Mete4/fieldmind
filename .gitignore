@@ -13,3 +13,4 @@ data/samples/images/*.jpg
 data/samples/images/*.png
 .env
 data/preview/
+data/samples/radio/**/*.wav

@@ -23,6 +23,11 @@ _TYPE_SYNONYMS = [
     (r"road|debris|tree down|closure|blocked|impass|traffic|bridge out", "road_blocked"),
     (r"trap|entrap|pinned|stuck|stranded|missing|search", "trapped"),
 ]
+DEPARTMENTS = ("FD", "PD", "EMS", "other")
+FIRE_SIZES = ("small", "medium", "large")
+DIRECTIONS = ("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+_DIR_WORDS = {"north": "N", "northeast": "NE", "north east": "NE", "east": "E", "southeast": "SE", "south east": "SE",
+              "south": "S", "southwest": "SW", "south west": "SW", "west": "W", "northwest": "NW", "north west": "NW"}
 _WORD_NUMBERS = {"zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8,
                  "nine": 9, "ten": 10, "eleven": 11, "twelve": 12, "dozen": 12, "fifteen": 15, "twenty": 20, "thirty": 30}
 
@@ -45,6 +50,60 @@ class Extraction(BaseModel):
     needs: list[str] = Field(default_factory=list)
     confidence: float = Field(0.5, ge=0.0, le=1.0)
     summary: str = ""
+    department: str = "other"                 # FD | PD | EMS | other
+    unit: str = ""                            # radio call sign of the reporting unit
+    structure_part: Optional[str] = None      # "east wing", "gym", "second floor"
+    fire_direction: Optional[str] = None      # N NE E SE S SW W NW (where the fire comes from)
+    fire_size: Optional[str] = None           # small | medium | large
+    details: str = ""                         # every fact that fits no field
+
+    @field_validator("department", mode="before")
+    @classmethod
+    def _dept(cls, v):
+        s = str(v or "").strip().lower()
+        if s in ("fd", "fire", "fire department", "cal fire", "engine", "truck", "battalion"):
+            return "FD"
+        if s in ("pd", "police", "sheriff", "law enforcement", "chp"):
+            return "PD"
+        if s in ("ems", "medic", "ambulance", "medical", "paramedic"):
+            return "EMS"
+        return s.upper() if s.upper() in DEPARTMENTS else "other"
+
+    @field_validator("fire_direction", mode="before")
+    @classmethod
+    def _dir(cls, v):
+        if v is None:
+            return None
+        s = str(v).strip().lower().replace("-", " ").replace("from the ", "").replace("from ", "")
+        if s in ("", "null", "none", "unknown"):
+            return None
+        if s.upper() in DIRECTIONS:
+            return s.upper()
+        return _DIR_WORDS.get(s)
+
+    @field_validator("fire_size", mode="before")
+    @classmethod
+    def _size(cls, v):
+        if v is None:
+            return None
+        s = str(v).strip().lower()
+        if s in FIRE_SIZES:
+            return s
+        if s in ("minor", "spot", "small fire", "contained"):
+            return "small"
+        if s in ("moderate", "medium sized", "growing"):
+            return "medium"
+        if s in ("big", "major", "huge", "massive", "fully involved", "large fire"):
+            return "large"
+        return None
+
+    @field_validator("unit", "structure_part", "details", mode="before")
+    @classmethod
+    def _strs(cls, v):
+        if v is None:
+            return None
+        s = str(v).strip()
+        return None if s.lower() in ("null", "none", "unknown", "n/a") else s[:600]
 
     @field_validator("location_text", mode="before")
     @classmethod
@@ -135,6 +194,18 @@ class Report(BaseModel):
     stt_latency_ms: Optional[int] = None
     stt_rtf: Optional[float] = None
     audio_s: Optional[float] = None
+    # extraction result for THIS report (fire fields, section 3)
+    department: str = "other"
+    unit: str = ""
+    type: Optional[str] = None
+    severity: Optional[int] = None
+    people_count: Optional[int] = None
+    location_text: Optional[str] = None
+    confidence: Optional[float] = None
+    structure_part: Optional[str] = None
+    fire_direction: Optional[str] = None
+    fire_size: Optional[str] = None
+    details: str = ""
     status: Literal["received", "processed", "failed"] = "received"
     incident_id: Optional[str] = None       # the link: which incident this report belongs to
     link_action: Optional[Literal["new", "merged"]] = None
@@ -173,6 +244,12 @@ class Incident(BaseModel):
     hazard_zones: list[str] = Field(default_factory=list)
     in_hazard_zone: bool = False
     priority_score: float = 0.0
+    department: list[str] = Field(default_factory=list)   # every department that reported it
+    unit: list[str] = Field(default_factory=list)         # every call sign that reported it
+    structure_part: Optional[str] = None                  # latest value
+    fire_direction: Optional[str] = None                  # latest value
+    fire_size: Optional[str] = None                       # largest reported value
+    details: str = ""                                     # details of all linked reports, newest first
     source: Source = "edge"
     status: Status = "local"
     edge_latency_ms: Optional[int] = None

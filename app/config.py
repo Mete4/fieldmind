@@ -100,6 +100,7 @@ NEEDS_VOCAB = ["fire_suppression", "technical_rescue", "medical", "ambulance", "
                "shelter", "law_enforcement", "traffic_control", "heavy_equipment", "utilities", "air_support", "search"]
 LLM_NUM_PREDICT = 300
 QUEUE_DRAIN_INTERVAL_S = 3.0
+SITUATION_INTERVAL_S = 60          # cloud situation + suggestions refresh when online
 
 # ---------------------------------------------------------------- report -> incident linking rule
 # Every input is stored as a REPORT first. A new report JOINS an existing

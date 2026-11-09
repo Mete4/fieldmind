@@ -1,0 +1,120 @@
+{
+ "id": "phs",
+ "scenario": "Fire at Paradise High School on Maxwell Drive. The east wing burns. The fire comes from the north, pushed by wind. It is large. 123 students and staff are inside the gym. Spot fires start along Skyway and Pearson Road. Evacuation traffic jams Skyway at Neal Road. One elderly resident on Bille Road cannot walk.",
+ "writer_model": "qwen2.5:32b",
+ "created": "2026-11-08T19:51:30",
+ "calls": [
+  {
+   "offset_s": 0.0,
+   "channel": "FD Tact 1",
+   "department": "FD",
+   "unit": "Engine 81",
+   "text": "Engine 81 to Butte Command, we're en route to Paradise High School on Maxwell Drive. East wing is fully involved, fire coming from the north, it's large.",
+   "audio": "phs/1.wav"
+  },
+  {
+   "offset_s": 10.0,
+   "channel": "PD Tact 1",
+   "department": "PD",
+   "unit": "Paradise PD 7",
+   "text": "Paradise PD 7 to Command, Skyway is gridlocked at Neal Road due to evacuation traffic. Requesting additional units to assist with traffic control.",
+   "audio": "phs/2.wav"
+  },
+  {
+   "offset_s": 20.0,
+   "channel": "EMS Tact 1",
+   "department": "EMS",
+   "unit": "Medic 41",
+   "text": "Medic 41 to Command, we have an elderly resident on Bille Road who cannot walk. Requires urgent medical assistance.",
+   "audio": "phs/3.wav"
+  },
+  {
+   "offset_s": 30.0,
+   "channel": "FD Tact 1",
+   "department": "FD",
+   "unit": "Battalion 3",
+   "text": "Battalion 3 to Butte Command, requesting additional resources for Paradise High School. Over 120 students and staff trapped in the gym.",
+   "audio": "phs/4.wav"
+  },
+  {
+   "offset_s": 40.0,
+   "channel": "PD Tact 1",
+   "department": "PD",
+   "unit": "Paradise PD 15",
+   "text": "Paradise PD 15 to Command, Skyway is gridlocked at Neal Road. Fire has now spread to Pearson Road. Urgent request for additional units.",
+   "audio": "phs/5.wav"
+  },
+  {
+   "offset_s": 50.0,
+   "channel": "EMS Tact 1",
+   "department": "EMS",
+   "unit": "Medic 42",
+   "text": "Medic 42 to Command, we're en route to Bille Road to assist the elderly resident. ETA 5 minutes.",
+   "audio": "phs/6.wav"
+  },
+  {
+   "offset_s": 60.0,
+   "channel": "FD Tact 1",
+   "department": "FD",
+   "unit": "Truck 82",
+   "text": "Truck 82 to Butte Command, we're setting up a firebreak on Skyway to prevent further spread. Requesting additional manpower.",
+   "audio": "phs/7.wav"
+  },
+  {
+   "offset_s": 70.0,
+   "channel": "PD Tact 1",
+   "department": "PD",
+   "unit": "Paradise PD 9",
+   "text": "Paradise PD 9 to Command, we have an evacuation center set up at Rotary Grove. Traffic control on Skyway is still chaotic.",
+   "audio": "phs/8.wav"
+  },
+  {
+   "offset_s": 80.0,
+   "channel": "FD Tact 1",
+   "department": "FD",
+   "unit": "Engine 81",
+   "text": "Engine 81 to Butte Command, 123 students and staff are now evacuated from the gym at Paradise High School. Fire is still spreading north.",
+   "audio": "phs/9.wav"
+  },
+  {
+   "offset_s": 90.0,
+   "channel": "PD Tact 1",
+   "department": "PD",
+   "unit": "Paradise PD 10",
+   "text": "Paradise PD 10 to Command, we have a report of a structure fire on Birch Street. Possible evacuation required.",
+   "audio": "phs/10.wav"
+  },
+  {
+   "offset_s": 100.0,
+   "channel": "EMS Tact 1",
+   "department": "EMS",
+   "unit": "Medic 41",
+   "text": "Medic 41 to Command, elderly resident on Bille Road is stabilized. Requesting transport to Adventist Health Feather River.",
+   "audio": "phs/11.wav"
+  },
+  {
+   "offset_s": 110.0,
+   "channel": "FD Tact 1",
+   "department": "FD",
+   "unit": "Truck 82",
+   "text": "Truck 82 to Butte Command, we're still holding the line on Skyway. Fire is now spreading south, not north.",
+   "audio": "phs/12.wav"
+  },
+  {
+   "offset_s": 120.0,
+   "channel": "PD Tact 1",
+   "department": "PD",
+   "unit": "Paradise PD 12",
+   "text": "Paradise PD 12 to Command, we have a report of a small spot fire on Pearson Road. Urgent request for fire units.",
+   "audio": "phs/13.wav"
+  },
+  {
+   "offset_s": 130.0,
+   "channel": "EMS Tact 1",
+   "department": "EMS",
+   "unit": "Medic 42",
+   "text": "Medic 42 to Command, we have the elderly resident on Bille Road en route to Adventist Health Feather River.",
+   "audio": "phs/14.wav"
+  }
+ ]
+}

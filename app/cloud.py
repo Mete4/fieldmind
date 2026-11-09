@@ -94,5 +94,28 @@ def situation_summary(context: str) -> tuple[str, dict]:
     return text.strip(), meta
 
 
+SITUATION_SYSTEM = """You support the incident commander of {town} ({scenario}). You get the current incident list (personal data removed,
+audio never left the device). Return ONLY a JSON object:
+{{"situation": "<at most 150 words: overall picture, incidents inside the real fire hazard zones, blocked roads and access problems, people affected>",
+  "suggestions": [{{"text": "<one concrete action>", "reason": "<why, citing the incident>", "report_ids": ["<report id>", ...]}}, ... 3 to 6 items, most urgent first],
+  "open_questions": [{{"text": "<what the commander should find out>", "incident_id": "<incident id>"}}, ... 0 to 5 items]}}
+The human operator decides; you only suggest. Use only the data given, never invent incidents, and copy ids exactly."""
+
+
+def situation_and_suggestions(context: str, data_as_of: str) -> tuple[dict, dict]:
+    """Returns (payload, meta). Raises on failure. Audio never leaves the device; the context is redacted text only."""
+    raw, meta = _call("cloud_situation", SITUATION_SYSTEM.format(town=C.TOWN_NAME, scenario=C.SCENARIO_NAME),
+                      context + "\nReturn the JSON object.", C.ANTHROPIC_SUMMARY_MODEL, 1500)
+    payload = normalize_situation(_json_from(raw), data_as_of)
+    return payload, meta
+
+
+def normalize_situation(d: dict, data_as_of: str) -> dict:
+    sugg = [{"text": str(s.get("text", "")).strip(), "reason": str(s.get("reason", "")).strip(),
+             "report_ids": [str(x) for x in (s.get("report_ids") or []) if x]} for s in (d.get("suggestions") or []) if isinstance(s, dict) and s.get("text")]
+    qs = [{"text": str(q.get("text", "")).strip(), "incident_id": str(q.get("incident_id") or "")} for q in (d.get("open_questions") or []) if isinstance(q, dict) and q.get("text")]
+    return {"situation": str(d.get("situation", "")).strip(), "suggestions": sugg[:8], "open_questions": qs[:8], "data_as_of": data_as_of}
+
+
 def cost_usd(tokens_in: int, tokens_out: int) -> float:
     return tokens_in / 1e6 * C.ANTHROPIC_PRICE_IN_PER_M + tokens_out / 1e6 * C.ANTHROPIC_PRICE_OUT_PER_M

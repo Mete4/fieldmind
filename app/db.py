@@ -36,7 +36,28 @@ CREATE TABLE IF NOT EXISTS metrics (key TEXT PRIMARY KEY, value TEXT, ts TEXT);
 CREATE TABLE IF NOT EXISTS summaries (
   id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT, source TEXT, model TEXT, latency_ms INTEGER,
   text TEXT, incident_count INTEGER);
+CREATE TABLE IF NOT EXISTS situations (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT, source TEXT, model TEXT, latency_ms INTEGER,
+  data_as_of TEXT, situation TEXT, payload TEXT, incident_count INTEGER, trigger TEXT);
+CREATE TABLE IF NOT EXISTS suggestions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT, source TEXT, text TEXT, reason TEXT, report_ids TEXT,
+  data_as_of TEXT, status TEXT DEFAULT 'open', decided_ts TEXT, situation_id INTEGER);
+CREATE TABLE IF NOT EXISTS units (
+  id TEXT PRIMARY KEY, name TEXT, department TEXT, status TEXT DEFAULT 'available', incident_id TEXT, updated_ts TEXT);
+CREATE TABLE IF NOT EXISTS open_questions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT, incident_id TEXT, text TEXT, source TEXT, answer TEXT,
+  status TEXT DEFAULT 'open', answered_ts TEXT, situation_id INTEGER);
+CREATE TABLE IF NOT EXISTS info_requests (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT, incident_id TEXT, unit_id TEXT, what_to_find TEXT,
+  status TEXT DEFAULT 'sent', answer TEXT, answered_ts TEXT);
+CREATE TABLE IF NOT EXISTS decisions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT, kind TEXT, target_id TEXT, detail TEXT);
 """
+
+SEED_UNITS = [("E81", "Engine 81", "FD"), ("E82", "Engine 82", "FD"), ("E83", "Engine 83", "FD"), ("E35", "Engine 35", "FD"),
+              ("T82", "Truck 82", "FD"), ("B3", "Battalion 3", "FD"), ("WT26", "Water Tender 26", "FD"),
+              ("M41", "Medic 41", "EMS"), ("M42", "Medic 42", "EMS"), ("M43", "Medic 43", "EMS"),
+              ("PD7", "Paradise PD 7", "PD"), ("PD12", "Paradise PD 12", "PD"), ("SO4", "Sheriff 4", "PD")]
 
 
 @contextmanager
@@ -50,6 +71,23 @@ def connect() -> Iterator[sqlite3.Connection]:
         conn.close()
 
 
+# query-friendly columns (section 3/4); added with ALTER TABLE so data survives
+REPORT_COLS = {"text": "TEXT", "department": "TEXT", "unit": "TEXT", "type": "TEXT", "severity": "INTEGER",
+               "people_count": "INTEGER", "location_text": "TEXT", "confidence": "REAL", "structure_part": "TEXT",
+               "fire_direction": "TEXT", "fire_size": "TEXT", "details": "TEXT", "source_file": "TEXT"}
+INCIDENT_COLS = {"location_text": "TEXT", "geocode_match": "TEXT", "lat": "REAL", "lon": "REAL", "people_count": "INTEGER",
+                 "needs": "TEXT", "hazard_zones": "TEXT", "summary": "TEXT", "transcript": "TEXT", "department": "TEXT",
+                 "unit": "TEXT", "structure_part": "TEXT", "fire_direction": "TEXT", "fire_size": "TEXT", "details": "TEXT",
+                 "report_ids": "TEXT"}
+
+
+def _ensure_columns(c: sqlite3.Connection, table: str, cols: dict[str, str]) -> None:
+    have = {r[1] for r in c.execute(f"PRAGMA table_info({table})").fetchall()}
+    for name, typ in cols.items():
+        if name not in have:
+            c.execute(f"ALTER TABLE {table} ADD COLUMN {name} {typ}")
+
+
 def init_db() -> None:
     C.DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     with connect() as c:
@@ -58,24 +96,40 @@ def init_db() -> None:
         if cols and "last_ts" not in cols:       # pre-split schema: demo data, rebuild
             c.execute("DROP TABLE incidents")
         c.executescript(SCHEMA)
+        _ensure_columns(c, "reports", REPORT_COLS)
+        _ensure_columns(c, "incidents", INCIDENT_COLS)
+        _ensure_columns(c, "cloud_queue", {"kind": "TEXT", "payload": "TEXT"})
+        if c.execute("SELECT COUNT(*) FROM units").fetchone()[0] == 0:
+            for uid, name, dept in SEED_UNITS:
+                c.execute("INSERT INTO units (id,name,department,status,updated_ts) VALUES (?,?,?,?,?)", (uid, name, dept, "available", now_iso()))
+
+
+def _upsert(c: sqlite3.Connection, table: str, row: dict) -> None:
+    cols = ", ".join(row)
+    c.execute(f"INSERT OR REPLACE INTO {table} ({cols}) VALUES ({', '.join('?' for _ in row)})", list(row.values()))
 
 
 def reset_db() -> None:
     """Demo reset: wipe every table (keeps the schema)."""
     with _write_lock, connect() as c:
-        for t in ("reports", "incidents", "cloud_queue", "requests", "metrics", "summaries"):
+        for t in ("reports", "incidents", "cloud_queue", "requests", "metrics", "summaries", "situations", "suggestions",
+                  "open_questions", "info_requests", "decisions"):
             c.execute(f"DELETE FROM {t}")
+        c.execute("UPDATE units SET status='available', incident_id=NULL, updated_ts=?", (now_iso(),))
 
 
 # ------------------------------------------------------------------ incidents
 def save_incident(inc: Incident) -> Incident:
+    row = {"id": inc.id, "timestamp": inc.timestamp, "last_ts": inc.last_ts, "channel": inc.channel, "type": inc.type,
+           "severity": inc.severity, "confidence": inc.confidence, "priority_score": inc.priority_score,
+           "in_hazard_zone": int(inc.in_hazard_zone), "status": inc.status, "source": inc.source, "report_count": inc.report_count,
+           "location_text": inc.location_text, "geocode_match": inc.geocode_match, "lat": inc.lat, "lon": inc.lon,
+           "people_count": inc.people_count, "needs": ",".join(inc.needs), "hazard_zones": ",".join(inc.hazard_zones),
+           "summary": inc.summary, "transcript": inc.transcript, "department": ",".join(inc.department), "unit": ",".join(inc.unit),
+           "structure_part": inc.structure_part, "fire_direction": inc.fire_direction, "fire_size": inc.fire_size,
+           "details": inc.details, "report_ids": ",".join(inc.report_ids), "data": inc.model_dump_json()}
     with _write_lock, connect() as c:
-        c.execute(
-            "INSERT OR REPLACE INTO incidents (id,timestamp,last_ts,channel,type,severity,confidence,priority_score,"
-            "in_hazard_zone,status,source,report_count,data) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
-            (inc.id, inc.timestamp, inc.last_ts, inc.channel, inc.type, inc.severity, inc.confidence, inc.priority_score,
-             int(inc.in_hazard_zone), inc.status, inc.source, inc.report_count, inc.model_dump_json()),
-        )
+        _upsert(c, "incidents", row)
     return inc
 
 
@@ -93,9 +147,14 @@ def candidates_for_link(incident_type: Optional[str], since_iso: str, limit: int
 
 # ------------------------------------------------------------------ reports (raw inputs)
 def save_report(rep: Report) -> Report:
+    row = {"id": rep.id, "ts": rep.ts, "channel": rep.channel, "input_type": rep.input_type, "status": rep.status,
+           "incident_id": rep.incident_id, "link_action": rep.link_action, "text": rep.text, "department": rep.department,
+           "unit": rep.unit, "type": rep.type, "severity": rep.severity, "people_count": rep.people_count,
+           "location_text": rep.location_text, "confidence": rep.confidence, "structure_part": rep.structure_part,
+           "fire_direction": rep.fire_direction, "fire_size": rep.fire_size, "details": rep.details,
+           "source_file": rep.source_file, "data": rep.model_dump_json()}
     with _write_lock, connect() as c:
-        c.execute("INSERT OR REPLACE INTO reports (id,ts,channel,input_type,status,incident_id,link_action,data) VALUES (?,?,?,?,?,?,?,?)",
-                  (rep.id, rep.ts, rep.channel, rep.input_type, rep.status, rep.incident_id, rep.link_action, rep.model_dump_json()))
+        _upsert(c, "reports", row)
     return rep
 
 
@@ -244,3 +303,120 @@ def latest_summary() -> Optional[dict]:
     with connect() as c:
         row = c.execute("SELECT * FROM summaries ORDER BY id DESC LIMIT 1").fetchone()
     return dict(row) if row else None
+
+
+# ------------------------------------------------------------------ situation queue (one slot) + results
+def queue_situation(trigger: str) -> None:
+    """Keep only the newest pending situation request."""
+    with _write_lock, connect() as c:
+        c.execute("DELETE FROM cloud_queue WHERE kind='situation' AND done=0")
+        c.execute("INSERT INTO cloud_queue (incident_id, created_ts, kind, payload) VALUES ('', ?, 'situation', ?)", (now_iso(), trigger))
+
+
+def pending_situation() -> Optional[dict]:
+    with connect() as c:
+        row = c.execute("SELECT * FROM cloud_queue WHERE kind='situation' AND done=0 ORDER BY id DESC LIMIT 1").fetchone()
+    return dict(row) if row else None
+
+
+def save_situation(source: str, model: str, latency_ms: int, data_as_of: str, payload: dict, incident_count: int, trigger: str) -> int:
+    """Store a situation result; open suggestions/questions from the same
+    source are replaced by the new set, decided ones are kept."""
+    with _write_lock, connect() as c:
+        cur = c.execute("INSERT INTO situations (ts,source,model,latency_ms,data_as_of,situation,payload,incident_count,trigger) VALUES (?,?,?,?,?,?,?,?,?)",
+                        (now_iso(), source, model, latency_ms, data_as_of, payload.get("situation", ""), json.dumps(payload), incident_count, trigger))
+        sid = cur.lastrowid
+        c.execute("DELETE FROM suggestions WHERE status='open' AND source=?", (source,))
+        for s in payload.get("suggestions", []) or []:
+            c.execute("INSERT INTO suggestions (ts,source,text,reason,report_ids,data_as_of,status,situation_id) VALUES (?,?,?,?,?,?,'open',?)",
+                      (now_iso(), source, str(s.get("text", ""))[:500], str(s.get("reason", ""))[:500], ",".join(map(str, s.get("report_ids", []) or [])), data_as_of, sid))
+        c.execute("DELETE FROM open_questions WHERE status='open' AND source=?", (source,))
+        for q in payload.get("open_questions", []) or []:
+            c.execute("INSERT INTO open_questions (ts,incident_id,text,source,status,situation_id) VALUES (?,?,?,?,'open',?)",
+                      (now_iso(), str(q.get("incident_id") or ""), str(q.get("text", ""))[:500], source, sid))
+        return sid
+
+
+def latest_situation() -> Optional[dict]:
+    with connect() as c:
+        row = c.execute("SELECT * FROM situations ORDER BY id DESC LIMIT 1").fetchone()
+    if not row:
+        return None
+    d = dict(row)
+    d["payload"] = json.loads(d["payload"] or "{}")
+    return d
+
+
+def _rows(sql: str, args: tuple = ()) -> list[dict]:
+    with connect() as c:
+        return [dict(r) for r in c.execute(sql, args).fetchall()]
+
+
+def list_suggestions(status: Optional[str] = None) -> list[dict]:
+    return _rows("SELECT * FROM suggestions WHERE (? IS NULL OR status=?) ORDER BY id DESC", (status, status))
+
+
+def decide_suggestion(sid: int, action: str) -> Optional[dict]:
+    status = "accepted" if action == "accept" else "rejected"
+    with _write_lock, connect() as c:
+        c.execute("UPDATE suggestions SET status=?, decided_ts=? WHERE id=?", (status, now_iso(), sid))
+        row = c.execute("SELECT * FROM suggestions WHERE id=?", (sid,)).fetchone()
+    if row:
+        log_decision("suggestion_" + status, str(sid), row["text"])
+    return dict(row) if row else None
+
+
+def list_units() -> list[dict]:
+    return _rows("SELECT * FROM units ORDER BY department, name")
+
+
+def assign_unit(unit_id: str, incident_id: Optional[str], status: str = "assigned") -> Optional[dict]:
+    with _write_lock, connect() as c:
+        c.execute("UPDATE units SET status=?, incident_id=?, updated_ts=? WHERE id=?", (status, incident_id, now_iso(), unit_id))
+        row = c.execute("SELECT * FROM units WHERE id=?", (unit_id,)).fetchone()
+    if row:
+        log_decision("unit_" + status, unit_id, f"incident {incident_id or '-'}")
+    return dict(row) if row else None
+
+
+def list_questions(status: Optional[str] = None) -> list[dict]:
+    return _rows("SELECT * FROM open_questions WHERE (? IS NULL OR status=?) ORDER BY id DESC", (status, status))
+
+
+def answer_question(qid: int, answer: str) -> Optional[dict]:
+    with _write_lock, connect() as c:
+        c.execute("UPDATE open_questions SET answer=?, status='answered', answered_ts=? WHERE id=?", (answer, now_iso(), qid))
+        row = c.execute("SELECT * FROM open_questions WHERE id=?", (qid,)).fetchone()
+    if row:
+        log_decision("question_answered", str(qid), answer[:200])
+    return dict(row) if row else None
+
+
+def create_info_request(incident_id: str, unit_id: str, what: str) -> dict:
+    with _write_lock, connect() as c:
+        cur = c.execute("INSERT INTO info_requests (ts,incident_id,unit_id,what_to_find,status) VALUES (?,?,?,?,'sent')", (now_iso(), incident_id, unit_id, what))
+        row = c.execute("SELECT * FROM info_requests WHERE id=?", (cur.lastrowid,)).fetchone()
+    log_decision("info_request_sent", str(row["id"]), f"{unit_id} -> {incident_id}: {what[:150]}")
+    return dict(row)
+
+
+def answer_info_request(rid: int, answer: str) -> Optional[dict]:
+    with _write_lock, connect() as c:
+        c.execute("UPDATE info_requests SET answer=?, status='answered', answered_ts=? WHERE id=?", (answer, now_iso(), rid))
+        row = c.execute("SELECT * FROM info_requests WHERE id=?", (rid,)).fetchone()
+    if row:
+        log_decision("info_request_answered", str(rid), answer[:200])
+    return dict(row) if row else None
+
+
+def list_info_requests() -> list[dict]:
+    return _rows("SELECT * FROM info_requests ORDER BY id DESC")
+
+
+def log_decision(kind: str, target_id: str, detail: str) -> None:
+    with _write_lock, connect() as c:
+        c.execute("INSERT INTO decisions (ts,kind,target_id,detail) VALUES (?,?,?,?)", (now_iso(), kind, target_id, detail))
+
+
+def list_decisions(limit: int = 100) -> list[dict]:
+    return _rows("SELECT * FROM decisions ORDER BY id DESC LIMIT ?", (limit,))

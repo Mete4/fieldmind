@@ -24,6 +24,12 @@ You read ONE emergency radio transmission or text report and return ONLY a JSON 
 - severity: integer 1-5. 5 = lives in immediate danger or major structure/infrastructure loss; 4 = serious injuries, spreading fire or rising water threatening homes; 3 = significant but contained; 2 = minor; 1 = informational.
 - people_count: number of people affected, trapped, injured or unaccounted for if stated (digits), else null. Never guess.
 - needs: 1-4 items from: {needs}.
+- department: FD (fire), PD (police/sheriff), EMS (medic/ambulance) or other, from the reporting unit.
+- unit: the radio call sign of the unit reporting (e.g. "Engine 81", "Medic 3", "Paradise PD 12"); "" if none.
+- structure_part: the part of a building involved ("east wing", "gym", "second floor"), else null.
+- fire_direction: compass direction the fire comes FROM, one of N, NE, E, SE, S, SW, W, NW; null if not stated.
+- fire_size: small, medium or large if stated or clearly implied (a spot fire is small, a fully involved structure or a running fire front is large); else null.
+- details: one or two sentences with every fact that fits no other field (exposures, access, hazards, resources on scene, timing).
 - confidence: 0.0-1.0 = how sure you are about type, severity AND location. Use 0.6 or lower when the audio is garbled, the location is vague or missing, the report is unconfirmed or second-hand, or the type is unclear. Use 0.85 or higher only for clear, specific, first-hand reports.
 - summary: one line, at most 20 words, for a priority list.
 Never invent details that are not in the report."""
@@ -38,8 +44,15 @@ EXTRACTION_SCHEMA = {
         "needs": {"type": "array", "items": {"type": "string"}},
         "confidence": {"type": "number"},
         "summary": {"type": "string"},
+        "department": {"type": "string", "enum": ["FD", "PD", "EMS", "other"]},
+        "unit": {"type": "string"},
+        "structure_part": {"type": ["string", "null"]},
+        "fire_direction": {"type": ["string", "null"], "enum": ["N", "NE", "E", "SE", "S", "SW", "W", "NW", None]},
+        "fire_size": {"type": ["string", "null"], "enum": ["small", "medium", "large", None]},
+        "details": {"type": "string"},
     },
-    "required": ["location_text", "type", "severity", "people_count", "needs", "confidence", "summary"],
+    "required": ["location_text", "type", "severity", "people_count", "needs", "confidence", "summary",
+                 "department", "unit", "structure_part", "fire_direction", "fire_size", "details"],
 }
 
 _client: Optional[ollama.Client] = None
@@ -152,6 +165,8 @@ def process_text(transcript: str, channel: str = "text", input_type: str = "text
     inc.location_text = ext.location_text
     inc.type, inc.severity, inc.people_count = ext.type, ext.severity, ext.people_count
     inc.needs, inc.confidence, inc.summary = ext.needs, ext.confidence, ext.summary
+    inc.department, inc.unit = [ext.department], [ext.unit] if ext.unit else []
+    inc.structure_part, inc.fire_direction, inc.fire_size, inc.details = ext.structure_part, ext.fire_direction, ext.fire_size, ext.details or ""
     inc.llm_model, inc.tokens_per_s = meta["model"], meta["tokens_per_s"]
     inc.extraction_attempts, inc.fallback = meta["attempts"], meta["fallback"]
     try:

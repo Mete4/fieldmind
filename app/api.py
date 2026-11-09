@@ -39,13 +39,13 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="FieldMind edge API", version="0.1", lifespan=lifespan)
 
 
-class NetworkToggle(BaseModel):
-    online: bool
-
-
 class TextIn(BaseModel):
     text: str
     channel: str = "text"
+
+
+class QuestionIn(BaseModel):
+    question: str
 
 
 def _ingest_text_sync(text: str, channel: str, input_type: str = "text", source_file: Optional[str] = None, stt: Optional[dict] = None) -> dict:
@@ -122,42 +122,124 @@ async def hazards_list():
 
 @app.get("/network")
 async def network_get():
-    s = network.state()
+    st = network.state()
     ready, reason = network.cloud_ready()
-    return {**s.model_dump(), "cloud_ready": ready, "cloud_reason": reason, "last_drain": router.last_drain}
-
-
-@app.post("/network")
-async def network_set(body: NetworkToggle):
-    s = await asyncio.to_thread(network.set_manual_online, body.online)
-    ready, reason = network.cloud_ready()
-    return {**s.model_dump(), "cloud_ready": ready, "cloud_reason": reason}
+    return {**st.model_dump(), "cloud_ready": ready, "cloud_reason": reason, "last_situation": router.last_run}
 
 
 @app.get("/queue")
 async def queue():
-    items = db.pending_queue(100)
-    return {"size": len(items), "items": items, "last_drain": router.last_drain}
+    item = db.pending_situation()
+    return {"size": 1 if item else 0, "pending_situation": item, "last_situation": router.last_run}
 
 
-@app.post("/queue/drain")
-async def queue_drain():
-    return await asyncio.to_thread(router.drain_queue)
+@app.get("/situation")
+async def situation_latest():
+    return db.latest_situation() or {}
 
 
-@app.post("/summary")
-async def summary(force_edge: bool = False):
-    return await asyncio.to_thread(router.make_summary, force_edge)
+@app.post("/situation")
+async def situation_update():
+    return await asyncio.to_thread(router.run_situation, "operator")
 
 
-@app.get("/summary")
-async def summary_latest():
-    return db.latest_summary() or {}
+class DecisionIn(BaseModel):
+    action: str
+
+
+class AssignIn(BaseModel):
+    incident_id: Optional[str] = None
+    status: str = "assigned"
+
+
+class AnswerIn(BaseModel):
+    answer: str
+
+
+class InfoRequestIn(BaseModel):
+    incident_id: str
+    unit_id: str
+    what_to_find: str
+
+
+@app.get("/suggestions")
+async def suggestions(status: Optional[str] = None):
+    return db.list_suggestions(status)
+
+
+@app.post("/suggestions/{sid}")
+async def suggestion_decide(sid: int, body: DecisionIn):
+    if body.action not in ("accept", "reject"):
+        raise HTTPException(400, "action must be accept or reject")
+    row = db.decide_suggestion(sid, body.action)
+    if row is None:
+        raise HTTPException(404, "no such suggestion")
+    return row
+
+
+@app.get("/units")
+async def units():
+    return db.list_units()
+
+
+@app.post("/units/{unit_id}/assign")
+async def unit_assign(unit_id: str, body: AssignIn):
+    if body.status not in ("assigned", "available", "out_of_service"):
+        raise HTTPException(400, "bad status")
+    row = db.assign_unit(unit_id, body.incident_id, body.status)
+    if row is None:
+        raise HTTPException(404, "no such unit")
+    return row
+
+
+@app.get("/questions")
+async def questions(status: Optional[str] = None):
+    return db.list_questions(status)
+
+
+@app.post("/questions/{qid}/answer")
+async def question_answer(qid: int, body: AnswerIn):
+    row = db.answer_question(qid, body.answer)
+    if row is None:
+        raise HTTPException(404, "no such question")
+    return row
+
+
+@app.get("/info_requests")
+async def info_requests():
+    return db.list_info_requests()
+
+
+@app.post("/info_requests")
+async def info_request_create(body: InfoRequestIn):
+    return db.create_info_request(body.incident_id, body.unit_id, body.what_to_find)
+
+
+@app.post("/info_requests/{rid}/answer")
+async def info_request_answer(rid: int, body: AnswerIn):
+    row = db.answer_info_request(rid, body.answer)
+    if row is None:
+        raise HTTPException(404, "no such info request")
+    return row
+
+
+@app.get("/decisions")
+async def decisions(limit: int = 100):
+    return db.list_decisions(limit)
 
 
 @app.get("/metrics")
 async def metrics_get():
     return await asyncio.to_thread(metrics.snapshot)
+
+
+@app.post("/query")
+async def query_post(body: QuestionIn):
+    if not body.question.strip():
+        raise HTTPException(400, "question is required")
+    from app import query
+
+    return await asyncio.to_thread(query.answer, body.question)
 
 
 @app.get("/samples")

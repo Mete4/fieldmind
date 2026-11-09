@@ -26,6 +26,7 @@ from app.extract import available_models, llm_extract, resolve_model, set_model 
 from app.pipeline import ingest_text  # noqa: E402
 from app.samples import load_reports  # noqa: E402
 
+XYZ = "Fire at XYZ High School. The east wing burns. The fire comes from the north. It is large. 123 people are inside."
 FOLLOW_UP = ("Engine 82 to Command, on scene with Engine 81 at Skyway and Bille Road. Fire has extended into the "
              "exposure on the north side, we now have three residents unaccounted for. Requesting a third alarm.")
 
@@ -75,6 +76,7 @@ def main() -> int:
     wall = time.perf_counter() - t0
 
     print("\n#  channel          type          sev ppl conf  loc   location_text -> match (score)                      hazard zones            link      ms   tok/s")
+    print("   dept unit                 part            dir  size    details")
     for r, rep, inc, action in results:
         if inc is None:
             print(f"{r['id']:<2} {r['channel'][:16]:<16} FAILED {rep.error}")
@@ -85,6 +87,8 @@ def main() -> int:
         flag = " FALLBACK" if inc.fallback else ""
         print(f"{r['id']:<2} {r['channel'][:16]:<16} {inc.type:<13} {inc.severity}   {str(inc.people_count or '-'):<3} {inc.confidence:.2f}  {loc}  "
               f"{match:<58} {','.join(inc.hazard_zones) or '-':<23} {link:<8} {inc.edge_latency_ms:>5} {inc.tokens_per_s or 0:>6.1f}{flag}")
+        print(f"   {'/'.join(inc.department):<4} {'/'.join(inc.unit)[:20]:<20} {str(inc.structure_part or '-')[:15]:<15} {str(inc.fire_direction or '-'):<4} "
+              f"{str(inc.fire_size or '-'):<7} {inc.details[:95]}")
     ok = [(r, rep, inc) for r, rep, inc, _ in results if inc is not None]
     lat = sorted(inc.edge_latency_ms for _, _, inc in ok)
     tps = [inc.tokens_per_s for _, _, inc in ok if inc.tokens_per_s]
@@ -93,7 +97,7 @@ def main() -> int:
         print(f"\nwall {wall:.1f}s for {len(results)} reports = {len(results) / wall * 60:.1f} reports/min | "
               f"latency p50 {lat[len(lat) // 2]} ms, p95 {lat[min(len(lat) - 1, int(len(lat) * 0.95))]} ms, mean {statistics.mean(lat):.0f} ms"
               + (f" | tokens/s mean {statistics.mean(tps):.1f}" if tps else ""))
-    print(f"low confidence (<{C.CONFIDENCE_THRESHOLD}) -> cloud/queue: {low} | in hazard zone: {sum(1 for _, _, i in ok if i.in_hazard_zone)} | "
+    print(f"low confidence (<{C.CONFIDENCE_THRESHOLD}): {low} | in hazard zone: {sum(1 for _, _, i in ok if i.in_hazard_zone)} | "
           f"location unknown: {sum(1 for _, _, i in ok if i.location_unknown)} | fallbacks: {sum(1 for _, _, i in ok if i.fallback)}")
     types: dict[str, int] = {}
     for _, _, inc in ok:
@@ -102,6 +106,15 @@ def main() -> int:
           f"LLM requests logged: {db.request_stats().get('edge_llm', {}).get('count', 0)}")
     top = sorted(ok, key=lambda t: -t[2].priority_score)[:5]
     print("top priorities:", [(r["id"], inc.type, inc.priority_score) for r, _, inc in top])
+
+    print("\n--- section 3 check: XYZ High School example")
+    rep, inc, action = ingest_text(XYZ, channel="Dispatch", model=model)
+    if inc is not None:
+        got = {"structure_part": inc.structure_part, "fire_direction": inc.fire_direction, "fire_size": inc.fire_size,
+               "people_count": inc.people_count, "department": inc.department, "unit": inc.unit, "type": inc.type}
+        want = {"structure_part": "east wing", "fire_direction": "N", "fire_size": "large", "people_count": 123}
+        okk = all(str(got[k]).lower() == str(v).lower() for k, v in want.items())
+        print(f"{'PASS' if okk else 'CHECK'}: {got} | details: {inc.details[:120]}")
 
     if not a.no_merge_demo and ok:
         print("\n--- merge demo: follow-up transmission about report 1 (same fire, same intersection)")
