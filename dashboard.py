@@ -289,13 +289,14 @@ with tab_main:
 
 with tab_ask:
     with st.form("query_form"):
-        qq = st.text_input("Question", placeholder="Which incidents have people trapped inside?")
+        qq = st.text_input("Question", placeholder="Which incidents have people trapped and no unit assigned?")
         if st.form_submit_button("Ask") and qq.strip():
-            with st.spinner("local model writing SQL, DuckDB + Flock running it..."):
-                ss["query_result"] = api("POST", "/query", timeout=180, json={"question": qq})
-    qr = ss.get("query_result")
-    if qr:
-        st.markdown(f"**Answer:** {qr.get('answer') or qr.get('error')}")
+            api("POST", "/query/start", json={"question": qq})
+    qr = api("GET", "/query/last") or {}
+    if qr.get("status") == "running":
+        st.info(f"Working on: {qr.get('question')} (local model writes the SQL, DuckDB + Flock run it)")
+    elif qr:
+        st.markdown(f"**Q:** {qr.get('question')}  \n**Answer:** {qr.get('answer') or qr.get('error')}")
         st.caption(f"{qr.get('model')} · {qr.get('latency_ms')} ms · {len(qr.get('rows', []))} rows")
         st.code(qr.get("sql") or "", language="sql")
         if qr.get("rows"):

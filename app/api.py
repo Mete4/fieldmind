@@ -328,6 +328,32 @@ async def query_post(body: QuestionIn):
     return await asyncio.to_thread(query.answer, body.question)
 
 
+@app.post("/query/start")
+async def query_start(body: QuestionIn):
+    """Run the question in the background; the dashboard polls /query/last (robust against page reruns)."""
+    if not body.question.strip():
+        raise HTTPException(400, "question is required")
+    from app import query
+
+    db.set_metric("last_query", {"status": "running", "question": body.question, "started": db.now_iso() if hasattr(db, "now_iso") else ""})
+
+    def work() -> None:
+        try:
+            res = query.answer(body.question)
+        except Exception as e:  # noqa: BLE001
+            res = {"question": body.question, "error": f"{type(e).__name__}: {str(e)[:160]}", "rows": [], "sql": "", "answer": ""}
+        res["status"] = "done"
+        db.set_metric("last_query", res)
+
+    threading.Thread(target=work, daemon=True).start()
+    return {"ok": True, "status": "running"}
+
+
+@app.get("/query/last")
+async def query_last():
+    return db.get_metric("last_query", {}) or {}
+
+
 @app.get("/samples")
 async def samples():
     return load_reports()
