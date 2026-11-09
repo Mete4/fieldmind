@@ -25,7 +25,7 @@ CAL FIRE hazard zones; the radio traffic is written for the exercise.
 ## Demo (about 3 minutes)
 
 1. **Reset**: empty map of Paradise.
-2. **Play radio**: the part-1 calls play (several channels at once), each transcribed on the
+2. **Start demo**: the part-1 calls play (several channels at once), each transcribed on the
    GPU; pins appear; the banner shows FIRE-001 (Paradise High School, 123 in the gym).
 3. **Open FIRE-001**: key facts, then the Engine 81 and Battalion 3 calls linked into one
    incident, with audio. An unclear call shows as an open question, not as a guess.

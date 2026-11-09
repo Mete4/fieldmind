@@ -114,7 +114,7 @@ if t[1].button("Reset demo"):
     api("POST", "/reset")
     ss.update(selected=None, skipped=False, big_agent=None, seen_alert=0)
     st.rerun()
-if t[2].button("Play radio", type="primary"):
+if t[2].button("Start demo", type="primary"):
     launch(["scripts/play_radio.py", str(RADIO / "camp_live.json"), "--stream"])
     st.toast("Radio part 1: audio streamed through Whisper on the GPU")
 if t[3].button("Skip ahead 30 min"):
