@@ -126,10 +126,13 @@ class Geocoder:
             return self.entries[self.alias_index[q]], 100.0
         if not self.choices:
             return None, 0.0
-        res = process.extractOne(q, self.choices, scorer=fuzz.WRatio)
-        if res is None:
+        top = process.extract(q, self.choices, scorer=fuzz.WRatio, limit=6)
+        if not top:
             return None, 0.0
-        _, score, idx = res
+        best_score = top[0][1]
+        # near-ties: prefer the longer, more specific name ("Paradise High School" over "Paradise")
+        cands = [t for t in top if t[1] >= best_score - 2]
+        name, score, idx = max(cands, key=lambda t: (len(t[0]), t[1]))
         if len(q) <= 3:
             score *= 0.6
         return self.entries[idx], float(score)
