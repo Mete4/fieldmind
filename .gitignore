@@ -16,3 +16,4 @@ data/preview/
 data/samples/radio/**/*.wav
 data/skip_build.sqlite*
 logs/demo_replay.pid
+data/archive/

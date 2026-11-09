@@ -77,7 +77,7 @@ async def stream_call(call: dict, base: Path, speed: float, started: float, resu
         print(f"t+{time.time() - started:5.0f}s {call['unit']:<16} STREAM FAILED {type(e).__name__}: {e}", flush=True)
 
 
-async def run(path: Path, speed: float, use_text: bool, stream: bool = False) -> None:
+async def run(path: Path, speed: float, use_text: bool, stream: bool = False, one_at_a_time: bool = False) -> None:
     data = json.loads(path.read_text())
     calls = data["calls"]
     base = path.resolve().parent
@@ -86,13 +86,18 @@ async def run(path: Path, speed: float, use_text: bool, stream: bool = False) ->
     results: list = []
     async with httpx.AsyncClient(timeout=180) as client:
         async def at(call: dict) -> None:
-            await asyncio.sleep(call["offset_s"] / speed)
+            if not one_at_a_time:
+                await asyncio.sleep(call["offset_s"] / speed)
             if stream and call.get("audio") and (base / call["audio"]).exists() and not use_text:
                 await stream_call(call, base, speed, started, results)
             else:
                 await send(client, call, base, use_text, started, results)
 
-        await asyncio.gather(*(at(c) for c in calls))
+        if one_at_a_time:
+            for c in sorted(calls, key=lambda c: c["offset_s"]):
+                await at(c)
+        else:
+            await asyncio.gather(*(at(c) for c in calls))
     incs = {(r.get("incident") or {}).get("id") for r in results if r.get("incident")}
     merged = sum(1 for r in results if r.get("link") == "merged")
     print(f"done in {time.time() - started:.0f}s: {len(results)} calls -> {len(incs)} incidents ({merged} merged)")
@@ -104,8 +109,10 @@ def main() -> int:
     ap.add_argument("--speed", type=float, default=1.0, help="time compression, e.g. 4 = four times faster")
     ap.add_argument("--text", action="store_true", help="send text even when audio exists")
     ap.add_argument("--stream", action="store_true", help="stream audio in 0.5 s chunks over the websocket (VAD-cut live transcription)")
+    ap.add_argument("--one-at-a-time", action="store_true",
+                    help="send each call when the previous one is processed, so no call waits in a model queue")
     a = ap.parse_args()
-    asyncio.run(run(Path(a.scenario_json), a.speed, a.text, a.stream))
+    asyncio.run(run(Path(a.scenario_json), a.speed, a.text, a.stream, a.one_at_a_time))
     return 0
 
 
