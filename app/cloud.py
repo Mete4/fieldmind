@@ -60,28 +60,6 @@ def _call(route: str, system: str, user: str, model: str, max_tokens: int, incid
         raise
 
 
-REFINE_SYSTEM = """You are a senior emergency dispatcher in {town} reviewing an automated triage extraction from a radio report.
-Correct it if needed and return ONLY a JSON object with: location_text (most specific place in the report or null),
-type (one of {types}), severity (1-5; 5 = lives in immediate danger), people_count (integer or null, never guess),
-needs (1-4 of: {needs}), confidence (0-1, your confidence in type+severity+location), summary (<= 20 words),
-notes (<= 25 words: what you changed and why, or "confirmed"). Personal data in the report has been redacted; do not speculate about it."""
-
-
-def refine_incident(inc: Incident) -> tuple[Extraction, str, dict]:
-    """Returns (refined extraction, notes, meta). Raises on failure."""
-    text, counts = redact(inc.transcript)
-    current = {k: getattr(inc, k) for k in ("location_text", "type", "severity", "people_count", "needs", "confidence", "summary")}
-    user = (f"Redacted report:\n{text}\n\nLocal extraction (confidence {inc.confidence}):\n{json.dumps(current)}\n"
-            f"Local geocoder matched: {inc.geocode_match or 'nothing'} (score {inc.geocode_score}).\n"
-            f"Real hazard zones at that point: {', '.join(inc.hazard_zones) or 'none'}.\nReturn the JSON object.")
-    raw, meta = _call("cloud_refine", REFINE_SYSTEM.format(town=C.TOWN_NAME, types=", ".join(INCIDENT_TYPES), needs=", ".join(C.NEEDS_VOCAB)),
-                      user, C.ANTHROPIC_MODEL, C.ANTHROPIC_MAX_TOKENS, inc.id)
-    data = _json_from(raw)
-    notes = str(data.pop("notes", "") or "")[:200]
-    meta["redacted"] = counts
-    return Extraction.model_validate(data), notes, meta
-
-
 SUMMARY_SYSTEM = """You write the situation summary for the incident commander of {town} ({scenario}).
 Use ONLY the incident list given. In at most 180 words and plain language: 1) overall picture, 2) incidents inside real
 hazard zones, 3) blocked roads and access problems, 4) recommended priorities (top 3-5 with why). Mention counts of

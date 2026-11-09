@@ -63,8 +63,8 @@ class Handler(SimpleHTTPRequestHandler):
 
 def main(port: int = C.TILE_SERVER_PORT) -> None:
     handler = functools.partial(Handler, directory=str(C.DATA_DIR))
-    httpd = ThreadingHTTPServer(("127.0.0.1", port), handler)
-    print(f"FieldMind tile server on http://127.0.0.1:{port}/ serving {C.DATA_DIR}", flush=True)
+    httpd = ThreadingHTTPServer((C.TILE_BIND_HOST, port), handler)
+    print(f"FieldMind tile server bound to {C.TILE_BIND_HOST}:{port}, browsers use http://{C.PUBLIC_HOST}:{port}/ ; serving {C.DATA_DIR}", flush=True)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

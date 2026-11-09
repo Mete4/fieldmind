@@ -28,7 +28,7 @@ def load_layer_manifest() -> list[dict]:
 
 
 def _vendor_base() -> str:
-    return f"http://localhost:{C.TILE_SERVER_PORT}/vendor/"
+    return f"http://{C.PUBLIC_HOST}:{C.TILE_SERVER_PORT}/vendor/"
 
 
 _ASSET_RE = re.compile(r'(?P<attr>src|href)="(?P<url>https?://[^"]+)"')
@@ -105,9 +105,11 @@ def add_incident(m: folium.Map, inc: dict) -> None:
              f"<b>Needs:</b> {_html.escape(', '.join(inc.get('needs') or []) or '-')} | <b>hazard zones:</b> {_html.escape(', '.join(zones) or 'none')}<br>"
              f"<i>{_html.escape(str(inc.get('summary') or inc.get('transcript') or '')[:300])}</i><br>"
              f"<b>Details:</b> {details[:700]}<br>"
-             f"<small>confidence {inc.get('confidence', '')} | priority {inc.get('priority_score', '')} | status {_html.escape(str(inc.get('status', '')))} | id {inc.get('id', '')}</small>")
-    folium.CircleMarker([lat, lon], radius=10, color="#222", weight=1, fill=True, fill_color=color, fill_opacity=0.95,
-                        popup=folium.Popup(popup, max_width=420)).add_to(m)
+             + (f"<b>Needs review:</b> {_html.escape(', '.join(inc.get('review_reasons') or []))}<br>" if inc.get("needs_review") else "")
+             + f"<small>status {_html.escape(str(inc.get('status', '')))} | id {inc.get('id', '')}</small>")
+    review = inc.get("needs_review")
+    folium.CircleMarker([lat, lon], radius=10, color="#fff" if review else "#222", weight=2.5 if review else 1, dash_array="4 3" if review else None,
+                        fill=True, fill_color=color, fill_opacity=0.95, popup=folium.Popup(popup, max_width=420)).add_to(m)
     badge = (f"<div style='position:absolute;left:8px;top:-12px;background:#fff;border:1.5px solid #222;border-radius:9px;"
              f"min-width:16px;height:16px;font:bold 10px/16px sans-serif;text-align:center;padding:0 3px'>{n}</div>" if n > 1 else "")
     folium.Marker([lat, lon], icon=folium.DivIcon(html=f"<div style='position:relative;font-size:14px;line-height:14px;margin:-7px 0 0 -7px'>{icon}{badge}</div>",
@@ -156,7 +158,7 @@ def make_map(incidents: Iterable[dict] = (), enabled_layers: set[str] | None = N
                     return {"fillColor": col, "color": col, "weight": 1.5, "fillOpacity": 0.05}
                 return {"fillColor": col, "color": col, "weight": 0, "fillOpacity": 0.12}
 
-            folium.GeoJson(data, name=L["name"], style_function=style, show=bool(L["pip"]),
+            folium.GeoJson(data, name=L["name"], style_function=style, show=False,
                            tooltip=folium.GeoJsonTooltip(fields=["label"], labels=False)).add_to(m)
     if show_pois and C.GAZETTEER_PATH.exists():
         fg = folium.FeatureGroup(name="Key facilities (OpenStreetMap)", show=True)

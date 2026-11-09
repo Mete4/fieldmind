@@ -85,19 +85,19 @@ def main() -> int:
         match = f"{(inc.location_text or '-')[:24]} -> {(inc.geocode_match or 'NONE')[:26]} ({inc.geocode_score:.0f})"
         link = "new" if action == "new" else f"->{inc.id[:6]}"
         flag = " FALLBACK" if inc.fallback else ""
-        print(f"{r['id']:<2} {r['channel'][:16]:<16} {inc.type:<13} {inc.severity}   {str(inc.people_count or '-'):<3} {inc.confidence:.2f}  {loc}  "
+        print(f"{r['id']:<2} {r['channel'][:16]:<16} {inc.type:<13} {inc.severity}   {str(inc.people_count or '-'):<3} {('R' if inc.needs_review else ' '):<4}  {loc}  "
               f"{match:<58} {','.join(inc.hazard_zones) or '-':<23} {link:<8} {inc.edge_latency_ms:>5} {inc.tokens_per_s or 0:>6.1f}{flag}")
         print(f"   {'/'.join(inc.department):<4} {'/'.join(inc.unit)[:20]:<20} {str(inc.structure_part or '-')[:15]:<15} {str(inc.fire_direction or '-'):<4} "
               f"{str(inc.fire_size or '-'):<7} {inc.details[:95]}")
     ok = [(r, rep, inc) for r, rep, inc, _ in results if inc is not None]
     lat = sorted(inc.edge_latency_ms for _, _, inc in ok)
     tps = [inc.tokens_per_s for _, _, inc in ok if inc.tokens_per_s]
-    low = sum(1 for _, _, inc in ok if inc.confidence < C.CONFIDENCE_THRESHOLD)
+    low = sum(1 for _, _, inc in ok if inc.needs_review)
     if lat:
         print(f"\nwall {wall:.1f}s for {len(results)} reports = {len(results) / wall * 60:.1f} reports/min | "
               f"latency p50 {lat[len(lat) // 2]} ms, p95 {lat[min(len(lat) - 1, int(len(lat) * 0.95))]} ms, mean {statistics.mean(lat):.0f} ms"
               + (f" | tokens/s mean {statistics.mean(tps):.1f}" if tps else ""))
-    print(f"low confidence (<{C.CONFIDENCE_THRESHOLD}): {low} | in hazard zone: {sum(1 for _, _, i in ok if i.in_hazard_zone)} | "
+    print(f"needs review: {low} | in hazard zone: {sum(1 for _, _, i in ok if i.in_hazard_zone)} | "
           f"location unknown: {sum(1 for _, _, i in ok if i.location_unknown)} | fallbacks: {sum(1 for _, _, i in ok if i.fallback)}")
     types: dict[str, int] = {}
     for _, _, inc in ok:
@@ -122,7 +122,7 @@ def main() -> int:
         if inc is not None:
             print(f"action: {action} | {rep.link_reason}")
             print(f"incident {inc.id}: reports={inc.report_count} {inc.channels} severity={inc.severity} people={inc.people_count} "
-                  f"needs={inc.needs} confidence={inc.confidence} priority={inc.priority_score}")
+                  f"needs={inc.needs} review={inc.review_reasons} priority={inc.priority_score}")
             print(f"linked reports: {[ (x.channel, x.text[:50] + '...') for x in db.list_reports(incident_id=inc.id)]}")
         print(f"reports in DB: {db.report_count()} | incidents in DB: {db.incident_count()}")
     return 0

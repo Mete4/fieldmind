@@ -22,7 +22,7 @@ CREATE INDEX IF NOT EXISTS idx_reports_incident ON reports(incident_id);
 CREATE INDEX IF NOT EXISTS idx_reports_ts ON reports(ts DESC);
 CREATE TABLE IF NOT EXISTS incidents (
   id TEXT PRIMARY KEY, timestamp TEXT, last_ts TEXT, channel TEXT, type TEXT, severity INTEGER,
-  confidence REAL, priority_score REAL, in_hazard_zone INTEGER, status TEXT, source TEXT,
+  priority_score REAL, in_hazard_zone INTEGER, status TEXT, source TEXT,
   report_count INTEGER, data TEXT NOT NULL);
 CREATE INDEX IF NOT EXISTS idx_incidents_prio ON incidents(priority_score DESC, timestamp DESC);
 CREATE INDEX IF NOT EXISTS idx_incidents_link ON incidents(type, last_ts DESC);
@@ -76,9 +76,9 @@ def connect() -> Iterator[sqlite3.Connection]:
 
 # query-friendly columns (section 3/4); added with ALTER TABLE so data survives
 REPORT_COLS = {"text": "TEXT", "department": "TEXT", "unit": "TEXT", "type": "TEXT", "severity": "INTEGER",
-               "people_count": "INTEGER", "location_text": "TEXT", "confidence": "REAL", "structure_part": "TEXT",
+               "people_count": "INTEGER", "location_text": "TEXT", "needs_review": "INTEGER", "review_reasons": "TEXT", "structure_part": "TEXT",
                "fire_direction": "TEXT", "fire_size": "TEXT", "details": "TEXT", "source_file": "TEXT"}
-INCIDENT_COLS = {"label": "TEXT", "types": "TEXT", "location_text": "TEXT", "geocode_match": "TEXT", "lat": "REAL", "lon": "REAL", "people_count": "INTEGER",
+INCIDENT_COLS = {"label": "TEXT", "types": "TEXT", "needs_review": "INTEGER", "review_reasons": "TEXT", "location_text": "TEXT", "geocode_match": "TEXT", "lat": "REAL", "lon": "REAL", "people_count": "INTEGER",
                  "needs": "TEXT", "hazard_zones": "TEXT", "summary": "TEXT", "transcript": "TEXT", "department": "TEXT",
                  "unit": "TEXT", "structure_part": "TEXT", "fire_direction": "TEXT", "fire_size": "TEXT", "details": "TEXT",
                  "report_ids": "TEXT"}
@@ -124,7 +124,7 @@ def reset_db() -> None:
 # ------------------------------------------------------------------ incidents
 def save_incident(inc: Incident) -> Incident:
     row = {"id": inc.id, "label": inc.label, "types": ",".join(inc.types), "timestamp": inc.timestamp, "last_ts": inc.last_ts, "channel": inc.channel, "type": inc.type,
-           "severity": inc.severity, "confidence": inc.confidence, "priority_score": inc.priority_score,
+           "severity": inc.severity, "priority_score": inc.priority_score, "needs_review": int(inc.needs_review), "review_reasons": ",".join(inc.review_reasons),
            "in_hazard_zone": int(inc.in_hazard_zone), "status": inc.status, "source": inc.source, "report_count": inc.report_count,
            "location_text": inc.location_text, "geocode_match": inc.geocode_match, "lat": inc.lat, "lon": inc.lon,
            "people_count": inc.people_count, "needs": ",".join(inc.needs), "hazard_zones": ",".join(inc.hazard_zones),
@@ -153,7 +153,7 @@ def save_report(rep: Report) -> Report:
     row = {"id": rep.id, "ts": rep.ts, "channel": rep.channel, "input_type": rep.input_type, "status": rep.status,
            "incident_id": rep.incident_id, "link_action": rep.link_action, "text": rep.text, "department": rep.department,
            "unit": rep.unit, "type": rep.type, "severity": rep.severity, "people_count": rep.people_count,
-           "location_text": rep.location_text, "confidence": rep.confidence, "structure_part": rep.structure_part,
+           "location_text": rep.location_text, "needs_review": int(rep.needs_review), "review_reasons": ",".join(rep.review_reasons), "structure_part": rep.structure_part,
            "fire_direction": rep.fire_direction, "fire_size": rep.fire_size, "details": rep.details,
            "source_file": rep.source_file, "data": rep.model_dump_json()}
     with _write_lock, connect() as c:
