@@ -95,7 +95,8 @@ CONNECTIVITY_TIMEOUT_S = 2.0
 CONNECTIVITY_CACHE_S = 5.0
 
 # ---------------------------------------------------------------- router / triage
-CONFIDENCE_THRESHOLD = 0.7     # below this -> cloud refine (online) or queue (offline)
+CONFIDENCE_THRESHOLD = 0.7
+UNCLEAR_CONFIDENCE = 0.6       # below this a call becomes an open question for the operator instead of a pin     # below this -> cloud refine (online) or queue (offline)
 FALLBACK_CONFIDENCE = 0.3      # used when the LLM returns invalid JSON twice
 GEOCODE_MIN_SCORE = 70         # rapidfuzz score 0-100
 GEOCODE_FAIL_CONFIDENCE_PENALTY = 0.25

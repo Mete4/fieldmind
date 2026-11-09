@@ -203,8 +203,7 @@ def answer(question: str, model: Optional[str] = None) -> dict:
                 break
             except Exception as e:  # noqa: BLE001
                 last_err = f"{type(e).__name__}: {str(e)[:300]}"
-                if "timed out" in last_err.lower() or "ReadTimeout" in last_err:
-                    sql_model = _models.get("local") or resolve_model()   # 32B too slow: step down
+                sql_model = C.FALLBACK_MODEL if C.FALLBACK_MODEL in (_models.values()) or True else sql_model   # retry on the fast model
                 user = f"Q: {question}\nYour previous SQL:\n{sql or raw if 'raw' in dir() else ''}\nfailed with: {last_err}\nReturn a corrected single SELECT.\nSQL:"
         if last_err:
             out["error"] = last_err

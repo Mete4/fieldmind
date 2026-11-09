@@ -109,7 +109,7 @@ def ingest_text(text: str, channel: str = "text", input_type: str = "text", sour
     action = "failed"
     try:
         cand = process_text(text, channel=channel, input_type=input_type, model=model)
-        if cand.location_unknown and cand.confidence < 0.6 and not cand.fallback:
+        if cand.confidence < C.UNCLEAR_CONFIDENCE and not cand.fallback:   # unclear call: ask, do not guess a pin
             unit = (cand.unit or [channel])[0] or channel
             qid = db.add_open_question("", f"Unclear call from {unit}: \"{text.strip()[:140]}\" - where is it, and is it a new incident?", "edge")
             report.department = cand.department[0] if cand.department else "other"
