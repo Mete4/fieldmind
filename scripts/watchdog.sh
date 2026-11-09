@@ -7,8 +7,9 @@ OLLAMA_FAILED_PROBES_LIMIT=3
 failed_probe_count=0
 while true; do
   sleep 30
-  # generation probe: the server can answer /api/version while its runners are wedged
-  PROBE=$(curl -s -m 40 http://127.0.0.1:11434/api/generate -d '{"model":"qwen2.5:14b","prompt":"Say OK.","stream":false,"keep_alive":-1,"options":{"num_predict":3}}' | grep -c '"done":true')
+  # generation probe: the server can answer /api/version while its runners are wedged.
+  # num_ctx must match LLM_NUM_CTX, or Ollama reloads the model at its default context.
+  PROBE=$(curl -s -m 40 http://127.0.0.1:11434/api/generate -d '{"model":"qwen2.5:14b","prompt":"Say OK.","stream":false,"keep_alive":-1,"options":{"num_predict":3,"num_ctx":4096}}' | grep -c '"done":true')
   if [ "$PROBE" = "1" ]; then failed_probe_count=0; else failed_probe_count=$((failed_probe_count + 1)); fi
   if ! curl -s -m 2 http://127.0.0.1:11434/api/version >/dev/null || [ "$failed_probe_count" -ge "$OLLAMA_FAILED_PROBES_LIMIT" ]; then
     failed_probe_count=0
