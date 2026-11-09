@@ -87,6 +87,21 @@ def stop_replay() -> None:
         pass
 
 
+def archive_database(reason: str) -> None:
+    """Saves a full copy of the live database to data/archive/ before it is cleared or replaced."""
+    import sqlite3
+
+    folder = C.DATA_DIR / "archive"
+    folder.mkdir(exist_ok=True)
+    target = folder / f"fieldmind-{dt.datetime.now().strftime('%Y%m%d-%H%M%S')}-{reason}.sqlite"
+    src, dst = sqlite3.connect(C.DB_PATH, timeout=30), sqlite3.connect(target)
+    try:
+        src.backup(dst)
+    finally:
+        dst.close()
+        src.close()
+
+
 def launch(args: list[str]) -> None:
     proc = subprocess.Popen([sys.executable, *args], cwd=ROOT, stdout=open(ROOT / "logs" / "demo_play.log", "a"), stderr=subprocess.STDOUT, start_new_session=True)
     REPLAY_PID_FILE.write_text(str(proc.pid))
@@ -148,6 +163,7 @@ with st.container(horizontal=True, gap="small", vertical_alignment="center"):
     st.markdown("<span class='fm-demo'>Demo</span>", width="content", unsafe_allow_html=True)
     if st.button("Reset demo", width="content"):
         stop_replay()
+        archive_database("before-reset")
         api("POST", "/reset")
         ss.update(selected=None, skipped=False, big_agent=None, seen_alert=0)
         st.rerun()
@@ -162,6 +178,7 @@ with st.container(horizontal=True, gap="small", vertical_alignment="center"):
             st.toast("Skip ahead is not built yet: run scripts/build_skip_ahead.sh")
         else:
             stop_replay()   # the skip replaces the rest of part 1
+            archive_database("before-skip")
             load_skip_ahead()
             latest = api("GET", "/alerts", params={"limit": 1}) or []
             ss.update(skipped=True, selected=None, seen_alert=latest[0]["id"] if latest else 0)

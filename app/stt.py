@@ -89,7 +89,8 @@ class TransformersBackend(_Backend):
 
             names = [e["name"] for e in json.loads(C.GAZETTEER_PATH.read_text()) if e["type"] in ("school", "hospital", "major_road", "neighborhood", "park", "fire_station")]
             streets = ["Pentz Road", "Wagstaff Road", "Bille Road", "Clark Road", "Pearson Road", "Neal Road", "Elliott Road", "Edgewood Lane", "Oliver Road", "Skyway", "Maxwell Drive"]
-            vocab = "Butte ECC, Engine 81, Battalion 3, Medic 41, Paradise PD 7. " + ", ".join(dict.fromkeys(streets + names[:40])) + "."
+            vocab = ("Butte ECC, Engine 81. On scene Paradise High School, Maxwell Drive. Copy. Occupants sheltering in the gym. Start me two buses. "
+                     "Butte ECC, Battalion 3, Medic 41, Paradise 7, Butte 12, Maxwell Command. ") + ", ".join(dict.fromkeys(streets + names[:40])) + "."
             self.prompt_ids = self.pipe.tokenizer.get_prompt_ids(vocab, return_tensors="pt").to("cuda:0")
         except Exception:  # noqa: BLE001
             self.prompt_ids = None

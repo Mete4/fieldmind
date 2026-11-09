@@ -15,7 +15,9 @@ import datetime as dt
 import math
 import re
 import threading
+import json
 import time
+from datetime import datetime
 from typing import Optional
 
 from app import question_resolver
@@ -133,6 +135,22 @@ def merge_into(inc: Incident, cand: Incident, report: Report) -> Incident:
     return inc
 
 
+_transcript_lock = threading.Lock()
+
+
+def append_transcript(report: Report, inc: Optional[Incident]) -> None:
+    """Adds one line per processed call to logs/transcripts/<database>-<date>.jsonl, so no transcript is lost on a reset."""
+    line = {"ts": report.ts, "channel": report.channel, "unit": getattr(report, "unit", None), "input_type": report.input_type,
+            "source_file": getattr(report, "source_file", None), "text": getattr(report, "text", None),
+            "status": report.status, "incident": inc.label if inc else None, "type": inc.type if inc else None,
+            "pin_s": getattr(report, "pin_s", None)}
+    folder = C.LOG_DIR / "transcripts"
+    folder.mkdir(exist_ok=True)
+    path = folder / f"{C.DB_PATH.stem}-{datetime.now().strftime('%Y-%m-%d')}.jsonl"
+    with _transcript_lock, path.open("a") as f:
+        f.write(json.dumps(line, default=str) + chr(10))
+
+
 def ingest_text(text: str, channel: str = "text", input_type: str = "text", source_file: Optional[str] = None,
                 stt: Optional[dict] = None, model: Optional[str] = None) -> tuple[Report, Optional[Incident], str]:
     """Save the raw report, extract on the edge, apply the link rule, save the
@@ -185,6 +203,7 @@ def ingest_text(text: str, channel: str = "text", input_type: str = "text", sour
     report.processing_ms = int((time.perf_counter() - t0) * 1000)
     report.pin_s = round(((stt.get("latency_ms") or 0) + report.processing_ms) / 1000, 1)
     db.save_report(report)
+    append_transcript(report, inc)
     return report, inc, action
 
 
